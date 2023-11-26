@@ -20,6 +20,9 @@ module.exports = {
                 inter: "Inter",
                 roboto: "Roboto",
             },
+            screens:{
+                xs:'480px'
+            },
             colors: {
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
@@ -57,7 +60,8 @@ module.exports = {
                 primary_orange: "#FE8D0D",
                 primary_background: "#F1F7EB",
                 primary_black: "#101010",
-                primary_gray:'#989898'
+                primary_gray:'#989898',
+                secondary_dark:'#282828'
             },
             borderRadius: {
                 lg: "var(--radius)",

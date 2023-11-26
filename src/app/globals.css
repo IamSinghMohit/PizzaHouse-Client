@@ -143,3 +143,16 @@
     }
 }
 /* ************************************ Scrollbar******/
+/*************Home clip*******/
+.home-clip {
+    clip-path: polygon(30% 100%, 71% 100%, 100% 37%, 100% 100%, 0 100%, 0 40%);
+}
+/*************Home clip*******/
+
+/********** Hiding scrollbar ****/
+.hideScrollbar::-webkit-scrollbar { height: 0 !important }
+
+.hideScrollbar{ overflow: -moz-scrollbars-none; }
+
+.hideScrollbar{ -ms-overflow-style: none; }
+/********** Hiding scrollbar ****/
