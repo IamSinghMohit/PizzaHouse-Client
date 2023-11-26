@@ -76,8 +76,12 @@
     }
 }
 .eclipse {
-    width: 446px;
-    height: 446px;
+    width: 40%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    left: -20%;
     flex-shrink: 0;
     border-radius: 446px;
     background: linear-gradient(
@@ -89,10 +93,53 @@
 }
 
 .navbar {
-    background: rgba(255, 255, 255, 0.5);
-    /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
-    backdrop-filter: blur(15.5px);
-    -webkit-backdrop-filter: blur(15.5px);
-    border-radius: 10px;
+    background: rgba(251, 251, 251, 0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
+/* ************************************ Scrollbar******/
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #febd14 #dfe9eb;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+*::-webkit-scrollbar-track {
+    background-color: #dfe9eb;
+}
+
+*::-webkit-scrollbar-track:hover {
+    background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-track:active {
+    background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #fe9c08;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #e27c09;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: #ff8c0a;
+}
+
+@media (max-width: 800px) {
+    *::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+}
+/* ************************************ Scrollbar******/
