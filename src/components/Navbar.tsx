@@ -9,6 +9,8 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
 } from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
+import { CircleUserRound, Search, ShoppingCart } from "lucide-react";
 interface Props {}
 
 export default function Navbar({}: Props) {
@@ -18,22 +20,29 @@ export default function Navbar({}: Props) {
                 <div className="w-[120px] h-9 relative">
                     <Image src="/logo.svg" alt="logo image" layout="fill" />
                 </div>
-                {/* <div className="flex items-center font-bold font-inter gap-2">
-                    <Link
-                        href={"/products"}
-                        className="hover:text-primary_orange"
-                    >
-                        Products
+                <div className="flex items-center font-bold font-inter gap-2">
+                    <Link href={"/products"}>
+                        <Button size="icon">
+                            <Search />
+                        </Button>
                     </Link>{" "}
-                    <Link href={"/"} className="hover:text-primary_orange">
-                        Home
-                    </Link>
+                    <Link href={"/cart"}>
+                        <Button size="icon">
+                            <ShoppingCart />
+                        </Button>
+                    </Link>{" "}
                     <DropdownMenu>
                         <DropdownMenuTrigger>
-                            <Avatar>
+                            {/* <Avatar>
                                 <AvatarImage src="lskdjf" alt="@shadcn" />
                                 <AvatarFallback>CN</AvatarFallback>
-                            </Avatar>
+                            </Avatar> */}
+                            <Button
+                                size="icon"
+                                className="rounded-full bg-primary_orange"
+                            >
+                                <CircleUserRound />
+                            </Button>
                             <DropdownMenuContent>
                                 <DropdownMenuItem>
                                     <span>Profile</span>
@@ -44,7 +53,7 @@ export default function Navbar({}: Props) {
                             </DropdownMenuContent>
                         </DropdownMenuTrigger>
                     </DropdownMenu>
-                </div> */}
+                </div>
             </MaxWidthWrapper>
         </nav>
     );

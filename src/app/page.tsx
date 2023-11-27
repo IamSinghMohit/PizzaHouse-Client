@@ -1,15 +1,13 @@
 "use client";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { SectionCards } from "../../data/section";
 import SectionCard from "@/components/hero/card";
+import ProductCard from "@/components/ProductCard";
 
 export default function Home() {
     return (
         <div>
-            <Navbar />
-            <div className="eclipse"></div>
             <MaxWidthWrapper>
                 <div className="flex flex-col gap-1 sm:flex-row pt-5 sm:pt-14">
                     <div className="text-primary_black font-inter flex flex-col p-2 gap-4 max-w-[457px] items-center justify-center">
@@ -50,6 +48,10 @@ export default function Home() {
                 </MaxWidthWrapper>
             </section>
             {/* Home Sectoin ends here */}
+            <section>
+                <h5 className="font-roboto font-bold ">Pizza</h5>
+               <ProductCard description="test" heading="test" image="/hero.png" price={400}/> 
+            </section>
         </div>
     );
 }
