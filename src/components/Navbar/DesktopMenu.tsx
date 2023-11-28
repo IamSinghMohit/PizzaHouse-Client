@@ -7,8 +7,9 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
 } from "../ui/dropdown-menu";
-import { CircleUserRound, Search, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart } from "lucide-react";
 import { useAppSelector } from "@/hooks/state";
+import { LoginWithButton } from "../LoginWithButton";
 interface Props {}
 
 export default function DesktopMenu({}: Props) {
@@ -29,8 +30,10 @@ export default function DesktopMenu({}: Props) {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Avatar>
-                            <AvatarImage src="lskdjf" alt="@shadcn" />
-                            <AvatarFallback>{user.avatar}</AvatarFallback>
+                            <AvatarImage src={user.avatar} alt="user image" />
+                            <AvatarFallback>
+                                {user.name.slice(0, 2).toUpperCase()}
+                            </AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
@@ -43,9 +46,7 @@ export default function DesktopMenu({}: Props) {
                     </DropdownMenuContent>
                 </DropdownMenu>
             ) : (
-                <Button size="icon" className="rounded-full bg-primary_orange">
-                    <CircleUserRound />
-                </Button>
+                <LoginWithButton/>
             )}
         </div>
     );

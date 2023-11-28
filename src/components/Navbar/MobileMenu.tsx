@@ -1,40 +1,94 @@
-import { Menu } from "lucide-react";
+import { CircleUserRound, Menu, Search, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { X } from "lucide-react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { useAppSelector } from "@/hooks/state";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface Props {}
 
+function MBNavLink({
+    text,
+    icon,
+    href,
+}: {
+    text: string;
+    icon: React.ReactNode;
+    href: string;
+}) {
+    return (
+        <Link
+            className="active:text-primary_orange flex items-center gap-1 hover:underline"
+            href={href}
+        >
+            {text}
+            <span className="active:text-white">{icon}</span>
+        </Link>
+    );
+}
+
 export default function MobileMenu({}: Props) {
     const [open, setOpen] = useState(false);
-    const portalId = "f0d9a1d8-47c0-4a0d-96b9-8ab3e59157e7";
-
-    useEffect(() => {
-        const div = document.createElement("div");
-        div.id = portalId;
-        document.getElementsByTagName("body")[0].prepend(div);
-
-        return () => {
-            document.getElementsByTagName("body")[0].removeChild(div);
-        };
-    }, []);
+    const { user } = useAppSelector((state) => state.user);
 
     return (
-        <div className="overflow-hidden">
-            <Button
-                size="icon"
-                onClick={() => setOpen((prev) => !prev)}
-                className={`z-30 relative`}
-            >
-                {open ? <X strokeWidth={2.75} /> : <Menu strokeWidth={3} />}
-            </Button>
-            <div
-                className={`fixed w-[260px] top-0 -right-full ${
-                    open && "right-0"
-                } h-screen z-20 transition-all duration-300 animate-out ease-in-out nav-blur`}
-            >
-                hello world
-            </div>
-        </div>
+        <Dialog.Root open={open} onOpenChange={(e) => setOpen(e)}>
+            <Dialog.Trigger asChild>
+                <Button
+                    size="icon"
+                    onClick={() => setOpen((prev) => !prev)}
+                    className={`z-30 relative ${open && "invisible"}`}
+                >
+                    <Menu strokeWidth={3} />
+                </Button>
+            </Dialog.Trigger>
+            <Dialog.Portal>
+                <Dialog.Overlay className="fixed inset-0 z-50 bg-transparent backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+                <Dialog.Content className="nav-blur fixed z-50 gap-4 p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500 inset-y-0 right-0 h-full w-3/4  data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm">
+                    <div className="">
+                        <Dialog.Close asChild>
+                            <button
+                                onClick={() => setOpen((prev) => !prev)}
+                                className={`z-30 bg-transparent`}
+                            >
+                                <X strokeWidth={1.8} size={34} />
+                            </button>
+                        </Dialog.Close>
+                    </div>
+                    <div className="flex flex-col items-center justify-center gap-3 pt-8">
+                        <MBNavLink
+                            text="Products"
+                            icon={<Search />}
+                            href="/products"
+                        />
+                        <MBNavLink
+                            text="Cart"
+                            icon={<ShoppingCart />}
+                            href="/cart"
+                        />
+
+                        {user ? (
+                            <Avatar>
+                                <AvatarImage
+                                    src={user.avatar}
+                                    alt="user image"
+                                />
+                                <AvatarFallback>
+                                    {user.name.slice(0, 2).toUpperCase()}
+                                </AvatarFallback>
+                            </Avatar>
+                        ) : (
+                            <MBNavLink
+                                text="Login/Sign up"
+                                icon={<CircleUserRound />}
+                                href=""
+                            />
+                        )}
+                    </div>
+                </Dialog.Content>
+            </Dialog.Portal>
+        </Dialog.Root>
     );
 }

@@ -1,7 +1,7 @@
 "use client";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Image from "next/image";
-import { SectionCards } from "../../data/section";
+import { SectionCards } from "@/data/section";
 import SectionCard from "@/components/hero/card";
 import ProductCard from "@/components/ProductCard";
 
@@ -40,6 +40,7 @@ export default function Home() {
                 <MaxWidthWrapper className="flex gap-4">
                     {SectionCards.map((card) => (
                         <SectionCard
+                            key={card.id}
                             content={card.content}
                             image={card.image}
                             heading={card.heading}
@@ -50,7 +51,12 @@ export default function Home() {
             {/* Home Sectoin ends here */}
             <section>
                 <h5 className="font-roboto font-bold ">Pizza</h5>
-               <ProductCard description="test" heading="test" image="/hero.png" price={400}/> 
+                <ProductCard
+                    description="test"
+                    heading="test"
+                    image="/hero.png"
+                    price={400}
+                />
             </section>
         </div>
     );
