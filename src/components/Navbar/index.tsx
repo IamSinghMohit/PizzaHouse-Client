@@ -5,17 +5,24 @@ import { useEffect, useState } from "react";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
+import { useAppDispatch} from "@/hooks/state";
+import { setWindow } from "@/store/features/user";
 
 interface Props {}
 
 export default function Navbar({}: Props) {
-    const [mobile, setMobile] = useState(false);
     const [loaded, setLoaded] = useState(false);
-
+    const [isMobile, setIsMobile] = useState(false);
+    const dispatch = useAppDispatch();
     useEffect(() => {
         setLoaded(true);
         if (window.innerWidth < 480) {
-            setMobile(true);
+            setIsMobile(false);
+        }
+        if (window.innerWidth < 700) {
+            dispatch(setWindow("mobile"));
+        } else {
+            dispatch(setWindow("desktop"));
         }
     }, []);
 
@@ -25,7 +32,7 @@ export default function Navbar({}: Props) {
                 <div className="w-[120px] h-9 relative">
                     <Image src="/logo.svg" alt="logo image" layout="fill" />
                 </div>
-                {loaded ? mobile ? <MobileMenu /> : <DesktopMenu /> : null}
+                {loaded ? isMobile ? <MobileMenu /> : <DesktopMenu /> : null}
             </MaxWidthWrapper>
         </nav>
     );

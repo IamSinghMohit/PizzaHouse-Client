@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { CircleUserRound } from "lucide-react";
+import { CircleUserRound, FacebookIcon} from "lucide-react";
 import {
     Dialog,
     DialogContent,
@@ -12,8 +12,12 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Separator } from "./ui/separator";
+import { GoogleIcon } from "@/icons";
+import { useState } from "react";
 
 export function LoginWithButton() {
+    const [register, setRegister] = useState(false);
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -24,32 +28,58 @@ export function LoginWithButton() {
             <DialogOverlay className="bg-transparent border" />
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Login</DialogTitle>
+                    <DialogTitle>{register ? "Sign in" : "login"}</DialogTitle>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                            Name
+                <div className="flex flex-col gap-2">
+                    {register && (
+                        <div className="">
+                            <Label htmlFor="name" className="text-right">
+                                Name
+                            </Label>
+                            <Input id="email" className="col-span-3" />
+                        </div>
+                    )}
+                    <div className="">
+                        <Label htmlFor="email" className="text-right">
+                            Email
                         </Label>
-                        <Input
-                            id="name"
-                            placeholder="name..."
-                            className="col-span-3"
-                        />
+                        <Input id="email" className="col-span-3" />
                     </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
+                    <div className="">
                         <Label htmlFor="password" className="text-right">
                             Password
                         </Label>
-                        <Input
-                            id="password"
-                            placeholder="pas..."
-                            className="col-span-3"
-                        />
+                        <Input id="password" className="col-span-3" />
+                    </div>
+                    <span
+                        className="self-end underline text-primary_orange"
+                        onClick={() => setRegister((prev) => !prev)}
+                    >
+                        {register ? "login" : "Sign in"}
+                    </span>
+                    <div className="flex items-center gap-1 justify-center">
+                        <Separator className="w-1/2" />
+                        OR
+                        <Separator className="w-1/2" />
+                    </div>
+                    <div className="flex gap-1 items-center justify-center">
+                        <Button className="text-white text-[25px] gap-2">
+                            <GoogleIcon />
+                            <span className="text-[16px] font-light">
+                                Google
+                            </span>
+                        </Button>
+                        <Separator orientation="vertical" />
+                        <Button className="text-white text-[25px]">
+                            <FacebookIcon strokeWidth={1} />
+                            <span className="text-[16px] font-light">
+                                Facebook
+                            </span>
+                        </Button>
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit">Save changes</Button>
+                    <Button type="submit">Login</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

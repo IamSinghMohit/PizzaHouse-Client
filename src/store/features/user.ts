@@ -1,14 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IUserSliceState } from "../../types/user";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IUserSliceState, Twindow } from "../../types/user";
 
 const initialState: IUserSliceState = {
     user: null,
     isTriedToAutoLogin: false,
+    window: null,
 };
 
 export const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {},
+    reducers: {
+        setWindow(state, action: PayloadAction<Twindow>) {
+            state.window = action.payload;
+        },
+    },
 });
-export const {} = userSlice.actions;
+export const { setWindow } = userSlice.actions;

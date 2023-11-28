@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import store from "@/store/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as ReduxProvider } from "react-redux";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 interface Props {
     children: React.ReactNode;
 }
@@ -17,6 +18,7 @@ export default function Provider({ children }: Props) {
                 <div className="eclipse"></div>
                 {children}
             </ReduxProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     );
 }
