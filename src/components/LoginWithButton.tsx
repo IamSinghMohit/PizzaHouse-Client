@@ -1,5 +1,17 @@
 import { Button } from "@/components/ui/button";
-import { CircleUserRound, FacebookIcon} from "lucide-react";
+import { CircleUserRound, FacebookIcon } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+
 import {
     Dialog,
     DialogContent,
@@ -15,9 +27,25 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "./ui/separator";
 import { GoogleIcon } from "@/icons";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { FormSchema, FromSchemaType } from "@/schema/Login";
 
 export function LoginWithButton() {
     const [register, setRegister] = useState(false);
+
+    const form = useForm<FromSchemaType>({
+        resolver: zodResolver(FormSchema),
+        defaultValues: {
+            name: "",
+            email: "",
+            password: "",
+        },
+    });
+
+    function onSubmit(data: any) {
+        console.log(data);
+    }
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -30,57 +58,86 @@ export function LoginWithButton() {
                 <DialogHeader>
                     <DialogTitle>{register ? "Sign in" : "login"}</DialogTitle>
                 </DialogHeader>
-                <div className="flex flex-col gap-2">
-                    {register && (
-                        <div className="">
-                            <Label htmlFor="name" className="text-right">
-                                Name
-                            </Label>
-                            <Input id="email" className="col-span-3" />
-                        </div>
-                    )}
-                    <div className="">
-                        <Label htmlFor="email" className="text-right">
-                            Email
-                        </Label>
-                        <Input id="email" className="col-span-3" />
-                    </div>
-                    <div className="">
-                        <Label htmlFor="password" className="text-right">
-                            Password
-                        </Label>
-                        <Input id="password" className="col-span-3" />
-                    </div>
-                    <span
-                        className="self-end underline text-primary_orange"
-                        onClick={() => setRegister((prev) => !prev)}
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-8"
                     >
-                        {register ? "login" : "Sign in"}
-                    </span>
-                    <div className="flex items-center gap-1 justify-center">
-                        <Separator className="w-1/2" />
-                        OR
-                        <Separator className="w-1/2" />
-                    </div>
-                    <div className="flex gap-1 items-center justify-center">
-                        <Button className="text-white text-[25px] gap-2">
-                            <GoogleIcon />
-                            <span className="text-[16px] font-light">
-                                Google
-                            </span>
-                        </Button>
-                        <Separator orientation="vertical" />
-                        <Button className="text-white text-[25px]">
-                            <FacebookIcon strokeWidth={1} />
-                            <span className="text-[16px] font-light">
-                                Facebook
-                            </span>
-                        </Button>
-                    </div>
-                </div>
-                <DialogFooter>
-                    <Button type="submit">Login</Button>
-                </DialogFooter>
+                        {register && (
+                            <FormField
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Name</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        )}
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Email</FormLabel>
+                                    <FormControl>
+                                        <Input {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Password</FormLabel>
+                                    <FormControl>
+                                        <Input {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Name</FormLabel>
+                                    <FormControl>
+                                        <Input {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <Separator />
+                        <div className="flex gap-1 items-center justify-center">
+                            <Button className="text-white text-[25px] gap-2">
+                                <GoogleIcon />
+                                <span className="text-[16px] font-light">
+                                    Google
+                                </span>
+                            </Button>
+                            <Separator orientation="vertical" />
+                            <Button className="text-white text-[25px]">
+                                <FacebookIcon strokeWidth={1} />
+                                <span className="text-[16px] font-light">
+                                    Facebook
+                                </span>
+                            </Button>
+                        </div>
+                        <DialogFooter>
+                            <Button type="submit">Login</Button>
+                        </DialogFooter>
+                    </form>
+                </Form>
             </DialogContent>
         </Dialog>
     );
