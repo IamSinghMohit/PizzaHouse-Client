@@ -58,18 +58,33 @@ export function LoginWithButton() {
                 <DialogHeader>
                     <DialogTitle>{register ? "Sign in" : "login"}</DialogTitle>
                 </DialogHeader>
-                <Form {...form}>
-                    <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="space-y-8"
-                    >
-                        {register && (
+                <div className="flex flex-col">
+                    <Form {...form}>
+                        <form
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            className="space-y-8"
+                        >
+                            {register && (
+                                <FormField
+                                    control={form.control}
+                                    name="name"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Name</FormLabel>
+                                            <FormControl>
+                                                <Input {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            )}
                             <FormField
                                 control={form.control}
-                                name="name"
+                                name="email"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Name</FormLabel>
+                                        <FormLabel>Email</FormLabel>
                                         <FormControl>
                                             <Input {...field} />
                                         </FormControl>
@@ -77,67 +92,51 @@ export function LoginWithButton() {
                                     </FormItem>
                                 )}
                             />
-                        )}
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Email</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Password</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Name</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <Separator />
-                        <div className="flex gap-1 items-center justify-center">
-                            <Button className="text-white text-[25px] gap-2">
-                                <GoogleIcon />
-                                <span className="text-[16px] font-light">
-                                    Google
-                                </span>
-                            </Button>
-                            <Separator orientation="vertical" />
-                            <Button className="text-white text-[25px]">
-                                <FacebookIcon strokeWidth={1} />
-                                <span className="text-[16px] font-light">
-                                    Facebook
-                                </span>
-                            </Button>
-                        </div>
-                        <DialogFooter>
-                            <Button type="submit">Login</Button>
-                        </DialogFooter>
-                    </form>
-                </Form>
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Password</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <div>
+                                <div className="flex items-center gap-1 justify-center">
+                                    <Separator className="w-1/2" />
+                                    OR
+                                    <Separator className="w-1/2" />
+                                </div>
+                                <div className="flex gap-2 items-center justify-center">
+                                    <Button className="text-white text-[25px] gap-2">
+                                        <GoogleIcon />
+                                        <span className="text-[16px] font-light">
+                                            Google
+                                        </span>
+                                    </Button>
+                                    <Separator
+                                        orientation="vertical"
+                                        className="h-[36px]"
+                                    />
+                                    <Button className="text-white text-[25px]">
+                                        <FacebookIcon strokeWidth={1} />
+                                        <span className="text-[16px] font-light">
+                                            Facebook
+                                        </span>
+                                    </Button>
+                                </div>
+                            </div>
+                            <DialogFooter>
+                                <Button type="submit">Login</Button>
+                            </DialogFooter>
+                        </form>
+                    </Form>
+                </div>
             </DialogContent>
         </Dialog>
     );
