@@ -1,7 +1,7 @@
-import { UserSchemaType } from "@/schema/user";
+import { TUserSchema } from "@/schema";
 export type Twindow = "mobile" | "desktop" | null;
 export interface IUserSliceState {
-    user: UserSchemaType | null;
+    user: TUserSchema | null;
     isTriedToAutoLogin: boolean;
     window: Twindow;
 }

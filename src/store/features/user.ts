@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserSliceState, Twindow } from "../../types/user";
+import { TUserSchema } from "@/schema";
 
 const initialState: IUserSliceState = {
     user: null,
@@ -14,6 +15,9 @@ export const userSlice = createSlice({
         setWindow(state, action: PayloadAction<Twindow>) {
             state.window = action.payload;
         },
+        setUser(state, action: PayloadAction<TUserSchema>) {
+            state.user = action.payload;
+        },
     },
 });
-export const { setWindow } = userSlice.actions;
+export const { setWindow, setUser } = userSlice.actions;

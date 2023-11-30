@@ -16,8 +16,8 @@ export default function ProductCard({
     return (
         <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
             <Image
-                width={440}
-                height={400}
+                width={240}
+                height={200}
                 layout="intrinsic"
                 src={image}
                 alt="product image"

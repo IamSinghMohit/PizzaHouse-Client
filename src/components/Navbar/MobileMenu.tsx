@@ -32,7 +32,6 @@ function MBNavLink({
 export default function MobileMenu({}: Props) {
     const [open, setOpen] = useState(false);
     const { user } = useAppSelector((state) => state.user);
-
     return (
         <Dialog.Root open={open} onOpenChange={(e) => setOpen(e)}>
             <Dialog.Trigger asChild>

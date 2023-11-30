@@ -1,7 +1,13 @@
 import { z } from "zod";
-export const FormSchema = z.object({
-    name: z.string().min(2).optional(),
+export const LoginSchema = z.object({
     email: z.string().min(2),
     password: z.string().min(2),
 });
-export type FromSchemaType = z.TypeOf<typeof FormSchema>;
+export const SigninnSchema = z.object({
+    name: z.string().min(2),
+    email: z.string().min(2),
+    password: z.string().min(2),
+});
+
+export type TLoginSchema = z.TypeOf<typeof LoginSchema>;
+export type TSigninSchema = z.TypeOf<typeof SigninnSchema>;
