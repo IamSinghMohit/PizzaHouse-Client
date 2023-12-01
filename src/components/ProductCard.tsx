@@ -15,7 +15,7 @@ export default function ProductCard({
     description,
 }: Props) {
     return (
-        <div className="max-w-sm w-[320px] min-h-[400px] bg-white border border-gray-200 rounded-lg shadow p-2 flex flex-col items-center hover:shadow-2xl">
+        <div className="max-w-[320px] w-[300px] min-h-[400px] bg-white border border-gray-200 rounded-lg shadow p-2 flex flex-col items-center hover:shadow-2xl">
             <Image
                 width={240}
                 height={200}
@@ -26,7 +26,7 @@ export default function ProductCard({
             />
             <div className="flex flex-col">
                 <div className="p-4">
-                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 text-[16px]">
+                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 text-[14px] md:text-[16px]">
                         {heading}
                     </h5>
                     <p className="font-normal text-gray-700 text-[12px]">
@@ -35,7 +35,7 @@ export default function ProductCard({
                             : description}
                     </p>
                 </div>
-                <Button className="items-center w-[300px]">
+                <Button className="items-center w-[280px]">
                     <IndianRupee strokeWidth={3} size={15} />
                     {price}
                 </Button>
