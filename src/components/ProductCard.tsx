@@ -1,5 +1,6 @@
-import { ArrowRightSquare } from "lucide-react";
+import {IndianRupee } from "lucide-react";
 import Image from "next/image";
+import { Button } from "./ui/button";
 interface Props {
     image: string;
     heading: string;
@@ -14,28 +15,30 @@ export default function ProductCard({
     description,
 }: Props) {
     return (
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+        <div className="max-w-sm w-[320px] min-h-[400px] bg-white border border-gray-200 rounded-lg shadow p-2 flex flex-col items-center hover:shadow-2xl">
             <Image
                 width={240}
                 height={200}
                 layout="intrinsic"
+                className="rounded-sm"
                 src={image}
                 alt="product image"
             />
-            <div className="p-5">
-                <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+            <div className="flex flex-col">
+                <div className="p-4">
+                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 text-[16px]">
                         {heading}
                     </h5>
-                </a>
-                <p className="mb-3 font-normal text-gray-700">{description}</p>
-                <a
-                    href="#"
-                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-                >
+                    <p className="font-normal text-gray-700 text-[12px]">
+                        {description.length > 80
+                            ? `${description.slice(0, 80)}...`
+                            : description}
+                    </p>
+                </div>
+                <Button className="items-center w-[300px]">
+                    <IndianRupee strokeWidth={3} size={15} />
                     {price}
-                    <ArrowRightSquare/>
-                </a>
+                </Button>
             </div>
         </div>
     );

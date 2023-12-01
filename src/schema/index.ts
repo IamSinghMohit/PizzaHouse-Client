@@ -8,16 +8,14 @@ export const UserSchema = z
     })
     .merge(BaseResponse);
 
-export const ProductSchema = z.object({
-    category: z.string(),
-    description: z.string(),
-    status: z.string(),
-    price_attributes: z.string(),
-    default_prices: z.string(),
-    price: z.string(),
-    created_at: z.string(),
-    updated_at: z.string(),
-    featured: z.string(),
-}).merge(BaseResponseWithNameAndImage)
+export const ProductSchema = z
+    .object({
+        category: z.string(),
+        description: z.string(),
+        price: z.number(),
+        price_attributes: z.array(z.string()),
+        default_prices: z.string(),
+    })
+    .merge(BaseResponseWithNameAndImage);
 
 export type TUserSchema = TypeOf<typeof UserSchema>;

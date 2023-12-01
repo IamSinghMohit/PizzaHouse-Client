@@ -1,9 +1,8 @@
-"use client";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Image from "next/image";
 import { SectionCards } from "@/data/section";
 import SectionCard from "@/components/hero/card";
-import ProductCard from "@/components/ProductCard";
+import ProductFeed from "@/components/hero/ProductFeed";
 
 export default function Home() {
     return (
@@ -49,15 +48,7 @@ export default function Home() {
                 </MaxWidthWrapper>
             </section>
             {/* Home Sectoin ends here */}
-            <section>
-                <h5 className="font-roboto font-bold ">Pizza</h5>
-                <ProductCard
-                    description="test"
-                    heading="test"
-                    image="/hero.png"
-                    price={400}
-                />
-            </section>
+            <ProductFeed />
         </div>
     );
 }

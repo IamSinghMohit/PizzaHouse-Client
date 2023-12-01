@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
-import { useAppDispatch} from "@/hooks/state";
+import { useAppDispatch } from "@/hooks/state";
 import { setUser, setWindow } from "@/store/features/user";
 import { useGetUser } from "@/hooks/useGetUser";
 
@@ -15,7 +15,7 @@ export default function Navbar({}: Props) {
     const [loaded, setLoaded] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const dispatch = useAppDispatch();
-    const {data} = useGetUser()
+    const { data } = useGetUser();
     useEffect(() => {
         setLoaded(true);
         if (window.innerWidth < 480) {
@@ -29,12 +29,12 @@ export default function Navbar({}: Props) {
     }, []);
 
     useEffect(() => {
-        if(data){
+        if (data) {
             console.log(data);
-            dispatch(setUser(data))
+            dispatch(setUser(data));
         }
-            console.log(data);
-    },[data])
+        console.log(data);
+    }, [data]);
 
     return (
         <nav className="navbar sticky top-0 z-10">
