@@ -39,9 +39,7 @@ export default function Navbar({}: Props) {
     return (
         <nav className="navbar sticky top-0 z-10">
             <MaxWidthWrapper className="flex items-center justify-between py-2">
-                <div className="w-[120px] h-9 relative">
-                    <Image src="/logo.svg" alt="logo image" layout="fill" />
-                </div>
+                    <Image src="/pizza.png" alt="logo image" objectFit='contain'layout="intrensic" width={40} height={40}/>
                 {loaded ? isMobile ? <MobileMenu /> : <DesktopMenu /> : null}
             </MaxWidthWrapper>
         </nav>

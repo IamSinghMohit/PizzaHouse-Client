@@ -12,5 +12,7 @@ export function useGetUser() {
     return useQuery({
         queryKey: ["user"],
         queryFn: () => GetUser(),
+        retry:false,
+        refetchOnWindowFocus:false,
     });
 }

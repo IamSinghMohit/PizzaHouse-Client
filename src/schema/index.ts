@@ -19,3 +19,4 @@ export const ProductSchema = z
     .merge(BaseResponseWithNameAndImage);
 
 export type TUserSchema = TypeOf<typeof UserSchema>;
+export type TProductSchema = TypeOf<typeof ProductSchema>
