@@ -25,7 +25,6 @@ export default function Home() {
                     <div className="min-w-[300px]">
                         <Image
                             src="/hero.png"
-                            layout="intrinsic"
                             width={500}
                             height={550}
                             alt="hero image"

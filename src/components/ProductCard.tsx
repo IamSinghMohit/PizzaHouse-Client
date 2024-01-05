@@ -3,8 +3,8 @@
 import { IndianRupee } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { TProductSchema } from "@/schema";
 import CImage from "./CImage";
+import { TProductSchema } from "@/schema/base/product";
 
 interface Props {
     product: TProductSchema;
@@ -12,7 +12,7 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
     return (
-        <div className="max-w-[320px] mx-auto w-[300px] h-[360px] bg-white border border-gray-200 rounded-lg shadow p-2 flex flex-col items-center hover:shadow-2xl mb-3 gap-3">
+        <div className="max-w-[320px] mx-auto w-[300px] h-[360px] bg-white border border-gray-200 rounded-lg  p-2 flex flex-col items-center hover:shadow-md mb-3 gap-3">
             <CImage
                 width={290}
                 height={200}

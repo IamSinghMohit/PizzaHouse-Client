@@ -33,7 +33,7 @@ import {
     SigninnSchema,
     TLoginSchema,
     TSigninSchema,
-} from "@/schema/Login";
+} from "@/schema/base/auth";
 import { ZodType } from "zod";
 
 export function LoginWithButton() {

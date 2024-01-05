@@ -3,26 +3,22 @@
 import { useFormatedProducts } from "@/hooks/useFormatedProducts";
 import ProductCard from "../ProductCard";
 import Link from "next/link";
-// import { SwiperContainer, SwiperSlide } from "../swiper";
-import { Pagination } from "swiper/modules";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-
+import Autoplay from "embla-carousel-autoplay";
 import { Button } from "../ui/button";
 import MaxWidthWrapper from "../MaxWidthWrapper";
+import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
+import { useRef } from "react";
 
 interface Props {}
 
 export default function ProductFeed({}: Props) {
     const { data = [] } = useFormatedProducts();
+
+    const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
     return (
         <section>
             <MaxWidthWrapper>
-                {data.map((sec, index) => (
+                {data.map((sec) => (
                     <div key={sec.id}>
                         <Button>
                             <Link
@@ -32,34 +28,16 @@ export default function ProductFeed({}: Props) {
                                 See more
                             </Link>
                         </Button>
-                        <Swiper
-                            modules={[Pagination]}
-                            slidesPerView={1}
-                            spaceBetween={10}
-                            pagination={{
-                                clickable: true,
-                                bulletClass: "custom-pagination-bullet",
-                                bulletActiveClass:
-                                    "custom-pagination-bullet-active",
-                            }}
-                            breakpoints={{
-                                620: {
-                                    slidesPerView: 2,
-                                    spaceBetween: 10,
-                                },
-                                1080: {
-                                    slidesPerView: 3,
-                                    spaceBetween: 10,
-                                },
-                            }}
-                            init={false}
-                        >
-                            {sec.products.map((pro) => (
-                                <SwiperSlide key={pro.id}>
-                                    <ProductCard product={pro} />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+                        <Carousel plugins={[plugin.current]}>
+                            <CarouselContent>
+                                {sec.products.map((pro) => (
+                                    <CarouselItem key={pro.id}>
+                                        {" "}
+                                        <ProductCard product={pro} />
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                        </Carousel>
                     </div>
                 ))}
             </MaxWidthWrapper>

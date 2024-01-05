@@ -1,12 +1,17 @@
 import api from "@/lib/axios";
-import { GetProductSchema, TGetProductSchema } from "@/schema/get/product";
+import {
+    GetFormatedProductsSchema,
+    TGetFormatedProductsSchema,
+} from "@/schema/get";
 import { useQuery } from "@tanstack/react-query";
 
-async function getProducts(): Promise<TGetProductSchema | undefined> {
+async function getProducts(): Promise<TGetFormatedProductsSchema["data"]> {
     const result = await api.get("/product/formated").then((res) => res.data);
-    const data = GetProductSchema.parse(result);
-    console.log(data)
-    return data
+    try {
+        return GetFormatedProductsSchema.parse(result).data;
+    } catch (error) {
+        return [];
+    }
 }
 
 export function useFormatedProducts() {
