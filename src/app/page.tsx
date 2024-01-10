@@ -1,8 +1,8 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Image from "next/image";
 import { SectionCards } from "@/data/section";
-import SectionCard from "@/components/hero/card";
-import ProductFeed from "@/components/hero/ProductFeed";
+import ProductFeed from "@/app/components/ProductFeed";
+import ServiceCard from "./components/ServiceCard";
 
 export default function Home() {
     return (
@@ -37,7 +37,7 @@ export default function Home() {
             <section className="bg-secondary_dark overflow-x-scroll hideScrollbar">
                 <MaxWidthWrapper className="flex gap-4">
                     {SectionCards.map((card) => (
-                        <SectionCard
+                        <ServiceCard
                             key={card.id}
                             content={card.content}
                             image={card.image}

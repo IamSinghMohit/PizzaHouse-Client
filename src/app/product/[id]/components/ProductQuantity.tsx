@@ -2,7 +2,7 @@
 
 import { Minus, Plus } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/hooks/state";
 import useDebounce from "@/hooks/useDebounce";
 import { setOrderQuantity } from "@/store/slices/order/order";

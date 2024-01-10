@@ -5,7 +5,7 @@ interface Props {
     content: string;
 }
 
-function SectionCard({ image, heading, content }: Props) {
+function ServiceCard({ image, heading, content }: Props) {
     return (
         <div className="flex gap-4 min-w-[400px] py-3 items-center">
             <div className="bg-red-100 relative flex items-center justify-center w-[60px] h-[60px] rounded-full">
@@ -24,4 +24,4 @@ function SectionCard({ image, heading, content }: Props) {
     );
 }
 
-export default SectionCard;
+export default ServiceCard;

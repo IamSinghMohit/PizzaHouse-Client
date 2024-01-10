@@ -1,11 +1,12 @@
 import CImage from "@/components/CImage";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import ProductPrice from "@/components/ProductPrice";
-import ProductSections from "@/components/ProductSections";
-import TopingList from "@/components/TopingList";
+import ProductPrice from "./components/ProductPrice";
+import ProductSections from "./components/ProductSections";
+import TopingList from "./components/TopingList";
 import { Button } from "@/components/ui/button";
 import { useProduct } from "@/hooks/useProduct";
-import { Bike } from "lucide-react";
+import { Bike, ClipboardList } from "lucide-react";
+import AddressDetail from "@/components/AddressDetail";
 
 interface Props {
     params: {
@@ -45,10 +46,7 @@ export default async function Page(props: Props) {
                     </div>
                     <TopingList category={product.category} />
                 </div>
-                <Button className="flex items-center gap-1">
-                    Order
-                    <Bike />
-                </Button>
+                <AddressDetail/>
             </MaxWidthWrapper>
         </article>
     );

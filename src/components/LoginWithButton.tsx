@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -15,7 +14,6 @@ import {
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -23,7 +21,6 @@ import {
     DialogOverlay,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Separator } from "./ui/separator";
 import { GoogleIcon } from "@/icons";
 import { useState } from "react";
@@ -31,10 +28,8 @@ import { useForm } from "react-hook-form";
 import {
     LoginSchema,
     SigninnSchema,
-    TLoginSchema,
     TSigninSchema,
 } from "@/schema/base/auth";
-import { ZodType } from "zod";
 
 export function LoginWithButton() {
     const [register, setRegister] = useState(false);

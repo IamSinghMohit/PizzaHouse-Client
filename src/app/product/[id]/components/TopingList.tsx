@@ -2,9 +2,9 @@
 
 import { useTopings } from "@/hooks/useTopings";
 import React from "react";
-import { Card } from "./ui/card";
 import { IndianRupee, Search } from "lucide-react";
-import CImage from "./CImage";
+import { Card } from "@/components/ui/card";
+import CImage from "@/components/CImage";
 import { ToggleGroup, ToggleGroupItem } from "@radix-ui/react-toggle-group";
 import { useAppDispatch } from "@/hooks/state";
 import { setOrderTopings } from "@/store/slices/order/order";
@@ -40,7 +40,7 @@ function TopingList({ category }: Props) {
                             id: toping.id,
                             price: toping.price,
                         })}
-                        className="rounded-lg border bg-card text-card-foreground shadow-sm p-2 flex flex-col items-center justify-center max-w-[160px] data-[state=on]:bg-primary_orange_light"
+                        className="rounded-lg border bg-card text-card-foreground shadow-sm p-2 flex flex-col items-center justify-center max-w-[160px] data-[state=on]:border-primary_orange_light data-[state=on]:p-[8px] data-[state=on]:border-1"
                     >
                         <div className="flex flex-col items-center justify-center">
                             <h5 className="font-bold">{toping.name}</h5>

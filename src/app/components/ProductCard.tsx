@@ -2,8 +2,8 @@
 
 import { IndianRupee } from "lucide-react";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import CImage from "./CImage";
+import CImage from "@/components/CImage";
+import { Button } from "@/components/ui/button";
 import { TProductSchema } from "@/schema/base/product";
 
 interface Props {
