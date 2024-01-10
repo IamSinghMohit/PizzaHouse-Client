@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
     DialogFooter,
     DialogHeader,
@@ -37,6 +37,7 @@ import {
     GujratCities,
     HaryanaCities,
 } from "@/data/cities";
+import { useAppSelector } from "@/hooks/state";
 
 const getCitiesByState = (selectedState: string) => {
     switch (selectedState) {
@@ -56,6 +57,12 @@ const getCitiesByState = (selectedState: string) => {
 };
 
 function AddressDetail() {
+    const [modalOpen,setModalOpen] = useState(false)
+
+    const user = useAppSelector((state) => state.user.user)
+    const jsonData = localStorage.getItem(user?.id || "")
+    const data = JSON.parse(jsonData)
+    console.log(data)
     const form = useForm({
         // resolver: zodResolver(
         //     (() => (register ? SigninnSchema : LoginSchema))()
@@ -70,10 +77,11 @@ function AddressDetail() {
     });
     const selectedState = form.watch("state");
     function onSubmit(data: any) {
+        setModalOpen(false)
         console.log(data);
     }
     return (
-        <Dialog>
+        <Dialog open={modalOpen} onOpenChange={setModalOpen}>
             <DialogTrigger asChild>
                 <Button className="bg-primary_orange flex items-center gap-1">
                     <span>

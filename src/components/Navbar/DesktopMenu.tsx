@@ -10,6 +10,7 @@ import {
 import { Search, ShoppingCart } from "lucide-react";
 import { useAppSelector } from "@/hooks/state";
 import { LoginWithButton } from "../LoginWithButton";
+import ProfileButton from "../ProfileButton";
 interface Props {}
 
 export default function DesktopMenu({}: Props) {
@@ -27,26 +28,9 @@ export default function DesktopMenu({}: Props) {
                 </Button>
             </Link>{" "}
             {user ? (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Avatar>
-                            <AvatarImage src={user.avatar} alt="user image" />
-                            <AvatarFallback>
-                                {user.name.slice(0, 2).toUpperCase()}
-                            </AvatarFallback>
-                        </Avatar>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuItem>
-                            <span>Profile</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <span>Logout</span>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+            <ProfileButton user={user}/>
             ) : (
-                <LoginWithButton/>
+                <LoginWithButton />
             )}
         </div>
     );

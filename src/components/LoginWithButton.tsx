@@ -25,21 +25,18 @@ import { Separator } from "./ui/separator";
 import { GoogleIcon } from "@/icons";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-    LoginSchema,
-    SigninnSchema,
-    TSigninSchema,
-} from "@/schema/base/auth";
+import { LoginSchema, SigninnSchema, TSigninSchema } from "@/schema/base/auth";
 
 export function LoginWithButton() {
     const [register, setRegister] = useState(false);
 
     const form = useForm<TSigninSchema>({
         resolver: zodResolver(
-            (() => (register ? SigninnSchema : LoginSchema))()
+            (() => (register ? SigninnSchema : LoginSchema))(),
         ),
         defaultValues: {
-            name: "",
+            first_name: "",
+            last_name: "",
             email: "",
             password: "",
         },
@@ -50,7 +47,7 @@ export function LoginWithButton() {
     }
 
     function handleGoogleClick() {
-        window.open("http://localhost:3001/auth/login/google","_self");
+        window.open("http://localhost:3001/auth/login/google", "_self");
     }
 
     return (
@@ -72,19 +69,35 @@ export function LoginWithButton() {
                             className="space-y-8"
                         >
                             {register && (
-                                <FormField
-                                    control={form.control}
-                                    name="name"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Name</FormLabel>
-                                            <FormControl>
-                                                <Input {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                                <div className="flex items-center gap-2">
+                                    <FormField
+                                        control={form.control}
+                                        name="first_name"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>First Name</FormLabel>
+                                                <FormControl>
+                                                    <Input {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    <FormField
+                                        control={form.control}
+                                        name="last_name"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Last Name</FormLabel>
+                                                <FormControl>
+                                                    <Input {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
                             )}
                             <FormField
                                 control={form.control}
@@ -140,7 +153,10 @@ export function LoginWithButton() {
                                         orientation="vertical"
                                         className="h-[36px]"
                                     />
-                                    <Button className="text-white text-[25px]" type="button">
+                                    <Button
+                                        className="text-white text-[25px]"
+                                        type="button"
+                                    >
                                         <FacebookIcon strokeWidth={1} />
                                         <span className="text-[16px] font-light">
                                             Facebook

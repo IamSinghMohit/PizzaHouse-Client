@@ -7,7 +7,8 @@ export const LoginSchema = z.object({
 });
 
 export const SigninnSchema = z.object({
-    name: z.string().min(2),
+    first_name: z.string().min(2),
+    last_name: z.string().min(2),
     email: z.string().min(2),
     password: z.string().min(2),
 });
@@ -15,9 +16,10 @@ export const SigninnSchema = z.object({
 export const UserSchema = z
     .object({
         avatar: z.string().optional(),
+        first_name: z.string(),
+        last_name: z.string(),
     })
-    .merge(BaseResponseSchema.id)
-    .merge(BaseResponseSchema.name_);
+    .merge(BaseResponseSchema.id);
 
 export type TLoginSchema = z.TypeOf<typeof LoginSchema>;
 export type TSigninSchema = z.TypeOf<typeof SigninnSchema>;

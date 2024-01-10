@@ -1,7 +1,8 @@
-import { TUserSchema } from "@/schema";
+import { TuserSchema } from "@/schema/base/auth";
+
 export type Twindow = "mobile" | "desktop" | null;
 export interface IUserSliceState {
-    user: TUserSchema | null;
+    user: TuserSchema| null;
     isTriedToAutoLogin: boolean;
     window: Twindow;
 }
