@@ -3,7 +3,8 @@
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useAppDispatch } from "@/hooks/state";
 import useProductAttributes from "@/hooks/useProductAttributes";
-import { setOrderProductSections } from "@/store/slices/order/order";
+import { setOrderProductSections } from "@/store/slices/product/product";
+import { ChevronsDown } from "lucide-react";
 import { useMemo, useRef } from "react";
 interface Props {
     id: string;
@@ -26,7 +27,12 @@ export default function ProductSections({ id }: Props) {
         <div className="flex flex-col gap-2 items-start">
             {data?.sections.map((sec) => (
                 <div key={sec.id}>
-                    <h6 className="text-primary_orange">{sec.name}</h6>
+                    <h6 className="text-black font-bold flex items-center">
+                        {sec.name}
+                        <span className="text-primary_orange">
+                            <ChevronsDown height={20}/>
+                        </span>
+                    </h6>
                     <ToggleGroup
                         type="single"
                         variant={"outline"}
@@ -51,7 +57,7 @@ export default function ProductSections({ id }: Props) {
                             return (
                                 <ToggleGroupItem
                                     value={`${att.id}`}
-                                    className="border-primary_orange data-[state=on]:bg-primary_orange"
+                                    className="bg-white border-2 shadow-sm data-[state=on]:border-primary_orange data-[state=on]:bg-white"
                                     key={att.id}
                                 >
                                     {att.name}

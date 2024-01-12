@@ -3,10 +3,9 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProductPrice from "./components/ProductPrice";
 import ProductSections from "./components/ProductSections";
 import TopingList from "./components/TopingList";
-import { Button } from "@/components/ui/button";
 import { useProduct } from "@/hooks/useProduct";
-import { Bike, ClipboardList } from "lucide-react";
-import AddressDetail from "@/components/AddressDetail";
+import AddToCartButton from "./components/AddToCartButton";
+import { Card } from "@/components/ui/card";
 
 interface Props {
     params: {
@@ -31,7 +30,7 @@ export default async function Page(props: Props) {
                                 className="border border-red-300 rounded-md overflow-hidden"
                             />
                         </div>
-                        <div>
+                        <Card className="p-2 shadow-none bg-gray-50">
                             <div>
                                 <h1 className="font-bold text-[20px]">
                                     {product.name}
@@ -42,11 +41,11 @@ export default async function Page(props: Props) {
                                 <ProductPrice price={product.price} />
                             </div>
                             <ProductSections id={product.id} />
-                        </div>
+                        </Card>
                     </div>
                     <TopingList category={product.category} />
                 </div>
-                <AddressDetail/>
+                <AddToCartButton/>
             </MaxWidthWrapper>
         </article>
     );

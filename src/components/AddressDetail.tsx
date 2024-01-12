@@ -60,9 +60,6 @@ function AddressDetail() {
     const [modalOpen,setModalOpen] = useState(false)
 
     const user = useAppSelector((state) => state.user.user)
-    const jsonData = localStorage.getItem(user?.id || "")
-    const data = JSON.parse(jsonData)
-    console.log(data)
     const form = useForm({
         // resolver: zodResolver(
         //     (() => (register ? SigninnSchema : LoginSchema))()
@@ -78,7 +75,6 @@ function AddressDetail() {
     const selectedState = form.watch("state");
     function onSubmit(data: any) {
         setModalOpen(false)
-        console.log(data);
     }
     return (
         <Dialog open={modalOpen} onOpenChange={setModalOpen}>

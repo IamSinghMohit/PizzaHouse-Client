@@ -1,6 +1,8 @@
-import OrderStepper from "@/components/OrderStepper";
-import ProductQuantity from "@/components/ProductQuantity";
+import { Trash2 } from "lucide-react";
+import OrderQuantity from "./components/OrderQuantity";
+
 import React from "react";
+import { Button } from "@/components/ui/button";
 
 export default function page() {
     return (
@@ -16,7 +18,10 @@ export default function page() {
                     <div className="mt-8">
                         <ul className="space-y-4">
                             {[1, 1, 1].map(() => (
-                                <li className="flex items-center gap-4">
+                                <li
+                                    className="flex items-center gap-4"
+                                    key={`${Date.now() * Math.random() * 100}`}
+                                >
                                     <img
                                         src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80"
                                         alt=""
@@ -48,13 +53,17 @@ export default function page() {
                                     </div>
 
                                     <div className="flex flex-1 items-center justify-end gap-2">
-                                        <ProductQuantity />
+                                        <OrderQuantity />
                                     </div>
+                                    <Button
+                                        size={"icon"}
+                                        className="rounded-md"
+                                    >
+                                        <Trash2 />
+                                    </Button>
                                 </li>
                             ))}
                         </ul>
-                        {/*here */}
-                        <OrderStepper/>
                     </div>
                 </div>
             </div>

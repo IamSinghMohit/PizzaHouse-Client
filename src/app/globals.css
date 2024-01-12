@@ -2,6 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -155,7 +156,7 @@
     background-color: rgba(254, 141, 13, 0.5);
 }
 
-.custom-pagination-bullet{
+.custom-pagination-bullet {
     width: 10px;
     height: 10px;
     display: inline-block;
@@ -163,7 +164,7 @@
     margin: auto 2px;
     background-color: #fe8e0d50;
 }
-.custom-pagination-bullet.custom-pagination-bullet-active{
+.custom-pagination-bullet.custom-pagination-bullet-active {
     width: 10px;
     height: 10px;
     display: inline-block;

@@ -1,7 +1,7 @@
 'use client'
 
 import { useAppDispatch, useAppSelector } from "@/hooks/state";
-import { setOrderProductPrice } from "@/store/slices/order/order";
+import { setOrderProductPrice } from "@/store/slices/product/product";
 import React, { useEffect } from "react";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 export default function ProductPrice({ price }: Props) {
     const dispatch = useAppDispatch()
-    const ProductPrice = useAppSelector((state) => state.order.price)
+    const ProductPrice = useAppSelector((state) => state.product.price)
     useEffect(() => {
        dispatch(setOrderProductPrice(price)) 
     },[price])
