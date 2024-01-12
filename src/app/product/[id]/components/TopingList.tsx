@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import CImage from "@/components/CImage";
 import { useAppDispatch, useAppSelector } from "@/hooks/state";
 import { TGetTopoingSchema } from "@/schema/get";
-import { setOrderTopings } from "@/store/slices/product/product";
+import { setProductTopings } from "@/store/slices/product/product";
 
 type Props = {
     category: string;
@@ -21,11 +21,12 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
     function handleAddtopoing() {
         if (!isActive) {
             dispatch(
-                setOrderTopings({
+                setProductTopings({
                     type: "ADD",
                     data: {
                         [toping.id]: {
                             price: toping.price,
+                            name: toping.name,
                             id: toping.id,
                             image: toping.image,
                         },
@@ -34,12 +35,13 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
             );
         } else {
             dispatch(
-                setOrderTopings({
+                setProductTopings({
                     type: "DELETE",
                     data: {
                         [toping.id]: {
                             price: toping.price,
                             id: toping.id,
+                            name: toping.name,
                             image: toping.image,
                         },
                     },

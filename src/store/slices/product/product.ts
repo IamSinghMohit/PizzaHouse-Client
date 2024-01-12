@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+    TProductInfo,
     TProductSections,
     TProductSliceIntialState,
     TProductTopings,
@@ -8,7 +9,7 @@ import {
 const initialState: TProductSliceIntialState = {
     price: 0,
     topings: {},
-    product_management: {
+    product_info: {
         id: "",
         price: 0,
         name: "",
@@ -29,12 +30,12 @@ const productSlice = createSlice({
             action: PayloadAction<Record<string, TProductSections>>,
         ) {
             let price = 0;
-            state.product_management.sections = {
-                ...state.product_management.sections,
+            state.product_info.sections = {
+                ...state.product_info.sections,
                 ...action.payload,
             };
-            for (let key in state.product_management.sections) {
-                const obj = state.product_management.sections[key];
+            for (let key in state.product_info.sections) {
+                const obj = state.product_info.sections[key];
                 price += obj.value;
             }
             for (let key in state.topings) {
@@ -42,7 +43,7 @@ const productSlice = createSlice({
             }
             state.price = price;
         },
-        setOrderTopings(
+        setProductTopings(
             state,
             action: PayloadAction<{
                 type: "ADD" | "DELETE";
@@ -56,8 +57,8 @@ const productSlice = createSlice({
                         ...action.payload.data,
                     };
                     let price = 0;
-                    for (let key in state.product_management.sections) {
-                        const obj = state.product_management.sections[key];
+                    for (let key in state.product_info.sections) {
+                        const obj = state.product_info.sections[key];
                         price += obj.value;
                     }
                     for (let key in state.topings) {
@@ -73,19 +74,34 @@ const productSlice = createSlice({
             }
         },
         setOrderProductId(state, action: PayloadAction<string>) {
-            state.product_id = action.payload;
+            state.product_info.id = action.payload;
         },
-        setOrderQuantity(state, action: PayloadAction<number>) {
-            state.quantity = action.payload;
+        setCleanState(state) {
+            const obj = {
+                price: 0,
+                topings: {},
+                product_info: {
+                    id: "",
+                    price: 0,
+                    name: "",
+                    image: "",
+                    sections: {},
+                },
+            };
+            state = obj;
+        },
+        setProductInfo(state, action: PayloadAction<TProductInfo>) {
+            state.product_info = action.payload;
         },
     },
 });
 
 export const {
     setOrderProductId,
-    setOrderTopings,
+    setProductTopings,
     setOrderProductPrice,
     setOrderProductSections,
-    setOrderQuantity,
+    setCleanState,
+    setProductInfo,
 } = productSlice.actions;
 export default productSlice;

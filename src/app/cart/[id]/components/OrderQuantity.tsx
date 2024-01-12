@@ -5,15 +5,14 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/hooks/state";
 import useDebounce from "@/hooks/useDebounce";
-import { setOrderQuantity } from "@/store/slices/order/product";
 
 function OrderQuantity() {
     const dispatch = useAppDispatch();
     const [value, setValue] = useState(1);
     const debouncedValue = useDebounce(value, 350);
-    useEffect(() => {
-        dispatch(setOrderQuantity(debouncedValue));
-    }, [debouncedValue]);
+    // useEffect(() => {
+    //     dispatch(setOrderQuantity(debouncedValue));
+    // }, [debouncedValue]);
     return (
         <div>
             <label htmlFor="Quantity" className="sr-only">

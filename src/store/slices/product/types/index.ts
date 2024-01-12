@@ -9,7 +9,7 @@ export type TProductTopings = {
     name: string;
     image: string;
 };
-export type TProductManagment = {
+export type TProductInfo = {
     sections: Record<string, TProductSections>;
     id: string;
     name: string;
@@ -18,6 +18,6 @@ export type TProductManagment = {
 };
 export type TProductSliceIntialState = {
     topings: Record<string, TProductTopings>;
-    product_management: TProductManagment;
+    product_info: TProductInfo ;
     price:number;
 };

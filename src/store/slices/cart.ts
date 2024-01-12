@@ -1,6 +1,7 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 type TCartItem = {
     id: string;
+    price:number;
     product_name: string;
     product_id: string;
     product_price: number;
@@ -13,12 +14,12 @@ type TCartItem = {
     topings: Array<{
         id: string;
         name: string;
-        toping:string;
+        image:string;
         price: number;
     }>;
 };
 
-const CartItemAdapter = createEntityAdapter({
+export const CartItemAdapter = createEntityAdapter({
     selectId: (item: TCartItem) => item.id,
     sortComparer: (a, b) => a.product_name.localeCompare(b.product_name),
 });

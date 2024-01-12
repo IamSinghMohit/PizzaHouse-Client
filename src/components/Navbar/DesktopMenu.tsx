@@ -22,7 +22,7 @@ export default function DesktopMenu({}: Props) {
                     <Search />
                 </Button>
             </Link>{" "}
-            <Link href={"/cart"}>
+            <Link href={"/cart/lskdjf23lkj"}>
                 <Button size="icon">
                     <ShoppingCart />
                 </Button>

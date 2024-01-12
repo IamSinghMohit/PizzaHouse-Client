@@ -38,7 +38,7 @@ export default async function Page(props: Props) {
                                 <p className="text-gray-700 overflow-hidden break-words">
                                     {product.description}
                                 </p>
-                                <ProductPrice price={product.price} />
+                                <ProductPrice product={product} />
                             </div>
                             <ProductSections id={product.id} />
                         </Card>
