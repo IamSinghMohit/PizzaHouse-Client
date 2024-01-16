@@ -59,6 +59,7 @@ module.exports = {
                 },
                 primary_orange: "#FE8D0D",
                 primary_orange_light:"#FAA13E",
+                primary_red:"#FF5733",
                 second_orange: "#c26e0e",
                 primary_background: "#F1F7EB",
                 primary_black: "#101010",

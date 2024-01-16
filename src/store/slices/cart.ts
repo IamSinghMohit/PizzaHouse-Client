@@ -1,20 +1,22 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 type TCartItem = {
     id: string;
-    price:number;
+    price: number;
+    quantity: number;
     product_name: string;
     product_id: string;
     product_price: number;
-    product_image:string;
+    product_image: string;
+    product_description:string;
     product_sections: Array<{
-        section_name: string;
-        attribute_name: string;
-        price: number;
+        name: string;
+        attribute_id: string;
+        value: number;
     }>;
     topings: Array<{
         id: string;
         name: string;
-        image:string;
+        image: string;
         price: number;
     }>;
 };
@@ -29,6 +31,9 @@ export const cartSlice = createSlice({
     initialState: CartItemAdapter.getInitialState(),
     reducers: {
         addToCart: CartItemAdapter.addOne,
+        updateOneIntoCart: CartItemAdapter.updateOne,
+        removeOneFromCart: CartItemAdapter.removeOne,
     },
 });
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, updateOneIntoCart, removeOneFromCart } =
+    cartSlice.actions;

@@ -8,6 +8,7 @@ import MobileMenu from "./MobileMenu";
 import { useAppDispatch } from "@/hooks/state";
 import { setUser, setWindow } from "@/store/slices/user";
 import { useGetUser } from "@/hooks/useGetUser";
+import Link from "next/link";
 
 interface Props {}
 
@@ -39,7 +40,14 @@ export default function Navbar({}: Props) {
     return (
         <nav className="navbar sticky top-0 z-10">
             <MaxWidthWrapper className="flex items-center justify-between py-2">
-                    <Image src="/pizza.png" alt="logo image" width={40} height={40}/>
+                <Link href="/">
+                    <Image
+                        src="/pizza.png"
+                        alt="logo image"
+                        width={40}
+                        height={40}
+                    />
+                </Link>
                 {loaded ? isMobile ? <MobileMenu /> : <DesktopMenu /> : null}
             </MaxWidthWrapper>
         </nav>

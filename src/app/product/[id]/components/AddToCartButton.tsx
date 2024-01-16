@@ -25,9 +25,9 @@ export default function AddToCartButton({}: Props) {
         const sections = [];
         for (let key in productState.sections) {
             const obj = {
-                section_name: productState.sections[key].name,
-                attribute_name: productState.sections[key].attribute,
-                price: productState.sections[key].value,
+                name: productState.sections[key].name,
+                attribute: productState.sections[key].attribute,
+                value: productState.sections[key].value,
             };
             sections.push(obj);
         }
@@ -35,7 +35,10 @@ export default function AddToCartButton({}: Props) {
             addToCart({
                 id: uuidV4(),
                 price: price,
+                quantity: 1,
                 product_id: urlPath[urlPath.length - 1],
+                product_description:
+                    "this is the dommy description update later",
                 product_price: productState.price,
                 topings: topingsArray,
                 product_name: productState.name,

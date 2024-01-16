@@ -3,16 +3,20 @@
 import { Minus, Plus } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useAppDispatch } from "@/hooks/state";
 import useDebounce from "@/hooks/useDebounce";
 
-function OrderQuantity() {
-    const dispatch = useAppDispatch();
-    const [value, setValue] = useState(1);
-    const debouncedValue = useDebounce(value, 350);
-    // useEffect(() => {
-    //     dispatch(setOrderQuantity(debouncedValue));
-    // }, [debouncedValue]);
+interface IProps {
+    handleValueChange: (value: number) => void;
+    quantity: number;
+}
+function OrderQuantity({ handleValueChange, quantity }: IProps) {
+    const [value, setValue] = useState(quantity || 1);
+    const debouncedValue = useDebounce(value, 250);
+
+    useEffect(() => {
+        handleValueChange(debouncedValue);
+    }, [debouncedValue]);
+
     return (
         <div>
             <label htmlFor="Quantity" className="sr-only">
@@ -35,6 +39,7 @@ function OrderQuantity() {
                     id="Quantity"
                     value={value}
                     className="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                    readOnly
                 />
 
                 <Button

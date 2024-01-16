@@ -38,6 +38,7 @@ import {
     HaryanaCities,
 } from "@/data/cities";
 import { useAppSelector } from "@/hooks/state";
+import useCreateOrder from "@/hooks/useCreateOrder";
 
 const getCitiesByState = (selectedState: string) => {
     switch (selectedState) {
@@ -56,10 +57,11 @@ const getCitiesByState = (selectedState: string) => {
     }
 };
 
-function AddressDetail() {
-    const [modalOpen,setModalOpen] = useState(false)
-
-    const user = useAppSelector((state) => state.user.user)
+function AddressDetail({ id }: { id: string }) {
+    const [modalOpen, setModalOpen] = useState(false);
+    const { mutate } = useCreateOrder();
+    const entity = useAppSelector((state) => state.cart.entities[id]);
+    const user = useAppSelector((state) => state.user.user);
     const form = useForm({
         // resolver: zodResolver(
         //     (() => (register ? SigninnSchema : LoginSchema))()
@@ -73,8 +75,22 @@ function AddressDetail() {
         },
     });
     const selectedState = form.watch("state");
+
     function onSubmit(data: any) {
-        setModalOpen(false)
+        setModalOpen(false);
+        const body = {
+            first_name:data.firstName,
+            last_name:data.lastName,
+            state:data.state,
+            city:data.city,
+            address:data.address,
+            product_id: entity?.product_id,
+            price: entity?.price,
+            topings: entity?.topings.map((top) => top.id),
+            product_sections: entity?.product_sections,
+        };
+        // mutate(body);
+        console.log(body)
     }
     return (
         <Dialog open={modalOpen} onOpenChange={setModalOpen}>
@@ -137,7 +153,7 @@ function AddressDetail() {
                                             >
                                                 <FormControl>
                                                     <SelectTrigger className="w-[180px]">
-                                                        <SelectValue placeholder="Select your state" />
+                                                        <SelectValue placeholder="Select your state" />{" "}
                                                     </SelectTrigger>
                                                 </FormControl>
                                                 <SelectContent>
