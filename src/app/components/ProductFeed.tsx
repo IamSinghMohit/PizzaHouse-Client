@@ -1,12 +1,10 @@
 "use client";
 
 import { useFormatedProducts } from "@/hooks/useFormatedProducts";
-import ProductCard from "./ProductCard";
 import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "../../components/ui/button";
 import MaxWidthWrapper from "../../components/MaxWidthWrapper";
-import { Carousel, CarouselContent, CarouselItem } from "../../components/ui/carousel";
 import { useRef } from "react";
 
 interface Props {}
@@ -28,16 +26,6 @@ export default function ProductFeed({}: Props) {
                                 See more
                             </Link>
                         </Button>
-                        <Carousel plugins={[plugin.current]}>
-                            <CarouselContent>
-                                {sec.products.map((pro) => (
-                                    <CarouselItem key={pro.id}>
-                                        {" "}
-                                        <ProductCard product={pro} />
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                        </Carousel>
                     </div>
                 ))}
             </MaxWidthWrapper>

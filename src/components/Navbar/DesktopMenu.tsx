@@ -18,12 +18,12 @@ export default function DesktopMenu({}: Props) {
     return (
         <div className="flex items-center font-bold font-inter gap-2">
             <Link href={"/products"}>
-                <Button size="icon">
+                <Button size="icon" className="rounded-full">
                     <Search />
                 </Button>
             </Link>{" "}
             <Link href={"/cart/lskdjf23lkj"}>
-                <Button size="icon">
+                <Button size="icon" className="rounded-full">
                     <ShoppingCart />
                 </Button>
             </Link>{" "}

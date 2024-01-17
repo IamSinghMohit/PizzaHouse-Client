@@ -53,7 +53,7 @@ export function LoginWithButton() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button size="icon" className="rounded-full bg-primary_orange">
+                <Button size="icon" className="rounded-full">
                     <CircleUserRound />
                 </Button>
             </DialogTrigger>

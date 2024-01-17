@@ -3,6 +3,9 @@ import Image from "next/image";
 import { SectionCards } from "@/data/section";
 import ProductFeed from "@/app/components/ProductFeed";
 import ServiceCard from "./components/ServiceCard";
+import HomeTypeWriter from "./components/HomeTypeWriter";
+import Tilt from "react-parallax-tilt"
+import HeroImage from "./components/HeroImage";
 
 export default function Home() {
     return (
@@ -11,9 +14,9 @@ export default function Home() {
                 <div className="flex flex-col gap-1 sm:flex-row pt-5 sm:pt-14">
                     <div className="text-primary_black font-inter flex flex-col p-2 gap-4 max-w-[457px] items-center justify-center">
                         <h1 className="text-[35px] leading-10 xs:text-[53px] xs:leading-[50px] lg:text-[70px] lg:leading-[72px]">
-                            Not able to controll hunger{" "}
-                            <span className="text-primary_orange">
-                                order some pizza.
+                            Not able to controll your hunger{" "}
+                            <span className="text-primary_orange ">
+                                order some <HomeTypeWriter />
                             </span>
                         </h1>
                         <p className="text-primary_gray first-letter text-[12px] xs:text-[14px] md:text-[16px]">
@@ -22,14 +25,9 @@ export default function Home() {
                             your taste buds to new heights.
                         </p>
                     </div>
-                    <div className="min-w-[300px]">
-                        <Image
-                            src="/hero.png"
-                            width={500}
-                            height={550}
-                            alt="hero image"
-                        />
-                    </div>
+                    {/* <div className="min-w-[300px]"> */}
+                        <HeroImage/>
+                    {/* </div> */}
                 </div>
             </MaxWidthWrapper>
 

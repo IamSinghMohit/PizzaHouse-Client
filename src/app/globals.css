@@ -11,7 +11,7 @@
         --card-foreground: 20 14.3% 4.1%;
         --popover: 0 0% 100%;
         --popover-foreground: 20 14.3% 4.1%;
-        --primary: 24.6 95% 53.1%;
+        --primary: 31.9 99.2% 52.4%;
         --primary-foreground: 60 9.1% 97.8%;
         --secondary: 60 4.8% 95.9%;
         --secondary-foreground: 24 9.8% 10%;
@@ -172,6 +172,17 @@
     margin: auto 2px;
     background-color: #fe8d0d;
 }
-/* .swiper-pagination {
-    top: 100px;
-} */
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-float {
+    animation: float 2s infinite;
+}
