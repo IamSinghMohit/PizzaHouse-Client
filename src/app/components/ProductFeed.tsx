@@ -2,17 +2,15 @@
 
 import { useFormatedProducts } from "@/hooks/useFormatedProducts";
 import Link from "next/link";
-import Autoplay from "embla-carousel-autoplay";
 import { Button } from "../../components/ui/button";
 import MaxWidthWrapper from "../../components/MaxWidthWrapper";
-import { useRef } from "react";
+import ProductCarousel from "./ProductCarousel";
 
 interface Props {}
 
 export default function ProductFeed({}: Props) {
     const { data = [] } = useFormatedProducts();
 
-    const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
     return (
         <section>
             <MaxWidthWrapper>
@@ -26,6 +24,7 @@ export default function ProductFeed({}: Props) {
                                 See more
                             </Link>
                         </Button>
+                        <ProductCarousel products={sec.products}/>
                     </div>
                 ))}
             </MaxWidthWrapper>

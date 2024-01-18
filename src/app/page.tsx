@@ -1,10 +1,8 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Image from "next/image";
 import { SectionCards } from "@/data/section";
 import ProductFeed from "@/app/components/ProductFeed";
 import ServiceCard from "./components/ServiceCard";
 import HomeTypeWriter from "./components/HomeTypeWriter";
-import Tilt from "react-parallax-tilt"
 import HeroImage from "./components/HeroImage";
 
 export default function Home() {
