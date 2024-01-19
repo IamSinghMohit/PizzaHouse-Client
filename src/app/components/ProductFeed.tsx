@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "../../components/ui/button";
 import MaxWidthWrapper from "../../components/MaxWidthWrapper";
 import ProductCarousel from "./ProductCarousel";
+import { ArrowRightFromLine } from "lucide-react";
 
 interface Props {}
 
@@ -14,17 +15,22 @@ export default function ProductFeed({}: Props) {
     return (
         <section>
             <MaxWidthWrapper>
-                {data.map((sec) => (
+                {data.map((sec, index) => (
                     <div key={sec.id}>
-                        <Button>
-                            <Link
-                                href="product"
-                                className="font-roboto text-[18px] hover:text-primary_orange active:text-primary_orange"
-                            >
-                                See more
+                        <div className="my-2 ml-4">
+                            <Link href="product">
+                                <button className="p-2  border-2 border-primary_orange text-primary_orange rounded-full flex items-center gap-1 hover:bg-primary_orange hover:text-white px-3 transition-all duration-200">
+                                    <span className="font-bold">more</span>
+                                    <span>
+                                        <ArrowRightFromLine />
+                                    </span>
+                                </button>
                             </Link>
-                        </Button>
-                        <ProductCarousel products={sec.products}/>
+                        </div>
+                        <ProductCarousel
+                            products={sec.products}
+                            delay={index || 1}
+                        />
                     </div>
                 ))}
             </MaxWidthWrapper>

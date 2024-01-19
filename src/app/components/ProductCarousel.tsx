@@ -11,10 +11,14 @@ import { EmblaCarouselType } from "embla-carousel-react";
 
 type Props = {
     products: TGetFormatedProductsSchema["data"][0]["products"];
+    delay: number;
 };
 
-export default function ProductCarousel({ products }: Props) {
-    const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+export default function ProductCarousel({ products, delay }: Props) {
+    const plugin = useRef(
+        Autoplay({ delay: delay * 2000, stopOnInteraction: true }),
+    );
+
     const [api, setApi] = useState<EmblaCarouselType | null>(null);
     const [dots, setDots] = useState<number[]>([]);
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -22,6 +26,7 @@ export default function ProductCarousel({ products }: Props) {
     const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
         setSelectedIndex(emblaApi.selectedScrollSnap());
     }, []);
+
     useEffect(() => {
         if (api) {
             setDots(api.scrollSnapList());
@@ -31,7 +36,7 @@ export default function ProductCarousel({ products }: Props) {
 
     return (
         <Carousel
-            plugins={[plugin.current]}
+            // plugins={[plugin.current]}
             opts={{
                 loop: true,
             }}
@@ -39,7 +44,7 @@ export default function ProductCarousel({ products }: Props) {
         >
             <CarouselContent className="m-0">
                 {products.map((pro) => (
-                    <CarouselItem key={pro.id}>
+                    <CarouselItem key={pro.id} className="basis-auto">
                         {" "}
                         <ProductCard product={pro} />
                     </CarouselItem>
