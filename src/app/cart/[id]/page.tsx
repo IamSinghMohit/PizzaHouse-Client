@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector } from "@/hooks/state";
 import CartItem from "./components/CartItem";
 import Image from "next/image";
-import { BaggageClaim} from "lucide-react";
-import CartCheckout from "./components/CartCheckout";
+import { BaggageClaim } from "lucide-react";
+// import CartCheckout from "../../payment/[id]/CartCheckout";
 
 export default function page() {
     const ids = useAppSelector((state) => state.cart.ids);
@@ -14,6 +14,7 @@ export default function page() {
     useEffect(() => {
         setLoading(false);
     }, []);
+
     return (
         <section>
             <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -49,8 +50,6 @@ export default function page() {
                     ) : (
                         <p>loading</p>
                     )}
-                    {/* Rendering checkout element */}
-                    {!loading && ids.length > 0 && <CartCheckout />}
                 </div>
             </div>
         </section>

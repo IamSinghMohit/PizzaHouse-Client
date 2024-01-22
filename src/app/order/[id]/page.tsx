@@ -6,21 +6,45 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Card } from "@/components/ui/card";
 import { useAppSelector } from "@/hooks/state";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { IndianRupee } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { ClipboardList, IndianRupee } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useSocket } from "@/app/socket-context";
+import { initSocket } from "@/lib/socket";
+import { Socket } from "socket.io-client";
 
 type Props = {};
 
 export default function page({}: Props) {
-
     const pathArray = usePathname().split("/");
     const id = pathArray[pathArray.length - 1];
     const entity = useAppSelector((state) => state.cart.entities[id]);
     const [loading, setLoading] = useState(true);
+    const socketRef = useRef<Socket | null>(null);
+    const [step, setStep] = useState("placed");
     useEffect(() => {
         setLoading(false);
     }, []);
+    useEffect(() => {
+        console.log(socketRef.current)
+        async function init() {
+            socketRef.current = (await initSocket()) as unknown as Socket;
+            socketRef.current.emit("join");
+            socketRef.current.emit("join_room","65ae0d9ad8ee7b8203720575")
+            socketRef.current.on("status_updated",(data)=> {
+                console.log(data)
+                setStep(data.status)
+            })
+        }
+         init();
+        return () => {
+            socketRef.current?.disconnect();
+            socketRef.current = null;
+        };
+    }, []);
+
     // TODO: Also product description needed to be ad in entityAdapter
+
     return (
         <MaxWidthWrapper className="mt-10">
             {!loading && (
@@ -42,7 +66,15 @@ export default function page({}: Props) {
                             <h5 className="text-gray-700">
                                 Price: {entity?.product_price}
                             </h5>
+                            <p>Quantity:{entity?.quantity}</p>
                         </div>
+
+                        <Button className="bg-primary_orange flex items-center gap-1">
+                            <span>
+                                <ClipboardList />
+                            </span>
+                            Place Order
+                        </Button>
                     </Card>
                     <div className="flex mt-3 gap-4">
                         {entity?.topings && (
@@ -66,7 +98,7 @@ export default function page({}: Props) {
                         )}
                         <Card className="p-2 flex-grow">
                             <div className="p-4">
-                                <OrderStepper step={"placed"} />
+                                <OrderStepper step={step} />
                             </div>
                             <div className="w-screen max-w-lg space-y-4 mx-auto">
                                 <dl className="space-y-0.5 text-sm text-gray-700">

@@ -19,6 +19,7 @@ export function SocketContextProvider({
         async function init() {
             socketRef.current = (await initSocket()) as unknown as Socket;
             socketRef.current.emit("join");
+            socketRef.current.emit("join_room","65ae0d9ad8ee7b8203720575")
         }
          init();
         return () => {

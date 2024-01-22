@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import OrderQuantity from "./OrderQuantity";
-import { ClipboardList, Trash2 } from "lucide-react";
+import { ClipboardList, Eye, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CImage from "@/components/CImage";
 import { useAppDispatch, useAppSelector } from "@/hooks/state";
@@ -12,6 +12,7 @@ import { Stripe, loadStripe } from "@stripe/stripe-js";
 import axios from "@/lib/axios";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./PaymentForm";
+import Link from "next/link";
 
 function CartItem({ id }: { id: EntityId }) {
     const item = useAppSelector((state) => state.cart.entities[id]);
@@ -63,7 +64,17 @@ function CartItem({ id }: { id: EntityId }) {
                 </div>
             </div>
 
-            <div className="flex flex-col items-end gap-1">
+            <OrderQuantity
+                handleValueChange={handleValueChange}
+                quantity={item.quantity}
+            />
+            <Link href={`/order/${id}`}>
+                <Button variant={"link"}>
+                    <Eye width={18} height={18} />{" "}
+                    <span className="ml-1">view</span>
+                </Button>
+            </Link>
+            <div className="flex flex-col gap-1 items-end">
                 <Button
                     size={"icon"}
                     className="rounded-md"
@@ -73,25 +84,19 @@ function CartItem({ id }: { id: EntityId }) {
                 >
                     <Trash2 />
                 </Button>
-                <OrderQuantity
-                    handleValueChange={handleValueChange}
-                    quantity={item.quantity}
-                />
+                <Link href={`/payment/${id}`}>
+                    <Button className="bg-primary_orange flex items-center gap-1">
+                        <span>
+                            <ClipboardList />
+                        </span>
+                        Place Order
+                    </Button>
+                </Link>
             </div>
             {/* <Button className="flex items-center gap-1" onClick={makePayment}>
                 <ClipboardList />
                 Place
             </Button> */}
-            {/* {
-                clientSecret && (
-            <Elements
-                stripe={stripePromiseRef.current}
-                options={{ clientSecret: clientSecret }}
-            >
-                        <CheckoutForm/>
-            </Elements>
-                )
-            } */}
         </li>
     );
 }
