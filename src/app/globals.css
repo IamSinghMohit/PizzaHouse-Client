@@ -152,6 +152,7 @@
     -ms-overflow-style: none;
 }
 /********** Hiding scrollbar ****/
+
 .nav-blur {
     background-color: rgba(254, 141, 13, 0.5);
 }
@@ -186,3 +187,17 @@
 .animate-float {
     animation: float 2s infinite;
 }
+/* spinner animation */
+.spinner {
+    animation: spin 160s linear infinite; /* Adjust duration as needed */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+/* spinner animation */

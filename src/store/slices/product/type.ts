@@ -10,14 +10,15 @@ export type TProductTopings = {
     image: string;
 };
 export type TProductInfo = {
-    sections: Record<string, TProductSections>;
+    order_sections: Record<string, TProductSections>;
     id: string;
     name: string;
     image: string;
     price: number;
+    description:string;
 };
 export type TProductSliceIntialState = {
     topings: Record<string, TProductTopings>;
     product_info: TProductInfo ;
-    price:number;
+    total_price:number;
 };

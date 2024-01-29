@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import CImage from "@/components/CImage";
 import { useAppDispatch, useAppSelector } from "@/hooks/state";
 import { TGetTopoingSchema } from "@/schema/get";
-import { setProductTopings } from "@/store/slices/product/product";
+import { setProductTopings } from "@/store/slices/product";
 
 type Props = {
     category: string;

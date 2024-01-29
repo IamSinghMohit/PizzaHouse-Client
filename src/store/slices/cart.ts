@@ -10,7 +10,7 @@ type TCartItem = {
     product_description:string;
     product_sections: Array<{
         name: string;
-        attribute_id: string;
+        attribute: string;
         value: number;
     }>;
     topings: Array<{

@@ -7,13 +7,12 @@ import { useAppDispatch, useAppSelector } from "@/hooks/state";
 import { addToCart } from "@/store/slices/cart";
 import { v4 as uuidV4 } from "uuid";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 type Props = {};
 
 export default function AddToCartButton({}: Props) {
     const productState = useAppSelector((state) => state.product.product_info);
-    const { price, topings } = useAppSelector((state) => state.product);
+    const { total_price, topings } = useAppSelector((state) => state.product);
     const urlPath = usePathname().split("/");
     const dispatch = useAppDispatch();
 
@@ -23,22 +22,21 @@ export default function AddToCartButton({}: Props) {
             topingsArray.push(topings[key]);
         }
         const sections = [];
-        for (let key in productState.sections) {
+        for (let key in productState.order_sections) {
             const obj = {
-                name: productState.sections[key].name,
-                attribute: productState.sections[key].attribute,
-                value: productState.sections[key].value,
+                name: productState.order_sections[key].name,
+                attribute: productState.order_sections[key].attribute,
+                value: productState.order_sections[key].value,
             };
             sections.push(obj);
         }
         dispatch(
             addToCart({
                 id: uuidV4(),
-                price: price,
+                price: total_price,
                 quantity: 1,
                 product_id: urlPath[urlPath.length - 1],
-                product_description:
-                    "this is the dommy description update later",
+                product_description:productState.description,
                 product_price: productState.price,
                 topings: topingsArray,
                 product_name: productState.name,

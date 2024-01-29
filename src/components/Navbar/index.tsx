@@ -39,13 +39,13 @@ export default function Navbar({}: Props) {
 
     return (
         <nav className="navbar sticky top-0 z-10">
-            <MaxWidthWrapper className="flex items-center justify-between py-2">
+            <MaxWidthWrapper className="flex items-center justify-between py-2 gap-2">
                 <Link href="/">
                     <Image
-                        src="/pizza.png"
+                        src="/logo.svg"
                         alt="logo image"
-                        width={40}
-                        height={40}
+                        width={240}
+                        height={60}
                     />
                 </Link>
                 {loaded ? isMobile ? <MobileMenu /> : <DesktopMenu /> : null}

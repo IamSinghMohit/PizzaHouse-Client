@@ -2,8 +2,8 @@
 
 import { PayloadAction, configureStore } from "@reduxjs/toolkit";
 import { userSlice } from "./slices/user";
-import productSlice from "./slices/product/product";
 import { CartItemAdapter, cartSlice } from "./slices/cart";
+import productSlice from "./slices/product";
 
 // Middleware to save and load data from localStorage
 const localStorageMiddleware = () => (next: any) => (action: PayloadAction) => {
