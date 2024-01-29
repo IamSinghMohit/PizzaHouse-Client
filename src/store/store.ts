@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { PayloadAction, configureStore } from "@reduxjs/toolkit";
 import { userSlice } from "./slices/user";
@@ -17,14 +17,16 @@ const localStorageMiddleware = () => (next: any) => (action: PayloadAction) => {
 };
 
 let preloadedState;
-try {
-    const localStorageData = localStorage.getItem("cart-items");
-    const data = localStorage
-        ? { cart: JSON.parse(localStorageData || "") }
-        : {};
-    preloadedState = data.cart ? data : undefined;
-} catch (error) {
-    console.log(error);
+if (typeof window !== "undefined") {
+    try {
+        const localStorageData = localStorage.getItem("cart-items");
+        const data = localStorage
+            ? { cart: JSON.parse(localStorageData || "") }
+            : {};
+        preloadedState = data.cart ? data : undefined;
+    } catch (error) {
+        console.log(error);
+    }
 }
 const store = configureStore({
     reducer: {

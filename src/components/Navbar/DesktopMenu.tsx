@@ -1,12 +1,5 @@
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
-import {
-    DropdownMenu,
-    DropdownMenuTrigger,
-    DropdownMenuContent,
-    DropdownMenuItem,
-} from "../ui/dropdown-menu";
 import { Search, ShoppingCart } from "lucide-react";
 import { useAppSelector } from "@/hooks/state";
 import { LoginWithButton } from "../LoginWithButton";
@@ -15,6 +8,7 @@ interface Props {}
 
 export default function DesktopMenu({}: Props) {
     const { user } = useAppSelector((state) => state.user);
+    const ids = useAppSelector((state) => state.cart.ids);
     return (
         <div className="flex items-center font-bold font-inter gap-2">
             <Link href={"/products"}>
@@ -23,15 +17,14 @@ export default function DesktopMenu({}: Props) {
                 </Button>
             </Link>{" "}
             <Link href={"/cart/lskdjf23lkj"}>
-                <Button size="icon" className="rounded-full">
+                <Button size="icon" className="rounded-full relative">
                     <ShoppingCart />
+                    <span className="absolute top-0 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[12px] font-light flex items-center justify-center">
+                        {ids.length}
+                    </span>
                 </Button>
             </Link>{" "}
-            {user ? (
-            <ProfileButton user={user}/>
-            ) : (
-                <LoginWithButton />
-            )}
+            {user ? <ProfileButton user={user} /> : <LoginWithButton />}
         </div>
     );
 }

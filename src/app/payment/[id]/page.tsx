@@ -46,12 +46,7 @@ export default function page({}: Props) {
             product_price: entity?.product_price,
             product_sections:entity?.product_sections
         };
-        api.post("/order/create", data).then((res) => {
-            console.log(res);
-            setStripeSecret(res.data.data.client_secret);
-        });
     }, []);
-    // TODO: Also product description needed to be ad in entityAdapter
     return (
         <MaxWidthWrapper>
             <Card className="bg-gray-50 shadow-none flex">

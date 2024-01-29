@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/state";
 import { addToCart } from "@/store/slices/cart";
 import { v4 as uuidV4 } from "uuid";
 import { usePathname } from "next/navigation";
+import { toast } from "sonner";
 
 type Props = {};
 
@@ -36,7 +37,7 @@ export default function AddToCartButton({}: Props) {
                 price: total_price,
                 quantity: 1,
                 product_id: urlPath[urlPath.length - 1],
-                product_description:productState.description,
+                product_description: productState.description,
                 product_price: productState.price,
                 topings: topingsArray,
                 product_name: productState.name,
@@ -44,6 +45,8 @@ export default function AddToCartButton({}: Props) {
                 product_sections: sections,
             }),
         );
+
+        toast.success("product  added");
     }
     return (
         <Button onClick={handleClick} className="flex items-center gap-1">
