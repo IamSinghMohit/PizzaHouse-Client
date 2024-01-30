@@ -41,7 +41,7 @@ const CheckoutForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <PaymentElement />
-            <Button disabled={!stripe} type="submit">Submit</Button>
+            <Button disabled={!stripe} type="submit" className="my-5">Submit</Button>
         </form>
     );
 };

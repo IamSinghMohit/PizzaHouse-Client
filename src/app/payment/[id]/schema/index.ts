@@ -10,6 +10,8 @@ export type TGetStripePublishKeySchema = TypeOf<
 
 export const PaymentIntentSchema = z.object({
     success: z.boolean(),
-    data: z.string(),
+    data: z.object({
+        client_secret: z.string(),
+    }),
 });
-export type TPaymentIntentSchema = TypeOf<typeof PaymentIntentSchema>
+export type TPaymentIntentSchema = TypeOf<typeof PaymentIntentSchema>;

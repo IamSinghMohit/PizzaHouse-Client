@@ -17,8 +17,8 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                inter: "Inter",
-                roboto: "Roboto",
+                inter: ["var(--font-inter)", "sans-serif"],
+                roboto: ["var(--font-roboto)", "sans-serif"],
             },
             screens: {
                 xs: "480px",
@@ -58,8 +58,8 @@ module.exports = {
                     foreground: "hsl(var(--card-foreground))",
                 },
                 primary_orange: "#FE8D0D",
-                primary_orange_light:"#FAA13E",
-                primary_red:"#FF5733",
+                primary_orange_light: "#FAA13E",
+                primary_red: "#FF5733",
                 second_orange: "#c26e0e",
                 primary_background: "#F1F7EB",
                 primary_black: "#101010",

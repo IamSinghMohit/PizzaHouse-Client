@@ -2,7 +2,7 @@ import api from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import { GetStripePublishKeySchema } from "../schema";
 
-export function useStripeKey() {
+export function useStripeKey(user:boolean) {
     return useQuery({
         queryKey: ["stirpe", "key"],
         queryFn: async (): Promise<string> =>
@@ -12,5 +12,6 @@ export function useStripeKey() {
         refetchOnMount: false,
         refetchOnWindowFocus: false,
         staleTime: 60 * 60 * 1000,
+        enabled:user
     });
 }

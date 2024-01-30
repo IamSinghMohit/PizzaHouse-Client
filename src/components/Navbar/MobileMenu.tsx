@@ -38,7 +38,7 @@ export default function MobileMenu({}: Props) {
                 <Button
                     size="icon"
                     onClick={() => setOpen((prev) => !prev)}
-                    className={`z-30 relative ${open && "invisible"}`}
+                    className={`z-30 relative ${open && "invisible"} rounded-full`}
                 >
                     <Menu strokeWidth={3} />
                 </Button>
@@ -75,7 +75,7 @@ export default function MobileMenu({}: Props) {
                                     alt="user image"
                                 />
                                 <AvatarFallback>
-                                    {user.name.slice(0, 2).toUpperCase()}
+                                    {user.first_name.slice(0, 2).toUpperCase()}
                                 </AvatarFallback>
                             </Avatar>
                         ) : (
