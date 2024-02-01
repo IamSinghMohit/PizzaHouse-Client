@@ -6,7 +6,7 @@ import { useAppSelector } from "@/hooks/state";
 import { Elements } from "@stripe/react-stripe-js";
 import { Stripe, loadStripe } from "@stripe/stripe-js";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect,  useState } from "react";
 import CheckoutForm from "./components/CheckoutForm";
 import { useStripeKey } from "./hooks/useStripeKey";
 import { useCreatePaymentIntent } from "./hooks/useCreatePaymentIntent";
@@ -68,7 +68,7 @@ export default function page({}: Props) {
                     />
                     <div>
                         <h6>{entity?.product_name}</h6>
-                        <p className="text-gray-600 max-w-[340px] text-[12px]">
+                        <p className="text-gray-600 max-w-[340px] text-[12px] lg:text-[14px]">
                             this is the dommy description update it later inside
                             order page Lorem ipsum, dolor sit amet consectetur
                             adipisicing elit. Ipsum iste quam nostrum!
@@ -79,37 +79,39 @@ export default function page({}: Props) {
                         <p>qty:{entity?.quantity}</p>
                     </div>
                 </div>
-                <div className="flex flex-col gap-1 p-2 h-[300px] overflow-y-scroll">
-                    {entity?.topings.map((toping) => (
-                        <div className="flex gap-1 items-start p-1 bg-gray-50 rounded-md border">
-                            <CImage
-                                src={toping.image || ""}
-                                alt="toping image"
-                                width={60}
-                                height={60}
-                                className="rounded-sm"
-                            />
-                            <div>
-                                <h6>{toping.name}</h6>
-                                <span className="flex items-center gap-1">
-                                    {" "}
-                                    <IndianRupee width={14} height={14} />
-                                    {toping.price}
-                                </span>
+                {entity?.topings.length > 0 && (
+                    <div className="flex flex-col gap-1 p-2 max-h-[300px] overflow-y-scroll">
+                        {entity?.topings.map((toping) => (
+                            <div className="flex gap-1 items-start p-1 bg-gray-50 rounded-md border">
+                                <CImage
+                                    src={toping.image || ""}
+                                    alt="toping image"
+                                    width={60}
+                                    height={60}
+                                    className="rounded-sm"
+                                />
+                                <div>
+                                    <h6>{toping.name}</h6>
+                                    <span className="flex items-center gap-1">
+                                        {" "}
+                                        <IndianRupee width={14} height={14} />
+                                        {toping.price}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
             </div>
             {secret ? (
                 <Elements
                     stripe={stripePromies}
-                    options={{ clientSecret: secret }}
+                    options={{ clientSecret: secret.client_secret }}
                 >
                     <CheckoutForm />
                 </Elements>
             ) : (
-                <div className="shimmer w-[280px] h-[250px]"></div>
+                <div className="shimmer w-[280px] h-[270px]"></div>
             )}
         </MaxWidthWrapper>
     );

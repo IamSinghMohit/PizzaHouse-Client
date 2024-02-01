@@ -7,7 +7,6 @@ import Autoplay from "embla-carousel-autoplay";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ProductCard from "./ProductCard";
 import { TGetFormatedProductsSchema } from "@/schema/get";
-import { EmblaCarouselType } from "embla-carousel-react";
 
 type Props = {
     products: TGetFormatedProductsSchema["data"][0]["products"];
@@ -38,13 +37,13 @@ export default function ProductCarousel({ products, delay }: Props) {
         <Carousel
             // plugins={[plugin.current]}
             opts={{
-                loop: true,
+                align:'center'
             }}
             setApi={setApi}
         >
             <CarouselContent className="m-0">
                 {products.map((pro) => (
-                    <CarouselItem key={pro.id} className="basis-auto">
+                    <CarouselItem key={pro.id} className="basis-auto pl-2">
                         {" "}
                         <ProductCard product={pro} />
                     </CarouselItem>

@@ -10,7 +10,7 @@ export default function DesktopMenu({}: Props) {
     const { user } = useAppSelector((state) => state.user);
     const ids = useAppSelector((state) => state.cart.ids);
     return (
-        <div className="flex items-center font-bold font-inter gap-2">
+        <nav className="flex items-center font-bold font-inter gap-2">
             <Link href={"/products"}>
                 <Button size="icon" className="rounded-full">
                     <Search />
@@ -25,6 +25,6 @@ export default function DesktopMenu({}: Props) {
                 </Button>
             </Link>{" "}
             {user ? <ProfileButton user={user} /> : <LoginWithButton />}
-        </div>
+        </nav>
     );
 }

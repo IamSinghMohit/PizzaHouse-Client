@@ -7,13 +7,13 @@ import HeroImage from "./components/HeroImage";
 
 export default function Home() {
     return (
-        <div>
+        <main>
             <MaxWidthWrapper>
                 <div className="flex flex-col gap-1 sm:flex-row pt-5 sm:pt-14">
-                    <div className="text-primary_black font-inter flex flex-col p-2 gap-4 max-w-[457px] items-center justify-center">
+                    <div className="text-primary_black font-inter flex flex-col p-2 gap-4 font-bold  max-w-[457px] items-center justify-center">
                         <h1 className="text-[35px] leading-10 xs:text-[53px] xs:leading-[50px] lg:text-[70px] lg:leading-[72px]">
                             Not able to controll your hunger{" "}
-                            <span className="text-primary_orange ">
+                            <span className="text-primary_orange whitespace-nowrap">
                                 order some <HomeTypeWriter />
                             </span>
                         </h1>
@@ -23,9 +23,7 @@ export default function Home() {
                             your taste buds to new heights.
                         </p>
                     </div>
-                    {/* <div className="min-w-[300px]"> */}
                         <HeroImage/>
-                    {/* </div> */}
                 </div>
             </MaxWidthWrapper>
 
@@ -44,6 +42,6 @@ export default function Home() {
             </section>
             {/* Home Sectoin ends here */}
             <ProductFeed />
-        </div>
+        </main>
     );
 }

@@ -97,8 +97,8 @@
 
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
-    height: 8px;
-    width: 8px;
+    height: 6px;
+    width: 6px;
 }
 *::-webkit-scrollbar-track {
     background-color: #dfe9eb;
@@ -203,7 +203,7 @@
 
 /* shimmer loader */
 .shimmer {
-    @apply  bg-gray-200 overflow-hidden relative rounded-md  
+    @apply bg-gray-200 overflow-hidden relative rounded-md;
 }
 .shimmer::after {
     background: rgb(241, 245, 249);
@@ -232,3 +232,11 @@
     }
 }
 /* shimmer loader */
+/* hero image media queries*/
+
+@media only screen and (min-width: 637px) and (max-width: 940px) {
+    .hero-image {
+        display: none;
+    }
+}
+/* hero image media queries*/

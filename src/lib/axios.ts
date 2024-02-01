@@ -1,11 +1,6 @@
 import axios from "axios";
 
-const api = axios.create({
-    baseURL:'http://localhost:3001',
-    withCredentials: true,
-});
-
-api.interceptors.response.use(
+axios.interceptors.response.use(
     (config) => {
         return config;
     },
@@ -18,20 +13,20 @@ api.interceptors.response.use(
         ) {
             originalRequest._isRetry = true;
             try {
-                await axios.get(
-                    `${'http://localhost:3001'}/auth/refresh`,
-                    {
-                        withCredentials: true,
-                    }
-                );
+                await axios.get(`${"http://localhost:3001"}/auth/refresh`, {
+                    withCredentials: true,
+                });
 
-                return api.request(originalRequest);
-            } catch (err:any) {
+                return axios.request(originalRequest);
+            } catch (err: any) {
                 console.log(err.message);
             }
         }
         throw error;
-    }
+    },
 );
 
-export default api;
+export default axios.create({
+    baseURL: "http://localhost:3001",
+    withCredentials: true,
+});

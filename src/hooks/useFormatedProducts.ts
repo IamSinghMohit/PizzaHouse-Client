@@ -6,7 +6,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 
 async function getProducts(): Promise<TGetFormatedProductsSchema["data"]> {
-    const result = await api.get("/product/formated").then((res) => res.data);
+    const result = await api.get("/product/formated?productLimit=6").then((res) => res.data);
     try {
         return GetFormatedProductsSchema.parse(result).data;
     } catch (error) {
