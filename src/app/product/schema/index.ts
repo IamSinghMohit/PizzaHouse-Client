@@ -9,3 +9,8 @@ export const CategorySchema = z.object({
     updated_at: z.string(),
 });
 export type TGetCategorySchema = TypeOf<typeof CategorySchema>;
+
+export const GetProductStatsSchema = z.object({
+    max_price: z.number(),
+});
+export type TGetProductStatsSchema = TypeOf<typeof GetProductStatsSchema>;
