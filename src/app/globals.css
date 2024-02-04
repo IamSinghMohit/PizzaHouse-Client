@@ -234,9 +234,31 @@
 /* shimmer loader */
 /* hero image media queries*/
 
-@media only screen and (min-width: 637px) and (max-width: 940px) {
+@media only screen and (min-width: 637px) and (max-width: 800px) {
     .hero-image {
         display: none;
     }
 }
 /* hero image media queries*/
+/* product search page */
+.product-search-height {
+    height: calc(100vh - 74px);
+}
+.product-search-renderer {
+    display: grid;
+    gap:8px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+}
+@media only screen and (max-width: 980px) {
+    .product-search-renderer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media only screen and (max-width: 510px) {
+    .product-search-renderer {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+/* product search page */

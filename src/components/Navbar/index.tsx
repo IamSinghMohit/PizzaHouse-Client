@@ -45,11 +45,11 @@ export default function Navbar({}: Props) {
 
     useEffect(() => {
         window.addEventListener("scroll", controlNavbar);
-        async function init() {
+        /* async function init() {
             const locomotive = (await import("locomotive-scroll")).default;
             new locomotive();
         }
-        init();
+        init(); */
         return () => {
             window.removeEventListener("scroll", controlNavbar);
         };

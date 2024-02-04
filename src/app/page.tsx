@@ -8,8 +8,8 @@ import HeroImage from "./components/HeroImage";
 export default function Home() {
     return (
         <main>
-            <MaxWidthWrapper>
-                <div className="flex flex-col gap-1 sm:flex-row pt-5 sm:pt-14">
+            <MaxWidthWrapper className="md:px-2 lg:px-20">
+                <div className="flex flex-col gap-1 sm:flex-row pt-5 ">
                     <div className="text-primary_black font-inter flex flex-col p-2 gap-4 font-bold  max-w-[457px] items-center justify-center">
                         <h1 className="text-[35px] leading-10 xs:text-[53px] xs:leading-[50px] lg:text-[70px] lg:leading-[72px]">
                             Not able to controll your hunger{" "}
