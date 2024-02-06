@@ -9,24 +9,25 @@ import { ProductCategorySelector, ProductSlider } from "./ProductSearchForm";
 
 export function ProductSideBar() {
     const param = useSearchParams();
-
-    const [amount, setAmount] = useState<number[]>([
-        parseInt(param.get("min")) || 0,
-        parseInt(param.get("max")) || 0,
-    ]);
+    const minMax = [
+        parseInt(param.get("min") || "0"),
+        parseInt(param.get("max") || "0"),
+    ];
+    const [amount, setAmount] = useState<number[]>(minMax);
     const [input, setInput] = useState(param.get("name") || "");
-    const [categories, setCategories] = useState(param.get("categories") || "");
+    const [categories, setCategories] = useState("");
     const text = useDebounce(input, 300);
     const router = useRouter();
 
     useEffect(() => {
+        console.log(amount)
         router.push(
-            `product?name=${input}&min=${amount[0]}&max=${amount[1]}&category=${categories}`,
+            `product?name=${input}&category=${categories}&min=${amount[0]}&max=${amount[1]}`
         );
     }, [text, amount, categories]);
 
     return (
-        <Card className="p-2 bg-gray-50 shadow-none flex flex-col gap-1 md:w-[250px]">
+        <Card className="p-2 bg-gray-50 shadow-none flex flex-col gap-1 min-w-[250px] md:min-w-[270px] md:w-[270px]">
             <div className="flex rounded-lg border bg-card text-card-foreground p-2 flex-col gap-3">
                 <div className="border pl-1 rounded-md flex items-center">
                     <button className="text-primary_orange hover:cursor-default">
@@ -38,7 +39,11 @@ export function ProductSideBar() {
                         onChange={(e) => setInput(e.target.value)}
                     />
                 </div>
-                <ProductSlider amount={amount} setAmount={setAmount} />
+                <ProductSlider
+                    amount={amount}
+                    setAmount={setAmount}
+                    deafultValue={minMax}
+                />
             </div>
             <ProductCategorySelector setCategories={setCategories} />
         </Card>

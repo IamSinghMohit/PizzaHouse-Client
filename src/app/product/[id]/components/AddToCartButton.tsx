@@ -9,9 +9,13 @@ import { v4 as uuidV4 } from "uuid";
 import { usePathname } from "next/navigation";
 import { toast } from "sonner";
 
-type Props = {};
+type Props = {
+    className?:string;
+};
 
-export default function AddToCartButton({}: Props) {
+export default function AddToCartButton({
+    className
+}: Props) {
     const productState = useAppSelector((state) => state.product.product_info);
     const { total_price, topings } = useAppSelector((state) => state.product);
     const urlPath = usePathname().split("/");
@@ -49,7 +53,7 @@ export default function AddToCartButton({}: Props) {
         toast.success("product  added");
     }
     return (
-        <Button onClick={handleClick} className="flex items-center gap-1">
+        <Button onClick={handleClick} className={`flex items-center gap-1 ${className}`}>
             <span>Add to Cart</span>
             <BaggageClaim />
         </Button>

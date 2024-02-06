@@ -2,7 +2,7 @@
 
 import { PayloadAction, configureStore } from "@reduxjs/toolkit";
 import { userSlice } from "./slices/user";
-import { CartItemAdapter, cartSlice } from "./slices/cart";
+import {  cartSlice } from "./slices/cart";
 import productSlice from "./slices/product";
 
 // Middleware to save and load data from localStorage
@@ -16,18 +16,14 @@ const localStorageMiddleware = () => (next: any) => (action: PayloadAction) => {
     return result;
 };
 
-let preloadedState;
-if (typeof window !== "undefined") {
-    try {
-        const localStorageData = localStorage.getItem("cart-items");
-        const data = localStorage
-            ? { cart: JSON.parse(localStorageData || "") }
-            : {};
-        preloadedState = data.cart ? data : undefined;
-    } catch (error) {
-        console.log(error);
-    }
-}
+let preloadedState =
+    (() => {
+        if (typeof window === "undefined") {
+            return;
+        }
+        return { cart: JSON.parse(localStorage.getItem("cart-items") || "") };
+    })() || undefined;
+
 const store = configureStore({
     reducer: {
         user: userSlice.reducer,

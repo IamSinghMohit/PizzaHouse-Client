@@ -5,7 +5,7 @@ import { useAppSelector } from "@/hooks/state";
 import CartItem from "./components/CartItem";
 import Image from "next/image";
 import { BaggageClaim } from "lucide-react";
-// import CartCheckout from "../../payment/[id]/CartCheckout";
+import { Separator } from "@/components/ui/separator";
 
 export default function page() {
     const ids = useAppSelector((state) => state.cart.ids);
@@ -42,7 +42,10 @@ export default function page() {
                             <div className="mt-8">
                                 <ul className="space-y-4">
                                     {ids.map((id) => (
-                                        <CartItem key={id} id={id} />
+                                        <li key={id} >
+                                            <CartItem id={id} />
+                                            <Separator orientation="horizontal"/>
+                                        </li>
                                     ))}
                                 </ul>
                             </div>

@@ -85,25 +85,23 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function Page(props: Props) {
     const product = await getProduct(props.params.id);
     return (
-        <article className="pt-10">
+        <article className="pt-2 md:pt-10">
             <MaxWidthWrapper>
-                <div className="flex gap-2">
-                    <div className="flex flex-col gap-4">
-                        <div>
-                            <CImage
-                                src={product.image}
-                                width={400}
-                                height={360}
-                                alt="product image"
-                                className="border rounded-md overflow-hidden"
-                            />
-                        </div>
+                <div className="flex gap-2 flex-col lg:flex-row">
+                    <div className="flex flex-col gap-1">
+                        <CImage
+                            src={product.image}
+                            width={400}
+                            height={360}
+                            alt="product image"
+                            className="border rounded-md overflow-hidden mx-auto"
+                        />
                         <Card className="p-2 shadow-none bg-gray-50">
                             <div>
                                 <h1 className="font-bold text-[20px]">
                                     {product.name}
                                 </h1>
-                                <p className="text-gray-700 overflow-hidden break-words">
+                                <p className="text-gray-700 overflow-hidden break-words text-[14px]">
                                     {product.description}
                                 </p>
                                 <ProductPrice product={product} />
@@ -113,9 +111,11 @@ export default async function Page(props: Props) {
                             )}
                         </Card>
                     </div>
-                    <TopingList category={product.category} />
+                    <Card className="bg-gray-50 p-2 max-h-[300px] overflow-y-scroll lg:max-w-[530px] lg:max-h-full">
+                        <TopingList category={product.category} />
+                    </Card>
                 </div>
-                <AddToCartButton />
+                <AddToCartButton className="mt-2 w-full sm:max-w-[250px] mx-auto lg:mr-auto lg:ml-0" />
             </MaxWidthWrapper>
         </article>
     );

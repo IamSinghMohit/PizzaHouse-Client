@@ -23,7 +23,7 @@ export default function Home() {
                             your taste buds to new heights.
                         </p>
                     </div>
-                        <HeroImage/>
+                    <HeroImage />
                 </div>
             </MaxWidthWrapper>
 

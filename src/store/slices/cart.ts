@@ -7,7 +7,7 @@ type TCartItem = {
     product_id: string;
     product_price: number;
     product_image: string;
-    product_description:string;
+    product_description: string;
     product_sections: Array<{
         name: string;
         attribute: string;
@@ -35,5 +35,5 @@ export const cartSlice = createSlice({
         removeOneFromCart: CartItemAdapter.removeOne,
     },
 });
-export const { addToCart, updateOneIntoCart, removeOneFromCart } =
+export const { addToCart, updateOneIntoCart, removeOneFromCart} =
     cartSlice.actions;

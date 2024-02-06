@@ -24,12 +24,12 @@ function OrderQuantity({ handleValueChange, quantity }: IProps) {
                 Quantity{" "}
             </label>
 
-            <div className="flex items-center rounded border">
+            <div className="flex items-center rounded-3xl border">
                 <Button
                     type="button"
                     onClick={() => setValue((prev) => prev - 1 || 1)}
                     size={"icon"}
-                    className="text-white rounded-sm rounded-r-none transition hover:opacity-75"
+                    className="text-white rounded-sm rounded-r-none transition hover:opacity-75 rounded-l-2xl"
                 >
                     <Minus width={20} />
                 </Button>
@@ -46,7 +46,7 @@ function OrderQuantity({ handleValueChange, quantity }: IProps) {
                     type="button"
                     size={"icon"}
                     onClick={() => setValue((prev) => prev + 1)}
-                    className="text-white rounded-sm  rounded-l-none transition hover:opacity-75"
+                    className="text-white rounded-sm  rounded-l-none transition hover:opacity-75 rounded-r-2xl"
                 >
                     <Plus width={20} />
                 </Button>

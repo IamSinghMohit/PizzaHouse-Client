@@ -1,22 +1,25 @@
 import { Slider } from "@/components/ui/slider";
 import { IndianRupee } from "lucide-react";
-import { Dispatch, SetStateAction, useEffect,  useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useInfiniteCategories } from "../hooks/useInfiniteCategories";
 import CImage from "@/components/CImage";
-import { useProductStats } from "@/hooks/useProductState";
+import { useProductStats } from "@/hooks/useProductStats";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 export function ProductSlider({
     setAmount,
+    deafultValue
 }: {
     amount: number[];
     setAmount: Dispatch<SetStateAction<number[]>>;
+    deafultValue:number[]
 }) {
     const { data } = useProductStats();
-    const [value, setValue] = useState([0, 0]);
+    const [value, setValue] = useState(deafultValue);
     return (
         <div>
             <Slider
-                defaultValue={value}
+                defaultValue={deafultValue}
                 min={0}
                 max={data?.max_price || 500}
                 step={1}
@@ -49,9 +52,12 @@ export const ProductCategorySelector = ({
 }) => {
     const { data, fetchNextPage } = useInfiniteCategories();
     const [cats, setCats] = useState<Map<string, string>>(new Map());
+    const observer = useIntersectionObserver(() => {
+        fetchNextPage();
+    }, []);
 
     const handleCategoryClick = (categoryName: string) => {
-        const newCats = new Map(cats); // Create a new map to avoid mutating the state directly
+        const newCats = new Map(cats); 
         if (newCats.has(categoryName)) {
             newCats.delete(categoryName);
         } else {
@@ -64,16 +70,16 @@ export const ProductCategorySelector = ({
         setCategories(Array.from(cats.keys()).join(","));
     }, [cats]);
 
+    const arr = data?.pages.flat() || [];
     return (
         <div className="flex rounded-lg border bg-card p-2 text-card-foreground shadow-sm flex-wrap gap-1 justify-between max-h-[136px] md:max-h-full overflow-scroll">
-            {data?.pages
-                .flat()
-                .map((cat) => (
+            {arr.map((cat, index) => (
+                <div ref={index == arr?.length - 1 ? observer : undefined}>
                     <CImage
                         src={cat.image}
-                        className={`rounded-md border-2 cursor-pointer border-primary_orange ${
+                        className={`rounded-md border-2 cursor-pointer ${
                             cats.has(cat.name)
-                                ? "outline-2 outline-primary_orange"
+                                ? "border-primary_orange "
                                 : ""
                         }`}
                         width={55}
@@ -81,7 +87,8 @@ export const ProductCategorySelector = ({
                         alt={cat.name}
                         onClick={() => handleCategoryClick(cat.name)}
                     />
-                ))}
+                </div>
+            ))}
         </div>
     );
 };

@@ -69,9 +69,7 @@ export default function page({}: Props) {
                     <div>
                         <h6>{entity?.product_name}</h6>
                         <p className="text-gray-600 max-w-[340px] text-[12px] lg:text-[14px]">
-                            this is the dommy description update it later inside
-                            order page Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit. Ipsum iste quam nostrum!
+                            {entity?.product_description}
                         </p>
                         <h5 className="text-gray-800">
                             Price: {entity?.product_price}

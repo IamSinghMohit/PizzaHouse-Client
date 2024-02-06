@@ -4,6 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 type opts = {
     category?: string;
+    name?: string;
     min?: number;
     max?: number;
     cursor?: string;
@@ -14,19 +15,23 @@ export async function getProducts({
     max,
     cursor,
     category,
+    name,
 }: opts): Promise<TGetProductSchema["data"][]> {
     let query = "/product?";
-    if (max !== undefined) {
-        query += `max=${max}&`;
+    if (typeof Number(max) === "number") {
+        query += `max=${Number(max)}&`;
     }
-    if (min !== undefined) {
-        query += `min=${min}&`;
+    if (typeof Number(min) === 'number') {
+        query += `min=${Number(min)}&`;
     }
     if (cursor !== undefined) {
         query += `cursor=${cursor}&`;
     }
     if (category !== undefined) {
         query += `category=${category}&`;
+    }
+    if (name !== undefined) {
+        query += `name=${name}&`;
     }
 
     // Remove the trailing '&' if present
@@ -38,7 +43,14 @@ export async function getProducts({
 
 export function useInfiniteSearchProduct(opts: opts) {
     return useInfiniteQuery({
-        queryKey: ["product", "search", opts.min, opts.max, opts.category],
+        queryKey: [
+            "product",
+            "search",
+            opts.name,
+            opts.category,
+            opts.min,
+            opts.max,
+        ],
         initialPageParam: "",
         queryFn: async ({ pageParam }) =>
             await getProducts({ ...opts, cursor: pageParam }),

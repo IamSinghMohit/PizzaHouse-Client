@@ -13,6 +13,7 @@ import axios from "@/lib/axios";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./PaymentForm";
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 function CartItem({ id }: { id: EntityId }) {
     const item = useAppSelector((state) => state.cart.entities[id]);
@@ -30,24 +31,13 @@ function CartItem({ id }: { id: EntityId }) {
                     quantity: value,
                     price: basePrice * value,
                 },
-            }),
+            })
         );
     }
 
-    // async function makePayment() {
-    //     stripePromiseRef.current = loadStripe(
-    //         process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-    //     ) as Stripe;
-    //     const secret = await axios
-    //         .post("order/create", {
-    //             price: 500,
-    //         })
-    //         .then((res) => res.data);
-    //     setClientSecret(secret.client_secret);
-    // }
-
     return (
-        <li className="flex items-start gap-4 justify-between">
+        <div className="flex items-start justify-between flex-wrap gap-2">
+            {/* LEFT SIDE */}
             <div className="flex items-start gap-2">
                 <CImage
                     src={item.product_image}
@@ -63,21 +53,23 @@ function CartItem({ id }: { id: EntityId }) {
                     <span className="text-gray-600">Price: {item.price}</span>
                 </div>
             </div>
-
-            <OrderQuantity
-                handleValueChange={handleValueChange}
-                quantity={item.quantity}
-            />
-            <Link href={`/order/${id}`}>
-                <Button variant={"link"}>
-                    <Eye width={18} height={18} />{" "}
-                    <span className="ml-1">view</span>
-                </Button>
-            </Link>
-            <div className="flex flex-col gap-1 items-end">
+            {/* RIGHT SIDE  */}
+            <div className="flex flex-col justify-between items-center">
+                <OrderQuantity
+                    handleValueChange={handleValueChange}
+                    quantity={item.quantity}
+                />
+                <Link href={`/order/${id}`}>
+                    <Button variant={"link"} className="pr-0 pt-0">
+                        <Eye width={18} height={18} />{" "}
+                        <span className="ml-1">view</span>
+                    </Button>
+                </Link>
+            </div>
+            <div className="flex flex-col items-center">
                 <Button
                     size={"icon"}
-                    className="rounded-md"
+                    className="rounded-xl"
                     onClick={() => {
                         dispatch(removeOneFromCart(id));
                     }}
@@ -85,7 +77,7 @@ function CartItem({ id }: { id: EntityId }) {
                     <Trash2 />
                 </Button>
                 <Link href={`/payment/${id}`}>
-                    <Button className="bg-primary_orange flex items-center gap-1">
+                    <Button variant={"link"} className="pr-0 pt-0">
                         <span>
                             <ClipboardList />
                         </span>
@@ -93,11 +85,7 @@ function CartItem({ id }: { id: EntityId }) {
                     </Button>
                 </Link>
             </div>
-            {/* <Button className="flex items-center gap-1" onClick={makePayment}>
-                <ClipboardList />
-                Place
-            </Button> */}
-        </li>
+        </div>
     );
 }
 

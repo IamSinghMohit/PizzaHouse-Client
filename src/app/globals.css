@@ -186,6 +186,15 @@
 .animate-float {
     animation: float 2s infinite;
 }
+.delay-500 {
+    animation-delay: 500ms;
+}
+.delay-1500 {
+    animation-delay: 1500ms;
+}
+.delay-2000 {
+    animation-delay: 2000ms;
+}
 /* hero spinner animation */
 .spinner {
     animation: spin 160s linear infinite; /* Adjust duration as needed */

@@ -13,8 +13,8 @@ function HoverCardA() {
             scale={1.5}
             transitionSpeed={2500}
         >
-            <Card className="p-1 flex items-center gap-1 max-w-[180px] animate-float">
-                <div className="relative w-5 h-5 lg:w-12 lg:h-12">
+            <Card className="p-1 flex items-center gap-1 max-w-[180px] animate-float delay-500">
+                <div className="relative w-5 h-5 xs:w-12 xs:h-12">
                     <Image
                         src="/assets/hover-card-images/sicilian-pizza.png"
                         fill
@@ -23,7 +23,7 @@ function HoverCardA() {
                     />
                 </div>
                 <div>
-                    <h6 className="font-bold text-[10px] lg:text-[16px] whitespace-nowrap pr-1">
+                    <h6 className="font-bold text-[10px] xs:text-[16px] whitespace-nowrap pr-1">
                         Sicilian Pizza
                     </h6>
                     <span className="flex items-center text-primary_orange gap-1">
@@ -42,8 +42,8 @@ function HoverCardB() {
             scale={1.5}
             transitionSpeed={2500}
         >
-            <Card className="p-1 flex items-center gap-1 max-w-[180px] animate-float">
-                <div className="relative w-5 h-5 lg:w-12 lg:h-12">
+            <Card className="p-1 flex items-center gap-1 max-w-[180px] animate-float delay-1500">
+                <div className="relative w-5 h-5 xs:w-12 xs:h-12">
                     <Image
                         src="/assets/hover-card-images/roman-pizza.png"
                         fill
@@ -52,7 +52,7 @@ function HoverCardB() {
                     />
                 </div>
                 <div>
-                    <h6 className="font-bold text-[10px] lg:text-[16px] whitespace-nowrap pr-1">
+                    <h6 className="font-bold text-[10px] xs:text-[16px] whitespace-nowrap pr-1">
                         Roman pizza
                     </h6>
                     <span className="flex items-center text-primary_orange gap-1">
@@ -71,8 +71,8 @@ function HoverCardC() {
             scale={1.5}
             transitionSpeed={2500}
         >
-            <Card className="p-1 flex items-center gap-1 max-w-[180px] animate-float">
-                <div className="relative w-5 h-5 lg:w-12 lg:h-12">
+            <Card className="p-1 flex items-center gap-1 max-w-[180px] animate-float delay-2000">
+                <div className="relative w-5 h-5 xs:w-12 xs:h-12">
                     <Image
                         src="/assets/hover-card-images/burger.png"
                         fill
@@ -81,7 +81,7 @@ function HoverCardC() {
                     />
                 </div>
                 <div>
-                    <h6 className="font-bold text-[10px] lg:text-[16px] whitespace-nowrap pr-1">
+                    <h6 className="font-bold text-[10px] xs:text-[16px] whitespace-nowrap pr-1">
                         Ham Burger
                     </h6>
                     <span className="flex items-center text-primary_orange gap-1">
@@ -103,7 +103,7 @@ export default function HeroImage({}) {
 
             <Image
                 src="/hero.png"
-                alt="hero image"
+                alt="hsm:pt-14ero image"
                 width={550}
                 height={550}
                 className="spinner"

@@ -8,6 +8,7 @@ import CImage from "@/components/CImage";
 import { useAppDispatch, useAppSelector } from "@/hooks/state";
 import { TGetTopoingSchema } from "@/schema/get";
 import { setProductTopings } from "@/store/slices/product";
+import { TickFilledIcon } from "@/icons";
 
 type Props = {
     category: string;
@@ -15,7 +16,7 @@ type Props = {
 
 function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
     const isActive = useAppSelector(
-        (state) => state.product.topings[toping.id],
+        (state) => state.product.topings[toping.id]
     );
     const dispatch = useAppDispatch();
     function handleAddtopoing() {
@@ -31,7 +32,7 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
                             image: toping.image,
                         },
                     },
-                }),
+                })
             );
         } else {
             dispatch(
@@ -45,17 +46,24 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
                             image: toping.image,
                         },
                     },
-                }),
+                })
             );
         }
     }
     return (
         <Card
             onClick={handleAddtopoing}
-            className={`p-2 ${
+            className={`p-2 relative ${
                 isActive ? "p-[7px] border-2 border-primary_orange" : ""
             }`}
         >
+            <div
+                className={`w-4 h-4 absolute right-2 ${
+                    isActive ? "block" : "hidden"
+                }`}
+            >
+                <TickFilledIcon />
+            </div>
             <div className="flex flex-col items-center justify-center">
                 <h5 className="font-bold">{toping.name}</h5>
                 <p className="flex items-center gap-1">
@@ -66,8 +74,8 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
             <CImage
                 src={toping.image}
                 alt="toping-image"
-                width={142}
-                height={142}
+                width={100}
+                height={100}
                 className="rounded-md overflow-hidden"
             />
         </Card>
@@ -77,19 +85,11 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
 function TopingList({ category }: Props) {
     const { data = [] } = useTopings(category);
     return (
-        <Card className="bg-gray-50 p-2 w-[450px] flex flex-col items-start gap-4">
-            <div className="flex rounded-lg border bg-card text-card-foreground shadow-sm max-w-[280px] w-[280px] pl-1">
-                <button className="text-primary_orange hover:cursor-default">
-                    <Search />
-                </button>
-                <input className="p-2 focus:outline-none w-[245px]" />
-            </div>
-            <div className="flex flex-wrap gap-2">
-                {data.map((toping) => (
-                    <Toping toping={toping} key={toping.id} />
-                ))}
-            </div>
-        </Card>
+        <div className="flex flex-wrap gap-2 justify-center ">
+            {data.map((toping) => (
+                <Toping toping={toping} key={toping.id} />
+            ))}
+        </div>
     );
 }
 
