@@ -7,10 +7,10 @@ import { Card } from "@/components/ui/card";
 import { useAppSelector } from "@/hooks/state";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { IndianRupee } from "lucide-react";
 import { initSocket } from "@/lib/socket";
 import { Socket } from "socket.io-client";
-import { OrderStatusEnum } from "./types";
+import OrderTopingRenderer from "@/components/OrderTopingRenderer";
+import OrderSummary from "@/components/OrderSummary";
 
 type Props = {};
 
@@ -42,8 +42,6 @@ export default function page({}: Props) {
         };
     }, []);
 
-    // TODO: Also product description needed to be ad in entityAdapter
-
     return (
         <MaxWidthWrapper className="mt-10">
             {!loading && (
@@ -66,83 +64,12 @@ export default function page({}: Props) {
                             </h5>
                         </div>
                     </div>
-                    {entity?.topings.length > 0 && (
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 p-2 max-h-[300px] overflow-y-scroll">
-                            {entity?.topings.map((toping) => (
-                                <div className="flex gap-1 items-start p-1 bg-gray-50 rounded-md border">
-                                    <CImage
-                                        src={toping.image || ""}
-                                        alt="toping image"
-                                        width={60}
-                                        height={60}
-                                        className="rounded-sm"
-                                    />
-                                    <div>
-                                        <h6>{toping.name}</h6>
-                                        <span className="flex items-center gap-1">
-                                            {" "}
-                                            <IndianRupee
-                                                width={14}
-                                                height={14}
-                                            />
-                                            {toping.price}
-                                        </span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                    <OrderTopingRenderer id={id} />
                     <Card className="p-2 mt-4 flex flex-col gap-4">
                         <div className="p-4 pb-5">
                             <OrderStepper step={step} />
                         </div>
-                        <div className="max-w-[300px] w-full mx-auto sm:mx-0">
-                            <dl className="space-y-0.5 text-sm text-gray-700">
-                                <div className="flex justify-between">
-                                    <dt>Price</dt>
-                                    <dd className="flex items-center">
-                                        <IndianRupee width={15} height={15} />
-                                        <span>{entity?.price}</span>
-                                    </dd>
-                                </div>
-
-                                <div className="flex justify-between">
-                                    <dt>Quantity</dt>
-                                    <dd className="flex items-center">
-                                        <IndianRupee width={15} height={15} />
-                                        <span>{entity?.quantity}</span>
-                                    </dd>
-                                </div>
-
-                                <div className="flex justify-between">
-                                    <dt>Sub Total</dt>
-                                    <dd className="flex items-center">
-                                        <IndianRupee width={15} height={15} />
-                                        <span>
-                                            {entity?.price * entity?.quantity}
-                                        </span>
-                                    </dd>
-                                </div>
-                                <div className="flex justify-between">
-                                    <dt>Shipping</dt>
-                                    <dd className="flex items-center">
-                                        <IndianRupee width={15} height={15} />
-                                        <span>10</span>
-                                    </dd>
-                                </div>
-
-                                <div className="flex justify-between !text-base font-medium">
-                                    <dt>Total</dt>
-                                    <dd className="flex items-center">
-                                        <IndianRupee width={15} height={15} />
-                                        <span>
-                                            {entity?.price * entity?.quantity +
-                                                10}
-                                        </span>
-                                    </dd>
-                                </div>
-                            </dl>
-                        </div>
+                        <OrderSummary id={id} />
                     </Card>
                 </>
             )}

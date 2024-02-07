@@ -1,32 +1,42 @@
 import axios from "axios";
+const url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-axios.interceptors.response.use(
+const api = axios.create({
+    baseURL: url,
+    withCredentials: true,
+    headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+    },
+});
+
+api.interceptors.response.use(
     (config) => {
         return config;
     },
     async (error) => {
         const originalRequest = error.config;
         if (
-            error.response?.status === 401 &&
+            error.response.status === 401 &&
             originalRequest &&
-            !originalRequest?._isRetry
+            !originalRequest._isRetry
         ) {
-            originalRequest._isRetry = true;
+            originalRequest.isRetry = true;
             try {
-                await axios.get(`${"http://localhost:3001"}/auth/refresh`, {
-                    withCredentials: true,
-                });
+                await axios.get(
+                    `${url}/auth/refresh`,
+                    {
+                        withCredentials: true,
+                    }
+                );
 
-                return axios.request(originalRequest);
-            } catch (err: any) {
-                console.log(err.message);
+                return api.request(originalRequest);
+            } catch (err) {
+                console.log(err);
             }
         }
         throw error;
-    },
+    }
 );
 
-export default axios.create({
-    baseURL: "http://localhost:3001",
-    withCredentials: true,
-});
+export default api;

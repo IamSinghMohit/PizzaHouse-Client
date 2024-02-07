@@ -1,11 +1,11 @@
-import axios from "@/lib/axios";
+import api from "@/lib/axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { TGetCategorySchema } from "../schema";
 
 async function InfiniteCategoryScroll(
     cursor?: string,
 ): Promise<TGetCategorySchema[]> {
-    return await axios
+    return await api
         .get(`/category/search?name&limit=10&cursor=${cursor}`)
         .then((res) => res.data.data);
 }

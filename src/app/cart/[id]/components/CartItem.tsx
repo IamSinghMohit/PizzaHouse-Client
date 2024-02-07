@@ -8,12 +8,7 @@ import CImage from "@/components/CImage";
 import { useAppDispatch, useAppSelector } from "@/hooks/state";
 import { EntityId } from "@reduxjs/toolkit";
 import { removeOneFromCart, updateOneIntoCart } from "@/store/slices/cart";
-import { Stripe, loadStripe } from "@stripe/stripe-js";
-import axios from "@/lib/axios";
-import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "./PaymentForm";
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
 
 function CartItem({ id }: { id: EntityId }) {
     const item = useAppSelector((state) => state.cart.entities[id]);

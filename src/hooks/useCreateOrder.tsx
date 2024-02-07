@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
-import axios from '@/lib/axios'
+import api from '@/lib/axios'
 
 async function createOrder(data:any){
-    return await axios.post("/order/create",data).then((res)=> res.data)
+    return await api.post("/order/create",data).then((res)=> res.data)
 }
 
 function useCreateOrder() {

@@ -10,7 +10,6 @@ import { setUser } from "@/store/slices/user";
 import { useGetUser } from "@/hooks/useGetUser";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
-import { setCart } from "@/store/slices/cart";
 
 interface Props {}
 

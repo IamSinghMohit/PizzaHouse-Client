@@ -1,4 +1,4 @@
-import axios from "@/lib/axios";
+import api from "@/lib/axios";
 import { TGetProductSchema } from "@/schema/get";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
@@ -38,7 +38,7 @@ export async function getProducts({
     if (query.endsWith("&")) {
         query = query.slice(0, -1);
     }
-    return await axios.get(query).then((res) => res.data.data);
+    return await api.get(query).then((res) => res.data.data);
 }
 
 export function useInfiniteSearchProduct(opts: opts) {

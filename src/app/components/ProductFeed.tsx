@@ -40,7 +40,7 @@ export default function ProductFeed({}: Props) {
                         ) : (
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 justify-items-center">
                                 {sec.products.map((pro) => {
-                                    return <ProductCard product={pro} />;
+                                    return <ProductCard product={pro} key={pro.id}/>;
                                 })}
                             </div>
                         )}

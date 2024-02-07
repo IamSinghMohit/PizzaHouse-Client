@@ -16,8 +16,8 @@ export const SigninnSchema = z.object({
 export const UserSchema = z
     .object({
         avatar: z.string().optional(),
-        first_name: z.string(),
-        last_name: z.string(),
+        first_name: z.string().optional(),
+        last_name: z.string().optional(),
     })
     .merge(BaseResponseSchema.id);
 

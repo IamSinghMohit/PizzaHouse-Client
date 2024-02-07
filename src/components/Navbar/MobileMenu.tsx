@@ -38,7 +38,9 @@ export default function MobileMenu({}: Props) {
                 <Button
                     size="icon"
                     onClick={() => setOpen((prev) => !prev)}
-                    className={`z-30 relative ${open && "invisible"} rounded-full`}
+                    className={`z-30 relative ${
+                        open && "invisible"
+                    } rounded-full`}
                 >
                     <Menu strokeWidth={3} />
                 </Button>
@@ -69,20 +71,28 @@ export default function MobileMenu({}: Props) {
                         />
 
                         {user ? (
-                            <Avatar>
-                                <AvatarImage
-                                    src={user.avatar}
-                                    alt="user image"
-                                />
-                                <AvatarFallback>
-                                    {user.first_name.slice(0, 2).toUpperCase()}
-                                </AvatarFallback>
-                            </Avatar>
+                            <MBNavLink
+                                text=""
+                                icon={
+                                    <Avatar>
+                                        <AvatarImage
+                                            src={user.avatar}
+                                            alt="user image"
+                                        />
+                                        <AvatarFallback>
+                                            {user.first_name
+                                                .slice(0, 2)
+                                                .toUpperCase()}
+                                        </AvatarFallback>
+                                    </Avatar>
+                                }
+                                href="/profile?with_layout=true"
+                            />
                         ) : (
                             <MBNavLink
                                 text="Login/Sign up"
                                 icon={<CircleUserRound />}
-                                href=""
+                                href="/login?with_layout=true"
                             />
                         )}
                     </div>
