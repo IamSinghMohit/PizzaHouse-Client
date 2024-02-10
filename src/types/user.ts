@@ -1,8 +1,16 @@
-import { TuserSchema } from "@/schema/base/auth";
-
 export type Twindow = "mobile" | "desktop" | null;
+export type TUserStateUser = {
+    id:string;
+    first_name: string;
+    avatar: string;
+    last_name: string;
+    email: string;
+    state: string;
+    city: string;
+    address: string;
+};
 export interface IUserSliceState {
-    user: TuserSchema| null;
+    user: TUserStateUser | null;
     isTriedToAutoLogin: boolean;
-    window: Twindow;
+    stripePublishKey : string | null;
 }

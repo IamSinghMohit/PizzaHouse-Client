@@ -19,7 +19,7 @@ import { LoginSchema, SigninnSchema, TSigninSchema } from "@/schema/base/auth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import React from "react";
-import { FacebookIcon } from "lucide-react";
+import { Facebook} from "lucide-react";
 
 type Props = {};
 
@@ -136,7 +136,7 @@ export function LoginForm({}: Props) {
                             className="text-white text-[25px]"
                             type="button"
                         >
-                            <FacebookIcon/>
+                            <Facebook/>
                             <span className="text-[16px] font-light">
                                 Facebook
                             </span>
@@ -149,10 +149,10 @@ export function LoginForm({}: Props) {
     );
 }
 
-export function Wrapper({ children }: { children: ReactNode }) {
+export function LoginWrapper({ children }: { children: ReactNode }) {
 
     return (
-        <Card className={`flex flex-col max-w-[310px] p-4 mx-auto mt-2`}>
+        <Card className={`flex flex-col max-w-[310px] p-4 mx-auto mt-2 rounded-sm`}>
             {children}
         </Card>
     );

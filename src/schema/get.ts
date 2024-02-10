@@ -46,6 +46,13 @@ export const GetTopoingSchema = z
     })
     .merge(BaseResponseSchema.success);
 
+export const GetStripePublishKeySchema = z.object({
+    success: z.boolean(),
+    data: z.string(),
+});
+export type TGetStripePublishKeySchema = TypeOf<
+    typeof GetStripePublishKeySchema
+>;
 export type TGetProductSchema = TypeOf<typeof GetProductSchema>;
 export type TGetUserSchema = TypeOf<typeof GetUserSchema>;
 export type TGetFormatedProductsSchema = TypeOf<

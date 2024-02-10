@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Home } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -17,7 +18,12 @@ export default function notFound({}: Props) {
                 />
 
                 <Link href="/">
-                    <Button>Back to home</Button>
+                    <Button className="rounded-xl text-xl">
+                        Back to{" "}
+                        <span className="ml-1">
+                            <Home />
+                        </span>
+                    </Button>
                 </Link>
             </div>
         </div>

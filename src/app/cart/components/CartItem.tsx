@@ -26,7 +26,7 @@ function CartItem({ id }: { id: EntityId }) {
                     quantity: value,
                     price: basePrice * value,
                 },
-            })
+            }),
         );
     }
 
@@ -49,19 +49,11 @@ function CartItem({ id }: { id: EntityId }) {
                 </div>
             </div>
             {/* RIGHT SIDE  */}
-            <div className="flex flex-col justify-between items-center">
-                <OrderQuantity
-                    handleValueChange={handleValueChange}
-                    quantity={item.quantity}
-                />
-                <Link href={`/order/${id}`}>
-                    <Button variant={"link"} className="pr-0 pt-0">
-                        <Eye width={18} height={18} />{" "}
-                        <span className="ml-1">view</span>
-                    </Button>
-                </Link>
-            </div>
-            <div className="flex flex-col items-center">
+            <OrderQuantity
+                handleValueChange={handleValueChange}
+                quantity={item.quantity}
+            />
+            <div className="flex flex-col items-end">
                 <Button
                     size={"icon"}
                     className="rounded-xl"
@@ -71,12 +63,10 @@ function CartItem({ id }: { id: EntityId }) {
                 >
                     <Trash2 />
                 </Button>
-                <Link href={`/payment/${id}`}>
-                    <Button variant={"link"} className="pr-0 pt-0">
-                        <span>
-                            <ClipboardList />
-                        </span>
-                        Place Order
+                <Link href={`/order/${id}`}>
+                    <Button variant={"link"} className="pr-0">
+                        <Eye width={18} height={18} />{" "}
+                        <span className="ml-1">view</span>
                     </Button>
                 </Link>
             </div>

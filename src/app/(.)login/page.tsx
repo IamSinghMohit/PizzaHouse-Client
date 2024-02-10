@@ -1,4 +1,4 @@
-import { LoginForm, Wrapper } from "./components";
+import { LoginForm, LoginWrapper } from "./components";
 
 type Props = {
     searchParams: {
@@ -11,8 +11,8 @@ export default function Login({ searchParams }: Props) {
     return !layoutExist ? (
         <LoginForm />
     ) : (
-        <Wrapper>
+        <LoginWrapper>
             <LoginForm />
-        </Wrapper>
+        </LoginWrapper>
     );
 }

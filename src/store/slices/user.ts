@@ -1,23 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUserSliceState, Twindow } from "../../types/user";
-import { TuserSchema } from "@/schema/base/auth";
+import { IUserSliceState, TUserStateUser, Twindow } from "../../types/user";
 
 const initialState: IUserSliceState = {
     user: null,
     isTriedToAutoLogin: false,
-    window: null,
+    stripePublishKey: null,
 };
 
 export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        setWindow(state, action: PayloadAction<Twindow>) {
-            state.window = action.payload;
-        },
-        setUser(state, action: PayloadAction<TuserSchema>) {
+        setUser(state, action: PayloadAction<TUserStateUser>) {
             state.user = action.payload;
+        },
+        setUserStripeSecret(state, action: PayloadAction<string>) {
+            state.stripePublishKey = action.payload;
         },
     },
 });
-export const { setWindow, setUser } = userSlice.actions;
+export const { setUserStripeSecret, setUser } = userSlice.actions;

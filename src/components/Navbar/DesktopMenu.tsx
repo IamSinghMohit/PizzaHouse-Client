@@ -21,7 +21,7 @@ export default function DesktopMenu({}: Props) {
                     <Search />
                 </Button>
             </Link>{" "}
-            <Link href={"/cart/lskdjf23lkj"}>
+            <Link href={"/cart"}>
                 <Button size="icon" className="rounded-full relative">
                     <ShoppingCart />
                     <span className="absolute top-0 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[12px] font-light flex items-center justify-center">

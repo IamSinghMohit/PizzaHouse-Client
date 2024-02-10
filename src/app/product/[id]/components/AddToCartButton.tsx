@@ -53,7 +53,7 @@ export default function AddToCartButton({
         toast.success("product  added");
     }
     return (
-        <Button onClick={handleClick} className={`flex items-center gap-1 ${className}`}>
+        <Button onClick={handleClick} className={`flex items-center gap-1 rounded-xl ${className}`}>
             <span>Add to Cart</span>
             <BaggageClaim />
         </Button>

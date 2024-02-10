@@ -20,7 +20,7 @@ function MBNavLink({
 }) {
     return (
         <Link
-            className="active:text-primary_orange flex items-center gap-1 hover:underline"
+            className="active:text-primary_orange flex items-center gap-1 hover:underline text-lg"
             href={href}
         >
             {text}
@@ -32,6 +32,7 @@ function MBNavLink({
 export default function MobileMenu({}: Props) {
     const [open, setOpen] = useState(false);
     const { user } = useAppSelector((state) => state.user);
+    const { ids } = useAppSelector((state) => state.cart);
     return (
         <Dialog.Root open={open} onOpenChange={(e) => setOpen(e)}>
             <Dialog.Trigger asChild>
@@ -48,53 +49,69 @@ export default function MobileMenu({}: Props) {
             <Dialog.Portal>
                 <Dialog.Overlay className="fixed inset-0 z-50 bg-transparent backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
                 <Dialog.Content className="nav-blur fixed z-50 gap-4 p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500 inset-y-0 right-0 h-full w-3/4  data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm">
-                    <div className="">
-                        <Dialog.Close asChild>
-                            <button
-                                onClick={() => setOpen((prev) => !prev)}
-                                className={`z-30 bg-transparent`}
-                            >
-                                <X strokeWidth={1.8} size={34} />
-                            </button>
-                        </Dialog.Close>
-                    </div>
-                    <div className="flex flex-col items-center justify-center gap-3 pt-8">
-                        <MBNavLink
-                            text="Products"
-                            icon={<Search />}
-                            href="/products"
-                        />
-                        <MBNavLink
-                            text="Cart"
-                            icon={<ShoppingCart />}
-                            href="/cart"
-                        />
+                    <Dialog.Close asChild>
+                        <button
+                            onClick={() => setOpen((prev) => !prev)}
+                            className={`z-30 bg-transparent`}
+                        >
+                            <X strokeWidth={1.8} size={34} />
+                        </button>
+                    </Dialog.Close>
 
-                        {user ? (
+                    <div className="flex flex-col items-center justify-start gap-6 pt-8">
+                        <Dialog.Close asChild>
                             <MBNavLink
-                                text=""
-                                icon={
-                                    <Avatar>
-                                        <AvatarImage
-                                            src={user.avatar}
-                                            alt="user image"
-                                        />
-                                        <AvatarFallback>
-                                            {user.first_name
-                                                .slice(0, 2)
-                                                .toUpperCase()}
-                                        </AvatarFallback>
-                                    </Avatar>
-                                }
-                                href="/profile?with_layout=true"
+                                text="Product"
+                                icon={<Search width={28} height={28} />}
+                                href="/product"
                             />
-                        ) : (
+                        </Dialog.Close>
+
+                        <Dialog.Close asChild>
                             <MBNavLink
-                                text="Login/Sign up"
-                                icon={<CircleUserRound />}
-                                href="/login?with_layout=true"
+                                text="Cart"
+                                icon={(() => (
+                                    <div className="relative">
+                                        <ShoppingCart width={28} height={28} />
+                                        <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 text-white text-[12px] font-light flex items-center justify-center">
+                                            {ids.length}
+                                        </span>
+                                    </div>
+                                ))()}
+                                href="/cart"
                             />
-                        )}
+                        </Dialog.Close>
+
+                        <Dialog.Close asChild>
+                            {user ? (
+                                <MBNavLink
+                                    text=""
+                                    icon={
+                                        <div className="flex items-center gap-1">
+                                            <Avatar>
+                                                <AvatarImage
+                                                    src={user.avatar}
+                                                    alt="user image"
+                                                />
+                                                <AvatarFallback>
+                                                    {user.first_name
+                                                        .slice(0, 2)
+                                                        .toUpperCase()}
+                                                </AvatarFallback>
+                                            </Avatar>
+                                            <span>{user.first_name}</span>
+                                        </div>
+                                    }
+                                    href="/profile?with_layout=true"
+                                />
+                            ) : (
+                                <MBNavLink
+                                    text="Login/Sign up"
+                                    icon={<CircleUserRound />}
+                                    href="/login?with_layout=true"
+                                />
+                            )}
+                        </Dialog.Close>
                     </div>
                 </Dialog.Content>
             </Dialog.Portal>

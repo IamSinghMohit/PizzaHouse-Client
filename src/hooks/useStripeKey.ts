@@ -1,8 +1,8 @@
 import api from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
-import { GetStripePublishKeySchema } from "../schema";
+import { GetStripePublishKeySchema} from "@/schema/get";
 
-export function useStripeKey(user:boolean) {
+export function useStripeKey(user:boolean){
     return useQuery({
         queryKey: ["stirpe", "key"],
         queryFn: async (): Promise<string> =>

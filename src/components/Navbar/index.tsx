@@ -6,25 +6,46 @@ import MaxWidthWrapper from "../MaxWidthWrapper";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import { useAppDispatch } from "@/hooks/state";
-import { setUser } from "@/store/slices/user";
+import { setUser, setUserStripeSecret } from "@/store/slices/user";
 import { useGetUser } from "@/hooks/useGetUser";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
+import { useStripeKey } from "@/hooks/useStripeKey";
+import { TUserStateUser } from "@/types/user";
 
 interface Props {}
 
 export default function Navbar({}: Props) {
     const dispatch = useAppDispatch();
     const { data } = useGetUser();
-    const isMobile = useMediaQuery({ query: "(max-width:415px)" });
+    const { data: stripeData } = useStripeKey(!!data);
+    const isMobile = useMediaQuery({ query: "(max-width:600px)" });
     const scrollRef = useRef(0);
     const [show, setShow] = useState("translate-y-0");
 
     useEffect(() => {
         if (data) {
-            dispatch(setUser(data));
+            // data as unknown as TUserStateUser;
+            let userData = {
+                ...data,
+                city: "",
+                state: "",
+                address: "",
+            } as unknown as TUserStateUser;
+            try {
+                const localData = JSON.parse(
+                    localStorage.getItem(data.id) || "",
+                ) as object;
+                userData = { ...userData, ...localData };
+            } catch (error) {
+                console.log(error);
+            }
+            dispatch(setUser(userData));
         }
-    }, [data]);
+        if (stripeData) {
+            dispatch(setUserStripeSecret(stripeData))
+        }
+    }, [data, stripeData]);
 
     const controlNavbar = () => {
         if (window.scrollY > 200) {
