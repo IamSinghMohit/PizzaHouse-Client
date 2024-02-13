@@ -11,7 +11,7 @@ import { useGetUser } from "@/hooks/useGetUser";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { useStripeKey } from "@/hooks/useStripeKey";
-import { TUserStateUser } from "@/types/user";
+import { Client, HydrationProvider } from "react-hydration-provider";
 
 interface Props {}
 
@@ -25,27 +25,15 @@ export default function Navbar({}: Props) {
 
     useEffect(() => {
         if (data) {
-            // data as unknown as TUserStateUser;
-            let userData = {
-                ...data,
-                city: "",
-                state: "",
-                address: "",
-            } as unknown as TUserStateUser;
-            try {
-                const localData = JSON.parse(
-                    localStorage.getItem(data.id) || "",
-                ) as object;
-                userData = { ...userData, ...localData };
-            } catch (error) {
-                console.log(error);
-            }
-            dispatch(setUser(userData));
+            dispatch(setUser(data));
         }
+    }, [data]);
+
+    useEffect(() => {
         if (stripeData) {
-            dispatch(setUserStripeSecret(stripeData))
+            dispatch(setUserStripeSecret(stripeData));
         }
-    }, [data, stripeData]);
+    }, [stripeData]);
 
     const controlNavbar = () => {
         if (window.scrollY > 200) {
@@ -76,34 +64,29 @@ export default function Navbar({}: Props) {
             window.removeEventListener("scroll", controlNavbar);
         };
     }, []);
-
     return (
         <header
             className={`navbar sticky top-0 z-50 transition-all duration-200 ease-in ${show}`}
         >
             <MaxWidthWrapper
-                className={`flex items-center justify-between py-2 gap-2 ${
-                    isMobile ? "py-1" : ""
-                }`}
+                className={`flex items-center justify-between py-1 gap-2 sm:py-2`}
             >
-                <Link href="/">
-                    {isMobile ? (
-                        <Image
-                            src={"/logo.svg"}
-                            alt="logo image"
-                            width={180}
-                            height={60}
-                        />
-                    ) : (
-                        <Image
-                            src={"/logo.svg"}
-                            alt="logo image"
-                            width={240}
-                            height={60}
-                        />
-                    )}
+                <Link
+                    href="/"
+                    className="relative w-[180px] h-[60px] sm:w-[240px] sm:h-[60px]"
+                >
+                    <Image
+                        src={"/logo.svg"}
+                        alt="logo image"
+                        sizes="(max-width: 768px)100vw, (max-width: 1200px)50vw, 30vw"
+                        fill
+                    />
                 </Link>
-                {isMobile ? <MobileMenu /> : <DesktopMenu />}
+                <HydrationProvider>
+                    <Client>
+                        {isMobile ? <MobileMenu /> : <DesktopMenu />}
+                    </Client>
+                </HydrationProvider>
             </MaxWidthWrapper>
         </header>
     );

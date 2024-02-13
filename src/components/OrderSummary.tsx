@@ -3,19 +3,19 @@ import { IndianRupee } from "lucide-react";
 import React from "react";
 
 type Props = {
-    id: string;
+    price:number;
+    quantity:number;
 };
 
-function OrderSummary({ id }: Props) {
-    const entity = useAppSelector((state) => state.cart.entities[id]);
-    return entity ? (
+function OrderSummary({price,quantity}: Props) {
+    return (
         <div className="max-w-[300px] w-full mx-auto sm:mx-0 mt-5 sm:pl-10">
             <dl className="space-y-0.5 text-sm text-gray-700">
                 <div className="flex justify-between">
                     <dt>Price</dt>
                     <dd className="flex items-center">
                         <IndianRupee width={15} height={15} />
-                        <span>{entity?.price}</span>
+                        <span>{price}</span>
                     </dd>
                 </div>
 
@@ -23,7 +23,7 @@ function OrderSummary({ id }: Props) {
                     <dt>Quantity</dt>
                     <dd className="flex items-center">
                         <IndianRupee width={15} height={15} />
-                        <span>{entity?.quantity}</span>
+                        <span>{quantity}</span>
                     </dd>
                 </div>
 
@@ -31,12 +31,12 @@ function OrderSummary({ id }: Props) {
                     <dt>Total</dt>
                     <dd className="flex items-center">
                         <IndianRupee width={15} height={15} />
-                        <span>{entity?.price * entity?.quantity}</span>
+                        <span>{price * quantity}</span>
                     </dd>
                 </div>
             </dl>
         </div>
-    ) : null;
+    )
 }
 
 export default OrderSummary;

@@ -25,7 +25,10 @@ function CardRenderer({}: Props) {
     return (
         <div className="product-search-renderer">
             {arr.map((pro, index) => (
-                <div ref={index === arr?.length - 2 ? observer : undefined}>
+                <div
+                    ref={index === arr?.length - 2 ? observer : undefined}
+                    key={pro.id}
+                >
                     <ProductCard product={pro} key={pro.id} />
                 </div>
             ))}

@@ -88,13 +88,14 @@ export default async function Page(props: Props) {
         <article className="pt-2 md:pt-10">
             <MaxWidthWrapper>
                 <div className="flex gap-2 flex-col lg:flex-row">
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-1 flex-1">
                         <CImage
                             src={product.image}
                             width={400}
                             height={360}
                             alt="product image"
-                            className="border rounded-md overflow-hidden mx-auto"
+                            sizes="(max-width: 768px)100vw, (max-width: 1200px)50vw, 30vw"
+                            className="rounded-md overflow-hidden mx-auto"
                         />
                         <Card className="p-2 shadow-none bg-gray-50">
                             <div>
@@ -111,9 +112,7 @@ export default async function Page(props: Props) {
                             )}
                         </Card>
                     </div>
-                    <Card className="bg-gray-50 p-2 max-h-[300px] overflow-y-scroll lg:max-w-[530px] lg:max-h-full">
-                        <TopingList category={product.category} />
-                    </Card>
+                    <TopingList category={product.category} />
                 </div>
                 <AddToCartButton className="mt-2 w-full sm:max-w-[250px] mx-auto lg:mr-auto lg:ml-0" />
             </MaxWidthWrapper>

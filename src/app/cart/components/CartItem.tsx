@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useRef, useState } from "react";
 import OrderQuantity from "./OrderQuantity";
-import { ClipboardList, Eye, Trash2 } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CImage from "@/components/CImage";
 import { useAppDispatch, useAppSelector } from "@/hooks/state";
@@ -17,14 +16,13 @@ function CartItem({ id }: { id: EntityId }) {
     if (!item) {
         return;
     }
+
     function handleValueChange(value: number) {
-        const basePrice = item?.price / item?.quantity;
         dispatch(
             updateOneIntoCart({
                 id: id,
                 changes: {
                     quantity: value,
-                    price: basePrice * value,
                 },
             }),
         );
@@ -45,7 +43,7 @@ function CartItem({ id }: { id: EntityId }) {
                     <h3 className="text-sm text-gray-900 text-[21px]">
                         {item.product_name}
                     </h3>
-                    <span className="text-gray-600">Price: {item.price}</span>
+                    <span className="text-gray-600">Price: {item.price * item.quantity}</span>
                 </div>
             </div>
             {/* RIGHT SIDE  */}
@@ -63,7 +61,7 @@ function CartItem({ id }: { id: EntityId }) {
                 >
                     <Trash2 />
                 </Button>
-                <Link href={`/order/${id}`}>
+                <Link href={`/order/client-${id}`}>
                     <Button variant={"link"} className="pr-0">
                         <Eye width={18} height={18} />{" "}
                         <span className="ml-1">view</span>

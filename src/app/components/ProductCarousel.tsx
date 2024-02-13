@@ -57,6 +57,7 @@ export default function ProductCarousel({ products, delay }: Props) {
                                 ? "bg-orange-600 opacity-100 "
                                 : "bg-orange-400 opacity-35"
                         }`}
+                        key={index}
                     ></span>
                 ))}
             </div>

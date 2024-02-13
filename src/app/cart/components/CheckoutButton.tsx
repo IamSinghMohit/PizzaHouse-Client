@@ -2,11 +2,12 @@ import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/hooks/state";
 import { SpinnerIcon } from "@/icons";
 import api from "@/lib/axios";
-import { loadStripe } from "@stripe/stripe-js";
+import { Stripe, loadStripe } from "@stripe/stripe-js";
 import { Codepen } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { useCheckout } from "../hooks/useCheckout";
 
 type Props = {};
 
@@ -14,6 +15,17 @@ function CheckoutButton({}: Props) {
     const { user, stripePublishKey } = useAppSelector((state) => state.user);
     const [isLoading, setIsLoading] = useState(false);
     const { ids, entities } = useAppSelector((state) => state.cart);
+    const {mutate,isPending} = useCheckout()
+    const [stripePromise,setStripePromise] = useState<Promise<Stripe | null>>(null)
+
+    useEffect(()=> {
+        if(!stripePublishKey)  return
+        async  function init(){
+           return await  loadStripe(stripePublishKey)
+        }
+        const stripe = init()
+        setStripePromise(stripe)
+    },[stripePublishKey])
 
     async function handleMakePayment() {
         if (stripePublishKey && user) {
@@ -23,13 +35,13 @@ function CheckoutButton({}: Props) {
                     image: entities[id]?.product_image,
                     price: entities[id]?.product_price,
                     quantity: entities[id]?.quantity,
+                    description:entities[id]?.product_description,
+                    topings: entities[id]?.topings.map(
+                        ({ name, image, price }) => ({ name, image, price }),
+                    ),
                 })),
-                city: user.city,
-                state: user.state,
-                address: user.address,
             };
             setIsLoading(true);
-            const stripe = await loadStripe(stripePublishKey);
             const res = await api
                 .post("/order/create", body)
                 .then((res) => res.data)

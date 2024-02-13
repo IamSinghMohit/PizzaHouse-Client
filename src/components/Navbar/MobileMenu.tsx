@@ -84,26 +84,20 @@ export default function MobileMenu({}: Props) {
 
                         <Dialog.Close asChild>
                             {user ? (
-                                <MBNavLink
-                                    text=""
-                                    icon={
-                                        <div className="flex items-center gap-1">
-                                            <Avatar>
-                                                <AvatarImage
-                                                    src={user.avatar}
-                                                    alt="user image"
-                                                />
-                                                <AvatarFallback>
-                                                    {user.first_name
-                                                        .slice(0, 2)
-                                                        .toUpperCase()}
-                                                </AvatarFallback>
-                                            </Avatar>
-                                            <span>{user.first_name}</span>
-                                        </div>
-                                    }
-                                    href="/profile?with_layout=true"
-                                />
+                                <div className="flex items-center gap-1">
+                                    <Avatar>
+                                        <AvatarImage
+                                            src={user.avatar}
+                                            alt="user image"
+                                        />
+                                        <AvatarFallback>
+                                            {user.first_name
+                                                .slice(0, 2)
+                                                .toUpperCase()}
+                                        </AvatarFallback>
+                                    </Avatar>
+                                    <span>{user.first_name}</span>
+                                </div>
                             ) : (
                                 <MBNavLink
                                     text="Login/Sign up"

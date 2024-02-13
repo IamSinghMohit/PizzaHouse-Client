@@ -16,7 +16,7 @@ type Props = {
 
 function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
     const isActive = useAppSelector(
-        (state) => state.product.topings[toping.id]
+        (state) => state.product.topings[toping.id],
     );
     const dispatch = useAppDispatch();
     function handleAddtopoing() {
@@ -32,7 +32,7 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
                             image: toping.image,
                         },
                     },
-                })
+                }),
             );
         } else {
             dispatch(
@@ -46,7 +46,7 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
                             image: toping.image,
                         },
                     },
-                })
+                }),
             );
         }
     }
@@ -85,11 +85,11 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
 function TopingList({ category }: Props) {
     const { data = [] } = useTopings(category);
     return (
-        <div className="flex flex-wrap gap-2 justify-center ">
+        <Card className="bg-gray-50 p-2 max-h-[300px] flex flex-wrap gap-2 justify-between items-center overflow-y-scroll lg:max-w-[530px] lg:min-h-full lg:max-h-full w-full">
             {data.map((toping) => (
                 <Toping toping={toping} key={toping.id} />
             ))}
-        </div>
+        </Card>
     );
 }
 
