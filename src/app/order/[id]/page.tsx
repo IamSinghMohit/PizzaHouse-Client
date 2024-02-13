@@ -1,18 +1,20 @@
 "use client";
 
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { initSocket } from "@/lib/socket";
 import { Socket } from "socket.io-client";
 import ClientOrderRenderer from "./components/ClientOrderRenderer";
 import ServerOrderRenderer from "./components/ServerOrderRenderer";
 
-type Props = {};
+type Props = {
+    params: {
+        id?: string;
+    };
+};
 
-export default function page({}: Props) {
-    const pathArray = usePathname().split("/");
-    const id = pathArray[pathArray.length - 1];
+export default function page({ params }: Props) {
+    const id = params.id || "";
     const [loading, setLoading] = useState(true);
     const socketRef = useRef<Socket | null>(null);
     const [step, setStep] = useState("");
@@ -24,7 +26,6 @@ export default function page({}: Props) {
     const shouldRenderServerData = !id.startsWith("client");
 
     useEffect(() => {
-        console.log(socketRef.current);
         async function init() {
             if (shouldRenderServerData) {
                 socketRef.current = initSocket() as unknown as Socket;
@@ -43,6 +44,7 @@ export default function page({}: Props) {
             socketRef.current = null;
         };
     }, []);
+
     return (
         <MaxWidthWrapper className="mt-10">
             {!loading &&

@@ -73,7 +73,7 @@ function OrderStepper({ step }: { step: string }) {
                                 item.step === 0 ? "sm:ml-5" : ""
                             } ${item.step === 1 ? "sm:ml-3" : ""} ${
                                 item.step === 2 ? "sm:-ml-3" : ""
-                            }`}
+                            } ${item.step === 3 ? "sm:-ml-2" : ""}`}
                         >
                             <span>{item.label}</span>
                         </span>
@@ -83,7 +83,7 @@ function OrderStepper({ step }: { step: string }) {
                 <div className="absolute h-full w-1 sm:h-1 sm:w-full bg-gray-200 z-[4]">
                     <div
                         className={`absolute h-0 w-1 sm:h-1 sm:w-0 bg-primary_orange transition-all duration-500 ${getStylesForCurrentStatus(
-                            step
+                            step,
                         )} 
                         ${
                             step === OrderStatusEnum.COMPLETED
