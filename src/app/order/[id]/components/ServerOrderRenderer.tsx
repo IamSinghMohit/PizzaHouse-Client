@@ -1,23 +1,28 @@
+"use client";
+
 import React from "react";
 import CImage from "@/components/CImage";
 import { Card } from "@/components/ui/card";
 import OrderTopingRenderer from "@/components/OrderTopingRenderer";
 import OrderSummary from "@/components/OrderSummary";
-import { useGetOrder } from "../hooks";
+import { getOrder, useGetOrder } from "../hooks";
 import OrderStepper from "@/app/cart/components/OrderStepper";
+import { QueryClient } from "@tanstack/react-query";
+import OrderLoader from "./OrderLoader";
 
-type Props = { id: string; step: string };
+type Props = { id: string; step?: string };
 
 function ServerOrderRenderer({ id, step }: Props) {
-    const { data } = useGetOrder(id);
-    return (
+    const { data, isLoading } = useGetOrder(id);
+
+    return !isLoading ? (
         <>
             <div className="flex flex-wrap gap-2 bg-gray-50 p-2 rounded-md border mb-2">
                 <CImage
                     src={data?.image || ""}
                     alt="product image"
                     width={170}
-                    height={80}
+                    height={128}
                     className="rounded-sm self-center"
                 />
                 <div>
@@ -34,6 +39,8 @@ function ServerOrderRenderer({ id, step }: Props) {
                 />
             </Card>
         </>
+    ) : (
+        <OrderLoader />
     );
 }
 

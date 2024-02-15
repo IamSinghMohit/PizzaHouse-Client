@@ -1,14 +1,17 @@
 import api from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import { GetOrderSchema, TGetOrderSchema } from "../schema";
+import { toast } from "sonner";
 
-async function getOrder(id: string): Promise<TGetOrderSchema> {
+export async function getOrder(
+    id: string,
+): Promise<TGetOrderSchema | undefined> {
     return await api(`/order/${id}`).then((res) => {
         try {
             return GetOrderSchema.parse(res.data.data);
         } catch (error) {
-            console.log(error);
-            return error;
+            toast.error("received bad data");
+            return undefined;
         }
     });
 }

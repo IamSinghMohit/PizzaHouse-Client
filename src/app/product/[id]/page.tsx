@@ -54,7 +54,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
                                     fontFamily: "Source Sans Pro",
                                     fontSize: 160,
                                     fontWeight: "bold",
-                                    text: "test-headline",
+                                    text:"hello world",
                                 },
                                 position: {
                                     y: -100,
@@ -65,10 +65,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
                                 crop: "fit",
                                 text: {
                                     alignment: "center",
+                                    // color: "#FE8D0D",
                                     color: "white",
                                     fontFamily: "Source Sans Pro",
                                     fontSize: 74,
-                                    text: "test-body",
+                                    text: "Pizzeria - testiest pizza's in your city",
                                 },
                                 position: {
                                     y: 100,

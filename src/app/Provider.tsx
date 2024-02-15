@@ -7,6 +7,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "./components/Footer";
+import { SocketContextProvider } from "./socket-context";
 interface Props {
     children: React.ReactNode;
 }
@@ -23,10 +24,12 @@ export default function Provider({ children }: Props) {
                 duration={3000}
             />
             <ReduxProvider store={store}>
-                <Navbar />
-                <div className="eclipse"></div>
-                {children}
-                <Footer />
+                <SocketContextProvider>
+                    <Navbar />
+                    <div className="eclipse"></div>
+                    {children}
+                    <Footer />
+                </SocketContextProvider>
             </ReduxProvider>
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>

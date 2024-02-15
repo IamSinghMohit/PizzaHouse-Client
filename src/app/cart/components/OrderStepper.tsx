@@ -73,7 +73,7 @@ function OrderStepper({ step }: { step: string }) {
                                 item.step === 0 ? "sm:ml-5" : ""
                             } ${item.step === 1 ? "sm:ml-3" : ""} ${
                                 item.step === 2 ? "sm:-ml-3" : ""
-                            } ${item.step === 3 ? "sm:-ml-2" : ""}`}
+                            }`}
                         >
                             <span>{item.label}</span>
                         </span>

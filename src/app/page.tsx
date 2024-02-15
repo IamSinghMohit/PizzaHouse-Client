@@ -4,7 +4,6 @@ import ProductFeed from "@/app/components/ProductFeed";
 import ServiceCard from "./components/ServiceCard";
 import HomeTypeWriter from "./components/HomeTypeWriter";
 import HeroImage from "./components/HeroImage";
-import { Suspense } from "react";
 import { Client, HydrationProvider, Server } from "react-hydration-provider";
 
 export default function Home() {
@@ -50,9 +49,7 @@ export default function Home() {
                     </MaxWidthWrapper>
                 </section>
                 {/* Home Sectoin ends here */}
-                <Suspense fallback={<p>loading... feed</p>}>
                     <ProductFeed />
-                </Suspense>
             </main>
         </HydrationProvider>
     );

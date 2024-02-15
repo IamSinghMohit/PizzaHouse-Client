@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { useFormatedProducts } from "@/hooks/useFormatedProducts";
 import Link from "next/link";
