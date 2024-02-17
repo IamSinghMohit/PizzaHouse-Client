@@ -1,24 +1,22 @@
+"use client";
+
 import {
     Carousel,
     CarouselContent,
     CarouselItem,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { TGetFormatedProductsSchema } from "@/schema/get";
+import { EmblaCarouselType } from "embla-carousel";
 
 type Props = {
     products: TGetFormatedProductsSchema["data"][0]["products"];
-    delay: number;
+    category: string;
 };
 
-export default function ProductCarousel({ products, delay }: Props) {
-    const plugin = useRef(
-        Autoplay({ delay: delay * 2000, stopOnInteraction: true }),
-    );
-
-    const [api, setApi] = useState<EmblaCarouselType | null>(null);
+export default function ProductCarousel({ products, category }: Props) {
+    const [api, setApi] = useState<Required<EmblaCarouselType> | null>(null);
     const [dots, setDots] = useState<number[]>([]);
     const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -35,9 +33,8 @@ export default function ProductCarousel({ products, delay }: Props) {
 
     return (
         <Carousel
-            // plugins={[plugin.current]}
             opts={{
-                align:'center'
+                align: "center",
             }}
             setApi={setApi}
         >
@@ -45,7 +42,7 @@ export default function ProductCarousel({ products, delay }: Props) {
                 {products.map((pro) => (
                     <CarouselItem key={pro.id} className="basis-auto pl-2">
                         {" "}
-                        <ProductCard product={pro} />
+                        <ProductCard product={pro} category={category} />
                     </CarouselItem>
                 ))}
             </CarouselContent>

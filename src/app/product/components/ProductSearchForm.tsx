@@ -82,7 +82,7 @@ export const ProductCategorySelector = ({
     const arr = data?.pages.flat() || [];
     return (
         <div className="flex rounded-lg border bg-card p-2 text-card-foreground shadow-sm flex-wrap gap-1 justify-between max-h-[136px] overflow-y-scroll md:max-h-full">
-            {initialLoading
+            {!initialLoading
                 ? arr.map((cat, index) => (
                       <div
                           ref={(ref) => {

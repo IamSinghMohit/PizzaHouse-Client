@@ -1,17 +1,25 @@
-"use client";
-
 import { IndianRupee } from "lucide-react";
 import Link from "next/link";
 import CImage from "@/components/CImage";
 import { Button } from "@/components/ui/button";
-import { TProductSchema } from "@/schema/base/product";
 import { Card } from "@/components/ui/card";
 
 interface Props {
-    product: TProductSchema;
+    product: {
+        name: string;
+        image: string;
+        description: string;
+        category?: string;
+        price: number;
+        id: string;
+    };
+    category?: string;
 }
 
-export default function ProductCard({ product }: Props) {
+export default function ProductCard({ product, category }: Props) {
+    const url = `/product/${product.name.trim()}-${
+        category ? category : product.category
+    }-${product.id}`;
     return (
         <Card className="p-2 max-w-[278px] h-[330px]">
             <CImage
@@ -32,7 +40,7 @@ export default function ProductCard({ product }: Props) {
                             : product.description}
                     </p>
                 </div>
-                <Link href={`/product/${product.id}`}>
+                <Link href={url}>
                     <Button className="mx-auto flex w-[100px] items-center justify-center rounded-full bg-primary_orange text-white ">
                         <IndianRupee strokeWidth={3} size={15} />
                         {product.price}

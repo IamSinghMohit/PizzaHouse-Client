@@ -20,5 +20,7 @@ export function useFormatedProducts() {
     return useQuery({
         queryKey: ["product", "formated"],
         queryFn: getProducts,
+        refetchOnMount:false,
+        refetchOnWindowFocus:false,
     });
 }

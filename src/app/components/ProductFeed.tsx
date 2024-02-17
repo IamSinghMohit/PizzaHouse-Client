@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useFormatedProducts } from "@/hooks/useFormatedProducts";
 import Link from "next/link";
@@ -41,7 +41,7 @@ export default function ProductFeed({}: Props) {
                             {showCarousel ? (
                                 <ProductCarousel
                                     products={sec.products}
-                                    delay={index || 1}
+                                    category={sec.category}
                                 />
                             ) : (
                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3 justify-items-center">
@@ -50,6 +50,7 @@ export default function ProductFeed({}: Props) {
                                             <ProductCard
                                                 product={pro}
                                                 key={pro.id}
+                                                category={sec.category}
                                             />
                                         );
                                     })}

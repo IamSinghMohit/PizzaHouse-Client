@@ -1,11 +1,44 @@
+"use client";
+
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Card } from "@/components/ui/card";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 type Props = {};
 
 function Loading({}: Props) {
-    return (
+    const pathname = usePathname();
+    const showProductLoading = pathname.split("/").length > 2;
+
+    return showProductLoading ? (
+        <article className="pt-2 md:pt-10">
+            <MaxWidthWrapper>
+                <div className={`flex gap-2 flex-col lg:flex-row`}>
+                    <div className="flex flex-col gap-1 flex-1">
+                        <div className="max-w-[400px] max-h-[360px] rounded-md overflow-hidden mx-auto shimmer" />
+                        <Card className="p-2 shadow-none bg-gray-50">
+                            <div>
+                                <div className="h-5 shimmer" />
+                                <div className="h-4 shimmer" />
+                                <div className="h-3 w-4 shimmer" />
+                            </div>
+                            {[
+                                "7082409e-6357-4ea3-8324-ceb1662b1b4b",
+                                "4f63cf75-20c3-44e2-b055-e0747206e016",
+                                "d2bbf503-9f3f-4936-8634-83d30416a5b8",
+                                "56d07342-f997-45a8-a6a2-1e388690175c",
+                            ].map((id) => (
+                                <div className="h-3 w-5 shimmer" key={id} />
+                            ))}
+                        </Card>
+                    </div>
+                    <div className="h-[400px] shimmer" />
+                </div>
+                <div className="w-9 h-3 shimmer" />
+            </MaxWidthWrapper>
+        </article>
+    ) : (
         <MaxWidthWrapper className="md:px-1 flex justify-center flex-col gap-1 md:flex-row mt-1 product-search-height">
             <Card className="p-2 bg-gray-50 shadow-none flex flex-col gap-1 min-w-[250px] md:min-w-[270px] md:w-[270px]">
                 <div className="flex rounded-lg border bg-card text-card-foreground p-2 flex-col gap-3">
@@ -14,7 +47,7 @@ function Loading({}: Props) {
                 </div>
                 <div className="min-h-[300px] shimmer" />
             </Card>
-            <Card className="p-2 bg-gray-50 overflow-y-scroll w-full min-h-[500px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+            <Card className="p-2 bg-gray-50 overflow-y-scroll w-full min-h-[500px] grid grid-cols-1 justify-items-center sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {[
                     "41ebf1d1-6815-472a-860c-a329be131140",
                     "26451fe5-b976-48fb-bb38-17d6db9753ff",

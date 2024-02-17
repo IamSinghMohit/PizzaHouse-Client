@@ -64,6 +64,7 @@ export default function Navbar({}: Props) {
             window.removeEventListener("scroll", controlNavbar);
         };
     }, []);
+
     return (
         <header
             className={`navbar sticky top-0 z-50 transition-all duration-200 ease-in ${show}`}

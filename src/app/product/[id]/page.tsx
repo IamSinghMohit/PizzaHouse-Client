@@ -1,27 +1,26 @@
-import CImage from "@/components/CImage";
-import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import ProductPrice from "./components/ProductPrice";
-import ProductSections from "./components/ProductSections";
-import TopingList from "./components/TopingList";
 import { useProduct } from "@/hooks/useProduct";
-import AddToCartButton from "./components/AddToCartButton";
-import { Card } from "@/components/ui/card";
 import { cache } from "react";
 import { Metadata } from "next";
 import { getCldOgImageUrl } from "next-cloudinary";
+import ProductPreview from "./components/ProductPreview";
+import { redirect } from "next/navigation";
 
 interface Props {
     params: {
         id: string;
     };
     searchParams: any;
+    pathname: string;
 }
 
 const getProduct = cache(async (id: string) => await useProduct(id));
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-    const res = await getProduct(props.params.id);
+    const arr = props.params.id.split("-");
+    const id = arr[arr.length - 1];
+    const res = await getProduct(id);
     const publicId = res.image;
+
     return {
         title: res.name,
         description: res.description,
@@ -54,7 +53,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
                                     fontFamily: "Source Sans Pro",
                                     fontSize: 160,
                                     fontWeight: "bold",
-                                    text:"hello world",
+                                    text: res.name,
                                 },
                                 position: {
                                     y: -100,
@@ -65,8 +64,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
                                 crop: "fit",
                                 text: {
                                     alignment: "center",
-                                    // color: "#FE8D0D",
-                                    color: "white",
+                                    color: "#FE8D0D",
                                     fontFamily: "Source Sans Pro",
                                     fontSize: 74,
                                     text: "Pizzeria - testiest pizza's in your city",
@@ -84,39 +82,21 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default async function Page(props: Props) {
-    const product = await getProduct(props.params.id);
+    const arr = props.params.id.split("-");
+    const id = arr[arr.length - 1];
+    const product = await getProduct(id);
+
+    const paramId = encodeURIComponent(
+        `${product.name.trim()}-${product.category}-${product.id}`,
+    );
+    if (paramId !== props.params.id) {
+        redirect(
+            `/product/${product.name.trim()}-${product.category}-${product.id}`,
+        );
+    }
     return (
         <article className="pt-2 md:pt-10">
-            <MaxWidthWrapper>
-                <div className="flex gap-2 flex-col lg:flex-row">
-                    <div className="flex flex-col gap-1 flex-1">
-                        <CImage
-                            src={product.image}
-                            width={400}
-                            height={360}
-                            alt="product image"
-                            sizes="(max-width: 768px)100vw, (max-width: 1200px)50vw, 30vw"
-                            className="rounded-md overflow-hidden mx-auto"
-                        />
-                        <Card className="p-2 shadow-none bg-gray-50">
-                            <div>
-                                <h1 className="font-bold text-[20px]">
-                                    {product.name}
-                                </h1>
-                                <p className="text-gray-700 overflow-hidden break-words text-[14px]">
-                                    {product.description}
-                                </p>
-                                <ProductPrice product={product} />
-                            </div>
-                            {product.sections.length > 0 && (
-                                <ProductSections id={product.id} />
-                            )}
-                        </Card>
-                    </div>
-                    <TopingList category={product.category} />
-                </div>
-                <AddToCartButton className="mt-2 w-full sm:max-w-[250px] mx-auto lg:mr-auto lg:ml-0" />
-            </MaxWidthWrapper>
+            <ProductPreview product={product} />
         </article>
     );
 }

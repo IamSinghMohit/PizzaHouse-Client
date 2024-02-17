@@ -29,16 +29,16 @@ export default async function page({
             "search",
             name,
             category,
-            parseInt(min),
-            parseInt(max),
+            parseInt(min ? min : "0"),
+            parseInt(max ? max : "0"),
         ],
         initialPageParam: "",
         queryFn: async () =>
             await getProducts({
                 name,
                 category,
-                min: parseInt(min),
-                max: parseInt(max),
+                min: parseInt(min ? min : "0"),
+                max: parseInt(max ? max : "0"),
             }),
     });
     return (

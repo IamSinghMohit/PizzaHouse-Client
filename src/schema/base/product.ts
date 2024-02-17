@@ -1,4 +1,4 @@
-import { z ,TypeOf} from "zod";
+import { z, TypeOf } from "zod";
 import BaseResponseSchema from "./index";
 
 export const ProductSchema = z
@@ -43,8 +43,16 @@ export const formatedProductSchema = z.array(
     z
         .object({
             category: z.string(),
-            products: z.array(ProductSchema.partial()),
+            products: z.array(
+                z.object({
+                    id: z.string(),
+                    name: z.string(),
+                    image: z.string(),
+                    description: z.string(),
+                    price: z.number(),
+                }),
+            ),
         })
         .merge(BaseResponseSchema.id),
 );
-export type TProductSchema =TypeOf<typeof ProductSchema> 
+export type TProductSchema = TypeOf<typeof ProductSchema>;

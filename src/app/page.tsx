@@ -49,7 +49,7 @@ export default function Home() {
                     </MaxWidthWrapper>
                 </section>
                 {/* Home Sectoin ends here */}
-                    <ProductFeed />
+                <ProductFeed />
             </main>
         </HydrationProvider>
     );

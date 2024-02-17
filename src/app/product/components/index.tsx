@@ -15,14 +15,15 @@ export function ProductSideBar() {
     ];
     const [amount, setAmount] = useState<number[]>(minMax);
     const [input, setInput] = useState(param.get("name") || "");
-    const [categories, setCategories] = useState("");
+    const [categories, setCategories] = useState(
+        `${param.get("category") || ""}`,
+    );
     const text = useDebounce(input, 300);
     const router = useRouter();
 
     useEffect(() => {
-        console.log(amount)
         router.push(
-            `product?name=${input}&category=${categories}&min=${amount[0]}&max=${amount[1]}`
+            `product?name=${input}&category=${categories}&min=${amount[0]}&max=${amount[1]}`,
         );
     }, [text, amount, categories]);
 

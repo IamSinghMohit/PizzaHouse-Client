@@ -1,17 +1,18 @@
 "use client";
 
 import { useTopings } from "@/hooks/useTopings";
-import React from "react";
-import { IndianRupee, Search } from "lucide-react";
+import { IndianRupee } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import CImage from "@/components/CImage";
 import { useAppDispatch, useAppSelector } from "@/hooks/state";
 import { TGetTopoingSchema } from "@/schema/get";
 import { setProductTopings } from "@/store/slices/product";
 import { TickFilledIcon } from "@/icons";
+import { useMediaQuery } from "react-responsive";
 
 type Props = {
     category: string;
+    height: number;
 };
 
 function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
@@ -53,7 +54,7 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
     return (
         <Card
             onClick={handleAddtopoing}
-            className={`p-2 relative ${
+            className={`p-2 relative w-[118px] h-[166px] ${
                 isActive ? "p-[7px] border-2 border-primary_orange" : ""
             }`}
         >
@@ -82,10 +83,14 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
     );
 }
 
-function TopingList({ category }: Props) {
+function TopingList({ category, height }: Props) {
     const { data = [] } = useTopings(category);
+    const isLargeScreen = useMediaQuery({query:"(min-width: 1024px)"})
     return (
-        <Card className="bg-gray-50 p-2 max-h-[300px] flex flex-wrap gap-2 justify-between items-center overflow-y-scroll lg:max-w-[530px] lg:min-h-full lg:max-h-full w-full">
+        <Card
+            className={`bg-gray-50 p-2 max-h-[300px] flex flex-wrap gap-2 justify-between overflow-y-scroll lg:max-w-[524px] w-full lg:justify-normal`}
+            style={isLargeScreen ? { maxHeight: height, height: height } : {}}
+        >
             {data.map((toping) => (
                 <Toping toping={toping} key={toping.id} />
             ))}

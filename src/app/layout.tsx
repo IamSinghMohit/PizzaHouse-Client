@@ -6,13 +6,13 @@ import Provider from "./Provider";
 const inter = Inter({
     weight: ["400", "600", "700"],
     variable: "--font-inter",
-    subsets:['latin']
+    preload:false
 });
 const roboto = Roboto({
     weight: ["300", "400", "700"],
     variable: "--font-roboto",
     display: "swap",
-    subsets:['latin']
+    preload:false
 });
 
 export const metadata: Metadata = {

@@ -11,8 +11,10 @@ export function useDeleteCartItem() {
                 .delete(`auth/cart/${id}`)
                 .then((res) => res.data.data);
         },
-        onSuccess: () => {
-            queryClient.invalidateQueries(["cart"]);
+        onSuccess:async () => {
+            await queryClient.invalidateQueries({
+                queryKey:queryKey
+            });
         },
     });
 }

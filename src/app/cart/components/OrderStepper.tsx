@@ -29,7 +29,7 @@ const StepsArray = [
     },
 ];
 
-function getStylesForCurrentStatus(value: OrderStatusEnum) {
+function getStylesForCurrentStatus(value: string) {
     switch (value) {
         case OrderStatusEnum.PREPARING:
             return "h-[33%] sm:w-[33%]";

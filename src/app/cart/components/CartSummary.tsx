@@ -16,7 +16,9 @@ export default function CartSummary({}: Props) {
         let price = 0;
         ids.forEach((id) => {
             const obj = entities[id];
-            price += obj?.price * obj?.quantity || 0;
+            if (obj) {
+                price += obj.price * obj.quantity || 0;
+            }
         });
         return price;
     }, [entities]);
@@ -27,13 +29,10 @@ export default function CartSummary({}: Props) {
                 <div className="space-y-0.5 text-sm text-gray-700 max-w-[500px] mx-auto">
                     <div className="flex justify-between">
                         <dt>Products</dt>
-                        <dd className="flex items-center">
-                            <IndianRupee width={15} height={15} />
-                            <span>
-                                <Client>{ids.length}</Client>
-                                <Server>{0}</Server>
-                            </span>
-                        </dd>
+                        <span>
+                            <Client>{ids.length}</Client>
+                            <Server>{0}</Server>
+                        </span>
                     </div>
 
                     <div className="flex justify-between">

@@ -104,8 +104,8 @@ export default function HeroImage({}) {
             <Image
                 src="/hero.png"
                 alt="hsm:pt-14ero image"
-                width={550}
-                height={550}
+                width={533}
+                height={554}
                 className="spinner"
             />
         </div>
