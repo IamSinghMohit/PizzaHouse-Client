@@ -1,9 +1,9 @@
-import CImage from "@/components/CImage";
+import CImage from "@/lib/CImage";
 import { Card } from "@/components/ui/card";
-import { useAppSelector } from "@/hooks/state";
+import { useAppSelector } from "@/hooks";
 import React from "react";
-import OrderTopingRenderer from "@/components/OrderTopingRenderer";
-import OrderSummary from "@/components/OrderSummary";
+import OrderTopingRenderer from "./OrderTopingRenderer";
+import OrderSummary from "./OrderSummary";
 
 type Props = { id: string };
 

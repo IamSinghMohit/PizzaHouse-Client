@@ -1,8 +1,8 @@
 "use client";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { useAppDispatch } from "@/hooks/state";
-import useProductAttributes from "@/hooks/useProductAttributes";
+import { useAppDispatch } from "@/hooks";
+import useProductAttributes from "../hooks/useProductAttributes";
 import { setProductOrderSections } from "@/store/slices/product";
 import { TProductSections } from "@/store/slices/product/type";
 import { ChevronsDown } from "lucide-react";

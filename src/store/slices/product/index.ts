@@ -14,7 +14,7 @@ const initialState: TProductSliceIntialState = {
         price: 0,
         name: "",
         image: "",
-        description:"",
+        description: "",
         order_sections: {},
     },
 };
@@ -112,7 +112,7 @@ const productSlice = createSlice({
         },
 
         setStateDefault(state) {
-            const obj = {
+            const stateObj = {
                 total_price: 0,
                 topings: {},
                 product_info: {
@@ -120,10 +120,11 @@ const productSlice = createSlice({
                     price: 0,
                     name: "",
                     image: "",
+                    description: "",
                     order_sections: {},
                 },
             };
-            state = obj;
+            state = stateObj;
         },
 
         setProductInfo(state, action: PayloadAction<TProductInfo>) {

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useAppSelector } from "@/hooks/state";
+import { useAppSelector } from "@/hooks";
 import { SpinnerIcon } from "@/icons";
 import { Stripe, loadStripe } from "@stripe/stripe-js";
 import { Codepen } from "lucide-react";

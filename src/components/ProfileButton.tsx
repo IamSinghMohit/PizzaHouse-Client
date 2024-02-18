@@ -4,7 +4,7 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface Props {
-    user: Required<TuserSchema>;
+    user: TuserSchema;
 }
 
 function ProfileButton({ user }: Props) {

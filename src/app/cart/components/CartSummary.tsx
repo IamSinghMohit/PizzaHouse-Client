@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { useAppSelector } from "@/hooks/state";
+import { useAppSelector } from "@/hooks";
 import { IndianRupee } from "lucide-react";
 import React, { useMemo } from "react";
 import CheckoutButton from "./CheckoutButton";

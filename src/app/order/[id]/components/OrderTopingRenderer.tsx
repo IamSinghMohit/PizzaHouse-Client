@@ -1,6 +1,5 @@
-import { useAppSelector } from "@/hooks/state";
 import React from "react";
-import CImage from "./CImage";
+import CImage from "@/lib/CImage";
 import { IndianRupee } from "lucide-react";
 
 type Props = {

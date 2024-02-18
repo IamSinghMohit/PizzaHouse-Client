@@ -1,4 +1,3 @@
-import { useAppSelector } from "@/hooks/state";
 import { IndianRupee } from "lucide-react";
 import React from "react";
 

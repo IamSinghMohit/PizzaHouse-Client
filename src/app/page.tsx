@@ -8,8 +8,8 @@ import { Client, HydrationProvider, Server } from "react-hydration-provider";
 
 export default function Home() {
     return (
-        <HydrationProvider>
-            <main>
+        <main>
+            <HydrationProvider>
                 <MaxWidthWrapper className="md:px-2 lg:px-20">
                     <div className="flex flex-col gap-1 sm:flex-row pt-5 ">
                         <div className="text-primary_black font-inter flex flex-col p-2 gap-4 font-bold  max-w-[457px] items-center justify-center">
@@ -50,7 +50,7 @@ export default function Home() {
                 </section>
                 {/* Home Sectoin ends here */}
                 <ProductFeed />
-            </main>
-        </HydrationProvider>
+            </HydrationProvider>
+        </main>
     );
 }

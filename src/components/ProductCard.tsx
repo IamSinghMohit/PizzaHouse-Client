@@ -1,6 +1,6 @@
 import { IndianRupee } from "lucide-react";
 import Link from "next/link";
-import CImage from "@/components/CImage";
+import CImage from "@/lib/CImage";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 

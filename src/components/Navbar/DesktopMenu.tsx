@@ -3,10 +3,9 @@
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Search, ShoppingCart } from "lucide-react";
-import { useAppSelector } from "@/hooks/state";
+import { useAppSelector } from "@/hooks";
 import { LoginWithButton } from "../LoginWithButton";
 import ProfileButton from "../ProfileButton";
-import { Client, HydrationProvider } from "react-hydration-provider";
 interface Props {}
 
 export default function DesktopMenu({}: Props) {

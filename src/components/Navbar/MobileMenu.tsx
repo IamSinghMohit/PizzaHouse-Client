@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import { X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { useAppSelector } from "@/hooks/state";
+import { useAppSelector } from "@/hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface Props {}

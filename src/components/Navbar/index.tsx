@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
-import { useAppDispatch } from "@/hooks/state";
+import { useAppDispatch } from "@/hooks";
 import { setUser, setUserStripeSecret } from "@/store/slices/user";
 import { useGetUser } from "@/hooks/useGetUser";
 import { useMediaQuery } from "react-responsive";

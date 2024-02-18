@@ -2,9 +2,9 @@ import { Slider } from "@/components/ui/slider";
 import { IndianRupee } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useInfiniteCategories } from "../hooks/useInfiniteCategories";
-import CImage from "@/components/CImage";
-import { useProductStats } from "@/hooks/useProductStats";
-import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+import CImage from "@/lib/CImage";
+import { useProductStats } from "../hooks";
+import { useIntersectionObserver } from "@/hooks";
 
 export function ProductSlider({
     setAmount,

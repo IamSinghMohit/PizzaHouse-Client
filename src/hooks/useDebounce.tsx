@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from "react";
 function useDebounce<T>(value: T, time: number) {
     const [debounceValue, setDebounceValue] = useState(value);

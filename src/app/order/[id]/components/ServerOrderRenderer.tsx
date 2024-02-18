@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-import CImage from "@/components/CImage";
+import CImage from "@/lib/CImage";
 import { Card } from "@/components/ui/card";
-import OrderTopingRenderer from "@/components/OrderTopingRenderer";
-import OrderSummary from "@/components/OrderSummary";
-import { getOrder, useGetOrder } from "../hooks";
-import OrderStepper from "@/app/cart/components/OrderStepper";
-import { QueryClient } from "@tanstack/react-query";
+import OrderTopingRenderer from "./OrderTopingRenderer";
+import OrderSummary from "./OrderSummary";
+import {  useGetOrder } from "../hooks";
+import OrderStepper from "./OrderStepper";
 import OrderLoader from "./OrderLoader";
 
 type Props = { id: string; step?: string };

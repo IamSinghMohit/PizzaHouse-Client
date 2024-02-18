@@ -1,3 +1,4 @@
+'use client'
 import { DependencyList, useCallback, useRef } from "react";
 
 export default function useIntersectionObserver<T extends HTMLElement>(

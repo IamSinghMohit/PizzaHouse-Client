@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { BaggageClaim } from "lucide-react";
 import React from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks/state";
+import { useAppDispatch,useAppSelector } from "@/hooks";
 import { addToCart } from "@/store/slices/cart";
 import { v4 as uuidV4 } from "uuid";
 import { usePathname } from "next/navigation";

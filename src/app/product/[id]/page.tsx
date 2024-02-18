@@ -1,4 +1,4 @@
-import { useProduct } from "@/hooks/useProduct";
+import { useProduct } from "./hooks/useProduct";
 import { cache } from "react";
 import { Metadata } from "next";
 import { getCldOgImageUrl } from "next-cloudinary";
@@ -10,7 +10,6 @@ interface Props {
         id: string;
     };
     searchParams: any;
-    pathname: string;
 }
 
 const getProduct = cache(async (id: string) => await useProduct(id));

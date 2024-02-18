@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
 import { useInfiniteSearchProduct } from "../hooks/useInfiniteSearchProduct";
 import { useSearchParams } from "next/navigation";
-import ProductCard from "@/app/components/ProductCard";
+import ProductCard from "@/components/ProductCard";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 type Props = {};
@@ -26,7 +25,11 @@ function CardRenderer({}: Props) {
         <div className="product-search-renderer">
             {arr.map((pro, index) => (
                 <div
-                    ref={index === arr?.length - 2 ? observer : undefined}
+                    ref={(el) => {
+                        if (index === arr?.length - 2 && el) {
+                            observer(el);
+                        }
+                    }}
                     key={pro.id}
                 >
                     <ProductCard product={pro} key={pro.id} />

@@ -6,28 +6,26 @@ import {
     CarouselItem,
 } from "@/components/ui/carousel";
 import React, { useCallback, useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
+import ProductCard from "../../components/ProductCard";
 import { TGetFormatedProductsSchema } from "@/schema/get";
-import { EmblaCarouselType } from "embla-carousel";
-
+import { type CarouselApi } from "@/components/ui/carousel";
 type Props = {
     products: TGetFormatedProductsSchema["data"][0]["products"];
     category: string;
 };
 
 export default function ProductCarousel({ products, category }: Props) {
-    const [api, setApi] = useState<Required<EmblaCarouselType> | null>(null);
+    const [api, setApi] = React.useState<CarouselApi>();
     const [dots, setDots] = useState<number[]>([]);
     const [selectedIndex, setSelectedIndex] = useState(0);
 
-    const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-        setSelectedIndex(emblaApi.selectedScrollSnap());
-    }, []);
 
     useEffect(() => {
         if (api) {
             setDots(api.scrollSnapList());
-            api.on("select", onSelect);
+            api.on("select", (emblaApi) => {
+                setSelectedIndex(emblaApi.selectedScrollSnap());
+            });
         }
     }, [api]);
 

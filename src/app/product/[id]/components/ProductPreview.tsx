@@ -1,6 +1,6 @@
 "use client";
 
-import CImage from "@/components/CImage";
+import CImage from "@/lib/CImage";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProductPrice from "./ProductPrice";
 import ProductSections from "./ProductSections";

@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-quer
 import { Provider as ReduxProvider } from "react-redux";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "@/components/ui/sonner";
-import Footer from "./components/Footer";
+import Footer from "../components/Footer";
 import { SocketContextProvider } from "./socket-context";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 

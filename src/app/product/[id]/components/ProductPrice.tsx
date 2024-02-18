@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/hooks/state";
+import { useAppDispatch,useAppSelector } from "@/hooks";
 import { TGetProductSchema } from "@/schema/get";
 import {
     setStateDefault,

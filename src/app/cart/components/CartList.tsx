@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useAppSelector } from "@/hooks/state";
+import { useAppSelector } from "@/hooks";
 import CartItem from "./CartItem";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
@@ -10,7 +10,7 @@ import { useCartProducts } from "../hooks/useCartProducts";
 import { Button } from "@/components/ui/button";
 import { Dot, Eye, Trash2 } from "lucide-react";
 import Link from "next/link";
-import CImage from "@/components/CImage";
+import CImage from "@/lib/CImage";
 import { OrderStatusEnum } from "@/app/order/[id]/types";
 import { useDeleteCartItem } from "../hooks/useDeleteCartItem";
 import CartLoader from "./CartLoader";
@@ -31,13 +31,15 @@ function CartList({}: Props) {
         <div>
             {!pageLoading ? (
                 ids.length < 1 ? (
+                    <div className="relative w-1/2 object-contain">
                     <Image
                         src="/empty-cart.png"
                         className="mx-auto mt-10"
-                        width={500}
-                        height={670}
+                        fill
+                        sizes="(max-width: 768px)100vw, (max-width: 1200px)50vw, 30vw"
                         alt="empty cart image"
                     />
+                    </div>
                 ) : (
                     <div className="mt-8">
                         <ul className="space-y-4">

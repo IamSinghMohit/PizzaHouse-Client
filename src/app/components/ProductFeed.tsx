@@ -5,7 +5,7 @@ import Link from "next/link";
 import MaxWidthWrapper from "../../components/MaxWidthWrapper";
 import ProductCarousel from "./ProductCarousel";
 import { ArrowRightFromLine } from "lucide-react";
-import ProductCard from "./ProductCard";
+import ProductCard from "../../components/ProductCard";
 import { useMediaQuery } from "react-responsive";
 import ProductFeedLoader from "./ProductFeedLoader";
 

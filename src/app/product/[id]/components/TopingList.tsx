@@ -1,10 +1,10 @@
 "use client";
 
-import { useTopings } from "@/hooks/useTopings";
 import { IndianRupee } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import CImage from "@/components/CImage";
-import { useAppDispatch, useAppSelector } from "@/hooks/state";
+import { useTopings } from "../hooks/useTopings";
+import CImage from "@/lib/CImage";
+import { useAppDispatch,useAppSelector } from "@/hooks";
 import { TGetTopoingSchema } from "@/schema/get";
 import { setProductTopings } from "@/store/slices/product";
 import { TickFilledIcon } from "@/icons";
