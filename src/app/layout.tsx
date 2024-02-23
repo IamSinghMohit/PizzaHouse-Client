@@ -16,7 +16,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("http://localhost:3000"),
+    metadataBase:new URL(process.env.NEXT_PUBLIC_BASE_URL),
     title: {
         default: "Pizzeria tastiest pizza's in your city",
         template: "%s - Pizzeria",

@@ -1,5 +1,5 @@
-import { z } from "zod";
-import BaseResponseSchema from ".";
+import { z ,TypeOf} from "zod";
+import BaseResponseSchema from "./base";
 
 export const LoginSchema = z.object({
     email: z.string().min(2),
@@ -21,6 +21,7 @@ export const UserSchema = z
     })
     .merge(BaseResponseSchema.id);
 
-export type TLoginSchema = z.TypeOf<typeof LoginSchema>;
-export type TSigninSchema = z.TypeOf<typeof SigninnSchema>;
-export type TuserSchema = z.TypeOf<typeof UserSchema>;
+export type TLoginSchema = TypeOf<typeof LoginSchema>;
+export type TSigninSchema = TypeOf<typeof SigninnSchema>;
+export type TUserSchema = TypeOf<typeof UserSchema>;
+

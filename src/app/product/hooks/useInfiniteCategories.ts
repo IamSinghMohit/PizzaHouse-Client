@@ -1,13 +1,21 @@
 import api from "@/lib/axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { TGetCategorySchema } from "../schema";
+import {
+    GetInfiniteCategorySchema,
+    TGetInfiniteCategorySchema,
+} from "../schema";
+import { ValidateBackendResponse } from "@/utils";
 
 async function InfiniteCategoryScroll(
-    cursor?: string,
-): Promise<TGetCategorySchema[]> {
+    cursor?: string
+): Promise<TGetInfiniteCategorySchema | []> {
     return await api
         .get(`/category/search?name&limit=10&cursor=${cursor}`)
-        .then((res) => res.data.data);
+        .then(
+            (res) =>
+                ValidateBackendResponse(res.data, GetInfiniteCategorySchema) ||
+                []
+        );
 }
 
 export function useInfiniteCategories() {

@@ -18,6 +18,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     const arr = props.params.id.split("-");
     const id = arr[arr.length - 1];
     const res = await getProduct(id);
+    // if(!res){
+    //    return 
+    // }
     const publicId = res.image;
 
     return {

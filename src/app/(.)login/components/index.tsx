@@ -15,7 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import { GoogleIcon } from "@/icons";
 import { ReactNode, useState } from "react";
 import { useForm } from "react-hook-form";
-import { LoginSchema, SigninnSchema, TSigninSchema } from "@/schema/base/auth";
+import { LoginSchema, SigninnSchema, TSigninSchema } from "@/schema/auth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import React from "react";
@@ -42,7 +42,7 @@ export function LoginForm({}: Props) {
     }
 
     function handleGoogleClick() {
-        window.open("http://localhost:3001/auth/login/google", "_self");
+        window.open(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login/google`, "_self");
     }
     return (
         <Form {...form}>

@@ -1,5 +1,5 @@
 import { z, TypeOf } from "zod";
-import BaseResponseSchema from "./index";
+import BaseResponseSchema from "./base";
 
 export const ProductSchema = z
     .object({
@@ -39,7 +39,7 @@ export const ProdutSectionsSchema = z.object({
     ),
 });
 
-export const formatedProductSchema = z.array(
+export const GetFormatedProductsSchema = z.array(
     z
         .object({
             category: z.string(),
@@ -56,3 +56,7 @@ export const formatedProductSchema = z.array(
         .merge(BaseResponseSchema.id),
 );
 export type TProductSchema = TypeOf<typeof ProductSchema>;
+export type TGetFormatedProductsSchema = TypeOf<
+    typeof GetFormatedProductsSchema
+>;
+export type TProdutSectionsSchema = TypeOf<typeof ProdutSectionsSchema>;

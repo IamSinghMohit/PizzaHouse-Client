@@ -1,19 +1,13 @@
 import api from "@/lib/axios";
-import { GetUserSchema, TGetUserSchema } from "@/schema/get";
+import { TUserSchema, UserSchema } from "@/schema/auth";
+import { ValidateBackendResponse } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 
-async function GetUser(): Promise<TGetUserSchema["data"] | undefined> {
+async function GetUser(): Promise<TUserSchema | undefined> {
     return await api
         .get("/auth/me")
         .then((res) => res.data)
-        .then((res) => {
-            try {
-                return GetUserSchema.parse(res).data;
-            } catch (err) {
-                console.log(err);
-                return undefined;
-            }
-        });
+        .then((res) => ValidateBackendResponse(res.data, UserSchema));
 }
 
 export function useGetUser() {

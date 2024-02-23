@@ -1,5 +1,5 @@
 import api from "@/lib/axios";
-import { TGetProductSchema } from "@/schema/get";
+import { TProductSchema } from "@/schema/product";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 type opts = {
@@ -16,7 +16,7 @@ export async function getProducts({
     cursor,
     category,
     name,
-}: opts): Promise<TGetProductSchema["data"][]> {
+}: opts): Promise<TProductSchema[]> {
     let query = "/product?";
     if (typeof Number(max) === "number") {
         query += `max=${Number(max)}&`;

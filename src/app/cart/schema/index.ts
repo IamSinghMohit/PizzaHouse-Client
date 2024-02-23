@@ -16,9 +16,16 @@ export const GetCartProductsSchema = z.array(
             ],
             {
                 errorMap: () => ({ message: "enum is not valid" }),
-            },
+            }
         ),
         name: z.string(),
-    }),
+    })
 );
+export const CreateCheckoutSchema = z.string();
+export const DeleteCartItemSchema = z.string();
+
+
+
+export type TDeleteCartItemSchema = TypeOf<typeof DeleteCartItemSchema>;
+export type TCreateCheckoutSchema = TypeOf<typeof CreateCheckoutSchema>;
 export type TGetCartProductsSchema = TypeOf<typeof GetCartProductsSchema>;

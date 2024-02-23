@@ -1,25 +1,14 @@
 import api from "@/lib/axios";
-import {
-    GetProductSectionsSchema,
-    TGetProductSectionsSchema,
-} from "@/schema/get";
 import { useQuery } from "@tanstack/react-query";
+import { ProdutSectionsSchema, TProdutSectionsSchema } from "@/schema/product";
+import { ValidateBackendResponse } from "@/utils";
 
 async function getProductAttributes(
     id: string,
-): Promise<TGetProductSectionsSchema["data"]> {
-    try {
-        const result = await api
-            .get(`/product/sections/${id}`)
-            .then((res) => res.data);
-        return GetProductSectionsSchema.parse(result).data;
-    } catch (error) {
-        console.log(error);
-        return {
-            sections: [],
-            default_attributes: [],
-        };
-    }
+): Promise<TProdutSectionsSchema | undefined> {
+    return await api
+        .get(`/product/sections/${id}`)
+        .then((res) => ValidateBackendResponse(res.data, ProdutSectionsSchema));
 }
 
 export default function useProductAttributes(id: string) {
