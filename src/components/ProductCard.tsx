@@ -21,7 +21,7 @@ export default function ProductCard({ product, category }: Props) {
         category ? category : product.category
     }-${product.id}`;
     return (
-        <Card className="p-2 max-w-[278px] h-[330px]">
+        <Card className="p-2 max-w-[278px] h-[330px] hover:border-primary_orange">
             <CImage
                 width={260}
                 height={195}

@@ -1,5 +1,4 @@
 import { BaggageClaim } from "lucide-react";
-import CartSummary from "./components/CartSummary";
 import CartList from "./components/CartList";
 
 export default function page() {

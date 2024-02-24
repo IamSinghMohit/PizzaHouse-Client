@@ -30,14 +30,19 @@ function CheckoutButton({}: Props) {
                 products: ids.map((id) => ({
                     name: entities[id]?.product_name,
                     image: entities[id]?.product_image,
-                    price: entities[id]?.product_price,
+                    price: entities[id]?.price,
                     quantity: entities[id]?.quantity,
                     description: entities[id]?.product_description,
                     topings: entities[id]?.topings.map(
-                        ({ name, image, price }) => ({ name, image, price }),
+                        ({ name, image, price }) => ({
+                            name,
+                            image,
+                            price,
+                        }),
                     ),
                 })),
             };
+
             mutate(body);
         }
     }

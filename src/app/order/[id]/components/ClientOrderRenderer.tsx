@@ -1,3 +1,5 @@
+'use client'
+
 import CImage from "@/lib/CImage";
 import { Card } from "@/components/ui/card";
 import { useAppSelector } from "@/hooks";
