@@ -9,11 +9,10 @@ import {  useGetOrder } from "../hooks";
 import OrderStepper from "./OrderStepper";
 import OrderLoader from "./OrderLoader";
 
-type Props = { id: string; step?: string };
+type Props = { id: string; };
 
-function ServerOrderRenderer({ id, step }: Props) {
+function ServerOrderRenderer({ id }: Props) {
     const { data, isLoading } = useGetOrder(id);
-
     return !isLoading ? (
         <>
             <div className="flex flex-wrap gap-2 bg-gray-50 p-2 rounded-md border mb-2">
@@ -27,6 +26,7 @@ function ServerOrderRenderer({ id, step }: Props) {
                 <div>
                     <h6>{data?.name}</h6>
                     <h5 className="text-gray-800">Price: {data?.price}</h5>
+                    <p className="text-gray-500 text-sm">{data?.description}</p>
                 </div>
             </div>
             <OrderTopingRenderer topings={data?.topings || []} />

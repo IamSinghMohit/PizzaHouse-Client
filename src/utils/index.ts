@@ -1,9 +1,9 @@
 import { toast } from "sonner";
-import {  ZodError, z, ZodSchema } from "zod";
+import { ZodError, z, ZodSchema } from "zod";
 
 export function ValidateBackendResponse<T>(
     response: any,
-    schema: ZodSchema<T>
+    schema: ZodSchema<T>,
 ) {
     const baseResponse = z.object({
         success: z.boolean(),
@@ -12,16 +12,23 @@ export function ValidateBackendResponse<T>(
     try {
         const result = baseResponse.parse(response);
         if (!result.success) {
-            // toast.error("unsuccessful response");
+            if (typeof window !== "undefined") {
+                toast.error("unsuccessful response");
+            }
             return undefined;
         }
         return result.data;
     } catch (error) {
         if (error instanceof ZodError) {
-            // toast.error("received bad data");
-            console.log(error)
+            if (typeof window !== "undefined") {
+                toast.error("received bad data");
+            }
+            console.log(error);
         } else {
-            throw new Error(`Received bad data from the server`);
+            if (typeof window !== "undefined") {
+                toast.error("some server error");
+            }
+            throw new Error("some server error");
         }
     }
     return undefined;

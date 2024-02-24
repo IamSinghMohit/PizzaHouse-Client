@@ -1,5 +1,3 @@
-"use client";
-
 import { Card } from "@/components/ui/card";
 import { useAppSelector } from "@/hooks";
 import { IndianRupee } from "lucide-react";
@@ -23,7 +21,7 @@ export default function CartSummary({}: Props) {
         return price;
     }, [entities]);
 
-    return (
+    return ids.length > 0 ? (
         <Card className="rounded-sm p-5 mt-4">
             <HydrationProvider>
                 <div className="space-y-0.5 text-sm text-gray-700 max-w-[500px] mx-auto">
@@ -69,5 +67,7 @@ export default function CartSummary({}: Props) {
                 </div>
             </HydrationProvider>
         </Card>
+    ) : (
+    <></>
     );
 }

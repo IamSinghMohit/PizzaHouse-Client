@@ -1,4 +1,5 @@
 import { OrderStatusEnum } from "@/app/order/[id]/types";
+import { useSocket } from "@/app/socket-context";
 import { Bike, ClipboardList, UtensilsCrossed, CookingPot } from "lucide-react";
 import React, { useMemo } from "react";
 
@@ -46,7 +47,6 @@ function OrderStepper({ step }: { step: string }) {
     const positionIndex = useMemo(() => {
         return StepsArray.find((item) => item.enumValue === step)?.step || 0;
     }, [step]);
-    console.log(step);
     return (
         <>
             <div className="relative flex flex-col justify-between items-center h-[400px] pr-[150px] sm:flex-row sm:pr-0 sm:h-auto">

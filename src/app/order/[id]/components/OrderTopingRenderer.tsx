@@ -16,7 +16,7 @@ function OrderTopingRenderer({ topings }: Props) {
         topings.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 p-2 max-h-[300px] overflow-y-scroll">
                 {topings.map((toping) => (
-                    <div className="flex gap-1 items-start p-1 bg-gray-50 rounded-md border">
+                    <div className="flex gap-1 items-start p-1 bg-gray-50 rounded-md border" key={toping.id}>
                         <CImage
                             src={toping.image || ""}
                             alt="toping image"

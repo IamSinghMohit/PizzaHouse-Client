@@ -6,12 +6,17 @@ import MaxWidthWrapper from "../MaxWidthWrapper";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import { useAppDispatch } from "@/hooks";
-import { setUser, setUserStripeSecret } from "@/store/slices/user";
+import {
+    seetUserCartItems,
+    setUser,
+    setUserStripeSecret,
+} from "@/store/slices/user";
 import { useGetUser } from "@/hooks/useGetUser";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { useStripeKey } from "@/hooks/useStripeKey";
 import { Client, HydrationProvider } from "react-hydration-provider";
+import { useCartProducts } from "@/app/cart/hooks";
 
 interface Props {}
 
@@ -22,12 +27,16 @@ export default function Navbar({}: Props) {
     const isMobile = useMediaQuery({ query: "(max-width:600px)" });
     const scrollRef = useRef(0);
     const [show, setShow] = useState("translate-y-0");
+    const { data: cartData = [] } = useCartProducts();
 
     useEffect(() => {
         if (data) {
             dispatch(setUser(data));
         }
-    }, [data]);
+        if (cartData.length > 0) {
+            dispatch(seetUserCartItems(cartData.length));
+        }
+    }, [data, cartData]);
 
     useEffect(() => {
         if (stripeData) {

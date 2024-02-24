@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function ProductSections({ id }: Props) {
-    const { data } = useProductAttributes(id);
+    const { data ,isLoading} = useProductAttributes(id);
     const dispatch = useAppDispatch();
 
     const defaultAttributes = useMemo(() => {
@@ -24,8 +24,7 @@ export default function ProductSections({ id }: Props) {
         return obj;
     }, [data]);
 
-    const Attributes = useMemo(() => {
-        const obj: Partial<Record<
+    const Attributes = useMemo(() => { const obj: Partial<Record<
             string,
             { name: string; value: number; sec_name: string }
         >> = {};

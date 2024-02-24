@@ -42,7 +42,7 @@ export function LoginForm({}: Props) {
     }
 
     function handleGoogleClick() {
-        window.open(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login/google`, "_self");
+        window.open(`${process.env.NEXT_PUBLIC_BACKEND_URL}auth/login/google`, "_self");
     }
     return (
         <Form {...form}>

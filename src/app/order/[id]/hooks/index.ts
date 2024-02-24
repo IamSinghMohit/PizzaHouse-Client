@@ -1,7 +1,6 @@
 import api from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import { GetOrderSchema, TGetOrderSchema } from "../schema";
-import { toast } from "sonner";
 import { ValidateBackendResponse } from "@/utils";
 
 export async function getOrder(

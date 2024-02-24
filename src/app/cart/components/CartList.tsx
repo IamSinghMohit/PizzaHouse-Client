@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { useAppSelector } from "@/hooks";
 import CartItem from "./CartItem";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { shallowEqual } from "react-redux";
-import { useCartProducts } from "../hooks/useCartProducts";
 import { Button } from "@/components/ui/button";
 import { Dot, Eye, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -14,43 +12,44 @@ import CImage from "@/lib/CImage";
 import { OrderStatusEnum } from "@/app/order/[id]/types";
 import { useDeleteCartItem } from "../hooks/useDeleteCartItem";
 import CartLoader from "./CartLoader";
+import { Server, Client, HydrationProvider } from "react-hydration-provider";
+import CartSummary from "./CartSummary";
+import { useQueryClient } from "@tanstack/react-query";
+import { TGetCartProductsSchema } from "../schema";
 
 type Props = {};
 
 function CartList({}: Props) {
     const ids = useAppSelector((state) => state.cart.ids, shallowEqual);
-    const [pageLoading, setPageLoading] = useState(true);
+    const queryClient = useQueryClient();
     const { mutate } = useDeleteCartItem();
-    const { data = [], isLoading } = useCartProducts();
-
-    useEffect(() => {
-        setPageLoading(false);
-    }, []);
+    const cartItems = useAppSelector((state) => state.user.cartItems);
+    const userCart = queryClient.getQueryData<TGetCartProductsSchema>(["cart"]);
+    const showImage = ids.length < 1 && cartItems < 1;
 
     return (
-        <div>
-            {!pageLoading ? (
-                ids.length < 1 ? (
-                    <div className="relative w-1/2 object-contain">
-                    <Image
-                        src="/empty-cart.png"
-                        className="mx-auto mt-10"
-                        fill
-                        sizes="(max-width: 768px)100vw, (max-width: 1200px)50vw, 30vw"
-                        alt="empty cart image"
-                    />
-                    </div>
-                ) : (
-                    <div className="mt-8">
-                        <ul className="space-y-4">
-                            {ids.map((id) => (
-                                <li key={id}>
-                                    <CartItem id={id} />
-                                    <Separator orientation="horizontal" />
-                                </li>
-                            ))}
-                            {(!pageLoading || !isLoading) &&
-                                data.map((pro) => (
+        <HydrationProvider>
+            <div>
+                <Client>
+                    {showImage ? (
+                        <Image
+                            src="/empty-cart.png"
+                            className="mx-auto mt-10"
+                            width={550}
+                            height={458}
+                            sizes="(max-width: 768px)100vw, (max-width: 1200px)50vw, 30vw"
+                            alt="empty cart image"
+                        />
+                    ) : (
+                        <div className="mt-8">
+                            <ul className="space-y-4">
+                                {ids.map((id) => (
+                                    <li key={id}>
+                                        <CartItem id={id} />
+                                        <Separator orientation="horizontal" />
+                                    </li>
+                                ))}
+                                {userCart?.map((pro) => (
                                     <li key={pro.id}>
                                         <div className="flex items-start justify-between flex-wrap gap-2">
                                             {/* LEFT SIDE */}
@@ -107,13 +106,20 @@ function CartList({}: Props) {
                                         <Separator orientation="horizontal" />
                                     </li>
                                 ))}
-                        </ul>
-                    </div>
-                )
-            ) : (
-                <CartLoader />
+                            </ul>
+                        </div>
+                    )}
+                </Client>
+                <Server>
+                    <CartLoader />
+                </Server>
+            </div>
+            {!showImage && (
+                <Client>
+                    <CartSummary />
+                </Client>
             )}
-        </div>
+        </HydrationProvider>
     );
 }
 

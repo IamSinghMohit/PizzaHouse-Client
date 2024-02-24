@@ -54,8 +54,7 @@ export default function AddToCartButton({
     }
     return (
         <Button onClick={handleClick} className={`flex items-center gap-1 rounded-xl ${className}`}>
-            <span>Add to Cart</span>
-            <BaggageClaim />
+            <span>Add+</span> <BaggageClaim />
         </Button>
     );
 }

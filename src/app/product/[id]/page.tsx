@@ -18,9 +18,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     const arr = props.params.id.split("-");
     const id = arr[arr.length - 1];
     const res = await getProduct(id);
-    // if(!res){
-    //    return 
-    // }
+    if(!res){
+        return {
+            title:'product-not-found'
+        }
+    }
     const publicId = res.image;
 
     return {
@@ -87,7 +89,11 @@ export default async function Page(props: Props) {
     const arr = props.params.id.split("-");
     const id = arr[arr.length - 1];
     const product = await getProduct(id);
-
+    if(!product){
+        return redirect(
+            `/`,
+        );
+    }
     const paramId = encodeURIComponent(
         `${product.name.trim()}-${product.category}-${product.id}`,
     );

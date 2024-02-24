@@ -16,15 +16,15 @@ export default function ProductFeed({}: Props) {
     const showCarousel = useMediaQuery({ query: "(max-width:600px)" });
     return (
         <section>
-            <MaxWidthWrapper>
+            <MaxWidthWrapper className="md:px-2 lg:px-20">
                 {isLoading ? (
                     <ProductFeedLoader />
                 ) : (
-                    data.map((sec, index) => (
+                    data.map((sec) => (
                         <div key={sec.id}>
                             <div className="my-2 ml-4">
                                 <Link
-                                    href={`/product?category=${sec.category}`}
+                                    href={`/product?name=&category=${sec.category}&min=0&max=0`}
                                     className="flex items-center gap-3"
                                 >
                                     <h4 className="font-bold">

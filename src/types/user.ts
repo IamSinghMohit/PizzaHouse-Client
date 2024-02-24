@@ -7,6 +7,6 @@ export type TUserStateUser = {
 };
 export interface IUserSliceState {
     user: TUserStateUser | null;
-    isTriedToAutoLogin: boolean;
+    cartItems:number;
     stripePublishKey : string | null;
 }

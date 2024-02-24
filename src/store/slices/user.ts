@@ -3,8 +3,8 @@ import { IUserSliceState, TUserStateUser} from "../../types/user";
 
 const initialState: IUserSliceState = {
     user: null,
-    isTriedToAutoLogin: false,
     stripePublishKey: null,
+    cartItems:0,
 };
 
 export const userSlice = createSlice({
@@ -17,6 +17,9 @@ export const userSlice = createSlice({
         setUserStripeSecret(state, action: PayloadAction<string>) {
             state.stripePublishKey = action.payload;
         },
+        seetUserCartItems(state,action:PayloadAction<number>){
+            state.cartItems = action.payload
+        }
     },
 });
-export const { setUserStripeSecret, setUser } = userSlice.actions;
+export const { setUserStripeSecret, setUser ,seetUserCartItems} = userSlice.actions;

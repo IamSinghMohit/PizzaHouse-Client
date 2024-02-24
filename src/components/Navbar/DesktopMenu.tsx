@@ -9,7 +9,7 @@ import ProfileButton from "../ProfileButton";
 interface Props {}
 
 export default function DesktopMenu({}: Props) {
-    const { user } = useAppSelector((state) => state.user);
+    const { user, cartItems } = useAppSelector((state) => state.user);
     const ids = useAppSelector((state) => state.cart.ids);
     return (
         <nav className="flex items-center font-bold font-inter gap-2">
@@ -22,7 +22,7 @@ export default function DesktopMenu({}: Props) {
                 <Button size="icon" className="rounded-full relative">
                     <ShoppingCart />
                     <span className="absolute top-0 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[12px] font-light flex items-center justify-center">
-                        {ids.length}
+                        {ids.length + cartItems}
                     </span>
                 </Button>
             </Link>{" "}

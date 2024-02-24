@@ -4,7 +4,7 @@ import OrderQuantity from "./OrderQuantity";
 import { Eye, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CImage from "@/lib/CImage";
-import { useAppDispatch,useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { EntityId } from "@reduxjs/toolkit";
 import { removeOneFromCart, updateOneIntoCart } from "@/store/slices/cart";
 import Link from "next/link";
@@ -43,7 +43,9 @@ function CartItem({ id }: { id: EntityId }) {
                     <h3 className="text-sm text-gray-900 text-[21px]">
                         {item.product_name}
                     </h3>
-                    <span className="text-gray-600">Price: {item.price * item.quantity}</span>
+                    <span className="text-gray-600">
+                        Price: {item.price * item.quantity}
+                    </span>
                 </div>
             </div>
             {/* RIGHT SIDE  */}

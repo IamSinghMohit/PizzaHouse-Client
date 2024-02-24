@@ -15,9 +15,7 @@ export function ProductSideBar() {
     ];
     const [amount, setAmount] = useState<number[]>(minMax);
     const [input, setInput] = useState(param.get("name") || "");
-    const [categories, setCategories] = useState(
-        `${param.get("category") || ""}`,
-    );
+    const [categories, setCategories] = useState(param.get("category") || "");
     const text = useDebounce(input, 300);
     const router = useRouter();
 

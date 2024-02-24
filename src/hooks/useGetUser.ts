@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 async function GetUser(): Promise<TUserSchema | undefined> {
     return await api
         .get("/auth/me")
-        .then((res) => res.data)
         .then((res) => ValidateBackendResponse(res.data, UserSchema));
 }
 

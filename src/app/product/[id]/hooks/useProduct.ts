@@ -7,6 +7,5 @@ export async function useProduct(
 ): Promise<TProductSchema | undefined> {
     return await api
         .get(`/product/${id}`)
-        .then((res) => res.data)
         .then((res) => ValidateBackendResponse(res.data, ProductSchema));
 }
