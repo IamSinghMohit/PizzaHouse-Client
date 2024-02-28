@@ -6,7 +6,7 @@ import {
 import { ValidateBackendResponse } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 
-async function getProducts(): Promise<TGetFormatedProductsSchema | undefined> {
+export async function getProducts(): Promise<TGetFormatedProductsSchema | undefined> {
     return await api
         .get("/product/formated?productLimit=6")
         .then((res) =>

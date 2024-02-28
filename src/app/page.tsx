@@ -1,10 +1,12 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { SectionCards } from "@/data/section";
-import ProductFeed from "@/app/components/ProductFeed";
 import ServiceCard from "./components/ServiceCard";
 import HomeTypeWriter from "./components/HomeTypeWriter";
 import HeroImage from "./components/HeroImage";
 import { Client, HydrationProvider, Server } from "react-hydration-provider";
+import ProductFeed from "./components/product-feed";
+import { Suspense } from "react";
+import ProductFeedLoader from "./components/product-feed/ProductFeedLoader";
 
 export default function Home() {
     return (
@@ -48,8 +50,9 @@ export default function Home() {
                         ))}
                     </MaxWidthWrapper>
                 </section>
-                {/* Home Sectoin ends here */}
-                <ProductFeed />
+                <Suspense fallback={<ProductFeedLoader />}>
+                    <ProductFeed />
+                </Suspense>
             </HydrationProvider>
         </main>
     );
