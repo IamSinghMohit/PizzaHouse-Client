@@ -3,10 +3,10 @@ import { TUserSchema, UserSchema } from "@/schema/auth";
 import { ValidateBackendResponse } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 
-async function GetUser(): Promise<TUserSchema | undefined> {
+async function GetUser(): Promise<TUserSchema> {
     return await api
         .get("/auth/me")
-        .then((res) => ValidateBackendResponse(res.data, UserSchema));
+        .then((res) => ValidateBackendResponse(res.data,UserSchema));
 }
 
 export function useGetUser() {

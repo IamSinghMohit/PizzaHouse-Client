@@ -7,6 +7,7 @@ import { Client, HydrationProvider, Server } from "react-hydration-provider";
 import ProductFeed from "./components/product-feed";
 import { Suspense } from "react";
 import ProductFeedLoader from "./components/product-feed/ProductFeedLoader";
+import ErrorBoundary from "@/lib/error-boundary";
 
 export default function Home() {
     return (
@@ -50,9 +51,11 @@ export default function Home() {
                         ))}
                     </MaxWidthWrapper>
                 </section>
-                <Suspense fallback={<ProductFeedLoader />}>
-                    <ProductFeed />
-                </Suspense>
+                <ErrorBoundary message="*Error while fetching products">
+                    <Suspense fallback={<ProductFeedLoader />}>
+                        <ProductFeed />
+                    </Suspense>
+                </ErrorBoundary>
             </HydrationProvider>
         </main>
     );

@@ -3,7 +3,7 @@ import { TopingSchema, TTopingSchema } from "@/schema/topings";
 import { ValidateBackendResponse } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 
-async function getTopings(id: string): Promise<TTopingSchema | []> {
+export async function getTopings(id: string): Promise<TTopingSchema | []> {
     return await api
         .get(`/toping/category/${id}`)
         .then((res) => ValidateBackendResponse(res.data, TopingSchema) || []);

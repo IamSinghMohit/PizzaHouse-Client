@@ -3,7 +3,7 @@
 import Link from "next/link";
 import ProductCarousel from "../ProductCarousel";
 import { ArrowRightFromLine } from "lucide-react";
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "../product-card/ProductCard";
 import { useMediaQuery } from "react-responsive";
 import { TGetFormatedProductsSchema } from "@/schema/product";
 

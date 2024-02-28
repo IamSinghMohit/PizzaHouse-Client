@@ -5,12 +5,12 @@ import {
     CarouselContent,
     CarouselItem,
 } from "@/components/ui/carousel";
-import React, { useCallback, useEffect, useState } from "react";
-import ProductCard from "../../components/ProductCard";
-import { TGetFormatedProductsSchema } from "@/schema/get";
+import React, {  useEffect, useState } from "react";
+import ProductCard from "./product-card/ProductCard";
+import { TGetFormatedProductsSchema } from "@/schema/product";
 import { type CarouselApi } from "@/components/ui/carousel";
 type Props = {
-    products: TGetFormatedProductsSchema["data"][0]["products"];
+    products: TGetFormatedProductsSchema[0]["products"];
     category: string;
 };
 

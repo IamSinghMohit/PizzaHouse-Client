@@ -2,20 +2,13 @@
 
 import { IndianRupee } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { useTopings } from "../hooks/useTopings";
 import CImage from "@/lib/CImage";
-import { useAppDispatch,useAppSelector } from "@/hooks";
-import { TGetTopoingSchema } from "@/schema/get";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { TTopingSchema } from "@/schema/topings";
 import { setProductTopings } from "@/store/slices/product";
 import { TickFilledIcon } from "@/icons";
-import { useMediaQuery } from "react-responsive";
 
-type Props = {
-    category: string;
-    height: number;
-};
-
-function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
+function Toping({ toping }: { toping: TTopingSchema[0] }) {
     const isActive = useAppSelector(
         (state) => state.product.topings[toping.id],
     );
@@ -82,20 +75,4 @@ function Toping({ toping }: { toping: TGetTopoingSchema["data"][0] }) {
         </Card>
     );
 }
-
-function TopingList({ category, height }: Props) {
-    const { data = [] } = useTopings(category);
-    const isLargeScreen = useMediaQuery({query:"(min-width: 1024px)"})
-    return (
-        <Card
-            className={`bg-gray-50 p-2 max-h-[300px] flex flex-wrap gap-2 justify-between overflow-y-scroll lg:max-w-[524px] w-full lg:justify-normal`}
-            style={isLargeScreen ? { maxHeight: height, height: height } : {}}
-        >
-            {data.map((toping) => (
-                <Toping toping={toping} key={toping.id} />
-            ))}
-        </Card>
-    );
-}
-
-export default TopingList;
+export default Toping;

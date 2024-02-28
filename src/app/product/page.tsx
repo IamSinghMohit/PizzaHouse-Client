@@ -6,7 +6,7 @@ import {
     QueryClient,
     dehydrate,
 } from "@tanstack/react-query";
-import CardRenderer from "./components/CardRenderer";
+import ProductList from "./components/product-list";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { ProductSideBar } from "./components";
 
@@ -23,6 +23,7 @@ export default async function page({
     searchParams: { min, max, category, name },
 }: Props) {
     const queryClient = new QueryClient();
+    console.log(min, max, category, name);
     await queryClient.prefetchInfiniteQuery({
         queryKey: [
             "product",
@@ -41,14 +42,13 @@ export default async function page({
                 max: parseInt(max ? max : "0"),
             }),
     });
+
     return (
         <main>
             <HydrationBoundary state={dehydrate(queryClient)}>
                 <MaxWidthWrapper className="md:px-1 flex justify-center flex-col gap-1 md:flex-row mt-1 product-search-height">
                     <ProductSideBar />
-                    <Card className="p-2 bg-gray-50 overflow-y-scroll w-full min-h-[500px]">
-                        <CardRenderer />
-                    </Card>
+                    <ProductList />
                 </MaxWidthWrapper>
             </HydrationBoundary>
         </main>

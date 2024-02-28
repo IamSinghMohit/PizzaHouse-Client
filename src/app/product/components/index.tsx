@@ -1,29 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import useDebounce from "@/hooks/useDebounce";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useQueryState } from "next-usequerystate";
 import { ProductCategorySelector, ProductSlider } from "./ProductSearchForm";
 
 export function ProductSideBar() {
-    const param = useSearchParams();
-    const minMax = [
-        parseInt(param.get("min") || "0"),
-        parseInt(param.get("max") || "0"),
-    ];
-    const [amount, setAmount] = useState<number[]>(minMax);
-    const [input, setInput] = useState(param.get("name") || "");
-    const [categories, setCategories] = useState(param.get("category") || "");
-    const text = useDebounce(input, 300);
-    const router = useRouter();
+    const [min, setMin] = useQueryState("min");
+    const [max, setMax] = useQueryState("max");
+    const [name, setName] = useQueryState("name");
+    const [_, setCategory] = useQueryState("category");
+    const [text, setText] = useState(name || "");
+    const searchedName = useDebounce(text, 400);
 
     useEffect(() => {
-        router.push(
-            `product?name=${input}&category=${categories}&min=${amount[0]}&max=${amount[1]}`,
-        );
-    }, [text, amount, categories]);
+        setName(searchedName);
+    }, [searchedName]);
 
     return (
         <Card className="p-2 bg-gray-50 shadow-none flex flex-col gap-1 min-w-[250px] md:min-w-[270px] md:w-[270px]">
@@ -34,17 +28,20 @@ export function ProductSideBar() {
                     </button>
                     <input
                         className="p-2 focus:outline-none w-full rounded-r-lg"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
+                        type="text"
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
                     />
                 </div>
                 <ProductSlider
-                    amount={amount}
-                    setAmount={setAmount}
-                    deafultValue={minMax}
+                    onValueCommit={(e) => {
+                        setMin(`${e[0]}`);
+                        setMax(`${e[1]}`);
+                    }}
+                    deafultValue={[parseInt(min || "0"), parseInt(max || "0")]}
                 />
             </div>
-            <ProductCategorySelector setCategories={setCategories} />
+            <ProductCategorySelector onChange={(e) => setCategory(e)} />
         </Card>
     );
 }

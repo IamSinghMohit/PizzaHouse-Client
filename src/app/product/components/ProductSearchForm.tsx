@@ -1,6 +1,6 @@
 import { Slider } from "@/components/ui/slider";
 import { IndianRupee } from "lucide-react";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInfiniteCategories } from "../hooks/useInfiniteCategories";
 import CImage from "@/lib/CImage";
 import { useProductStats } from "../hooks";
@@ -8,11 +8,10 @@ import { useIntersectionObserver } from "@/hooks";
 import { Client, HydrationProvider, Server } from "react-hydration-provider";
 
 export function ProductSlider({
-    setAmount,
+    onValueCommit,
     deafultValue,
 }: {
-    amount: number[];
-    setAmount: Dispatch<SetStateAction<number[]>>;
+    onValueCommit: (e: [number, number]) => void;
     deafultValue: number[];
 }) {
     const { data } = useProductStats();
@@ -24,8 +23,9 @@ export function ProductSlider({
                 min={0}
                 max={data?.max_price || 500}
                 step={1}
+                onBlur={() => console.log("blur called")}
                 onValueChange={setValue}
-                onValueCommit={setAmount}
+                onValueCommit={onValueCommit}
             />
             <div className="flex gap-1 items-center mt-2 text-[14px]">
                 <span className="flex items-center">
@@ -47,11 +47,11 @@ export function ProductSlider({
 }
 
 export const ProductCategorySelector = ({
-    setCategories,
+    onChange,
 }: {
-    setCategories: Dispatch<SetStateAction<string>>;
+    onChange: (str: string) => void;
 }) => {
-    const { data, fetchNextPage } = useInfiniteCategories();
+    const { data, fetchNextPage, isLoading } = useInfiniteCategories();
     const [cats, setCats] = useState<Map<string, string>>(new Map());
     const shouldChange = useRef(false);
     const observer = useIntersectionObserver(() => {
@@ -70,8 +70,7 @@ export const ProductCategorySelector = ({
 
     useEffect(() => {
         if (shouldChange.current) {
-            console.log(shouldChange.current);
-            setCategories(Array.from(cats.keys()).join(","));
+            onChange(Array.from(cats.keys()).join(","));
         } else {
             shouldChange.current = true;
         }
@@ -82,42 +81,56 @@ export const ProductCategorySelector = ({
         <div className="flex rounded-lg border bg-card p-2 text-card-foreground shadow-sm flex-wrap gap-1 justify-between max-h-[136px] overflow-y-scroll md:max-h-full">
             <HydrationProvider>
                 <Client>
-                    {arr.map((cat, index) => (
-                        <div
-                            ref={(ref) => {
-                                if (index === arr?.length - 1 && ref) {
-                                    observer(ref);
-                                }
-                            }}
-                            key={cat.id}
-                        >
-                            <CImage
-                                src={cat.image}
-                                className={`rounded-md border-2 cursor-pointer ${
-                                    cats.has(cat.name)
-                                        ? "border-primary_orange "
-                                        : ""
-                                }`}
-                                width={55}
-                                height={55}
-                                alt={cat.name}
-                                onClick={() => handleCategoryClick(cat.name)}
-                            />
-                        </div>
-                    ))}
+                    {isLoading ? (
+                        <ProductCategorySelectorLoader />
+                    ) : (
+                        arr.map((cat, index) => (
+                            <div
+                                ref={(ref) => {
+                                    if (index === arr?.length - 1 && ref) {
+                                        observer(ref);
+                                    }
+                                }}
+                                key={cat.id}
+                            >
+                                <CImage
+                                    src={cat.image}
+                                    className={`rounded-md border-2 cursor-pointer ${
+                                        cats.has(cat.name)
+                                            ? "border-primary_orange "
+                                            : ""
+                                    }`}
+                                    width={55}
+                                    height={55}
+                                    alt={cat.name}
+                                    onClick={() =>
+                                        handleCategoryClick(cat.name)
+                                    }
+                                />
+                            </div>
+                        ))
+                    )}
                 </Client>
                 <Server>
-                    {[
-                        "7605bb73-2c1a-4026-9959-44ce1de05206",
-                        "75078d34-7e5c-4bcf-8388-8eea632418e2",
-                        "6d676b72-9941-4db3-8896-61560cde4fcd",
-                        "6013d5b4-e4c6-4622-b3ae-c832f6049103",
-                        "8d7623a3-3588-46cc-a32e-02eb5212dcab",
-                    ].map((i) => (
-                        <div className="shimmer w-[55px] h-[55px]" key={i} />
-                    ))}
+                    <ProductCategorySelectorLoader />
                 </Server>
             </HydrationProvider>
         </div>
     );
 };
+
+function ProductCategorySelectorLoader() {
+    return (
+        <>
+            {[
+                "7605bb73-2c1a-4026-9959-44ce1de05206",
+                "75078d34-7e5c-4bcf-8388-8eea632418e2",
+                "6d676b72-9941-4db3-8896-61560cde4fcd",
+                "6013d5b4-e4c6-4622-b3ae-c832f6049103",
+                "8d7623a3-3588-46cc-a32e-02eb5212dcab",
+            ].map((i) => (
+                <div className="shimmer w-[55px] h-[55px]" key={i} />
+            ))}
+        </>
+    );
+}

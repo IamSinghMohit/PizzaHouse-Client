@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ProdutSectionsSchema, TProdutSectionsSchema } from "@/schema/product";
 import { ValidateBackendResponse } from "@/utils";
 
-async function getProductAttributes(
+export async function getProductAttributes(
     id: string,
 ): Promise<TProdutSectionsSchema | undefined> {
     return await api

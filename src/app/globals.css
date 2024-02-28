@@ -255,7 +255,7 @@
 }
 .product-search-renderer {
     display: grid;
-    gap:8px;
+    gap: 8px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     justify-items: center;
 }
@@ -271,3 +271,4 @@
     }
 }
 /* product search page */
+
