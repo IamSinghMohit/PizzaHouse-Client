@@ -5,7 +5,7 @@ type Props = {};
 
 function TopingListLoader({}: Props) {
     return (
-        <Card className="bg-gray-50 p-2 flex flex-wrap gap-2 justify-between overflow-y-scroll md:justify-normal absolute top-full mt-2 left-0 w-full h-[210px] md:h-full md:top-0 md:mt-0 md:left-full md:ml-2">
+        <Card className="bg-gray-50 p-2 flex flex-wrap content-start gap-2 overflow-y-scroll absolute top-full mt-2 left-0 w-full h-[210px] md:h-full md:top-0 md:mt-0 md:left-full md:ml-2">
             {[
                 "75901890-2e3b-4912-9991-1b89ed847f66",
                 "8e838275-6756-45e4-8f49-9992354c9b40",

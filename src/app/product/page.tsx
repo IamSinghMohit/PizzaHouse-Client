@@ -1,4 +1,3 @@
-import { Card } from "@/components/ui/card";
 import React from "react";
 import { getProducts } from "./hooks/useInfiniteSearchProduct";
 import {
@@ -23,7 +22,6 @@ export default async function page({
     searchParams: { min, max, category, name },
 }: Props) {
     const queryClient = new QueryClient();
-    console.log(min, max, category, name);
     await queryClient.prefetchInfiniteQuery({
         queryKey: [
             "product",
@@ -46,7 +44,7 @@ export default async function page({
     return (
         <main>
             <HydrationBoundary state={dehydrate(queryClient)}>
-                <MaxWidthWrapper className="md:px-1 flex justify-center flex-col gap-1 md:flex-row mt-1 product-search-height">
+                <MaxWidthWrapper className="md:px-1 flex justify-center flex-col gap-1 md:flex-row mt-1 md:h-[calc(100vh-74px)]">
                     <ProductSideBar />
                     <ProductList />
                 </MaxWidthWrapper>

@@ -14,6 +14,7 @@ export async function getProductAttributes(
 export default function useProductAttributes(id: string) {
     return useQuery({
         queryKey: ["product", "attributes", id],
+        staleTime:60 * 1000,
         queryFn: () => getProductAttributes(id),
         enabled: !!id,
     });

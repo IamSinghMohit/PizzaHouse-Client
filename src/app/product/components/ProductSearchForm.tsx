@@ -78,13 +78,13 @@ export const ProductCategorySelector = ({
 
     const arr = data?.pages.flat() || [];
     return (
-        <div className="flex rounded-lg border bg-card p-2 text-card-foreground shadow-sm flex-wrap gap-1 justify-between max-h-[136px] overflow-y-scroll md:max-h-full">
-            <HydrationProvider>
-                <Client>
-                    {isLoading ? (
-                        <ProductCategorySelectorLoader />
-                    ) : (
-                        arr.map((cat, index) => (
+        <HydrationProvider>
+            <Client>
+                {isLoading ? (
+                    <ProductCategorySelectorLoader />
+                ) : (
+                    <div className="flex rounded-lg border bg-card p-2 text-card-foreground shadow-sm flex-wrap gap-1 max-h-[136px] overflow-y-scroll md:max-h-full">
+                        {arr.map((cat, index) => (
                             <div
                                 ref={(ref) => {
                                     if (index === arr?.length - 1 && ref) {
@@ -108,20 +108,20 @@ export const ProductCategorySelector = ({
                                     }
                                 />
                             </div>
-                        ))
-                    )}
-                </Client>
-                <Server>
-                    <ProductCategorySelectorLoader />
-                </Server>
-            </HydrationProvider>
-        </div>
+                        ))}
+                    </div>
+                )}
+            </Client>
+            <Server>
+                <ProductCategorySelectorLoader />
+            </Server>
+        </HydrationProvider>
     );
 };
 
 function ProductCategorySelectorLoader() {
     return (
-        <>
+        <div className="flex rounded-lg border bg-card p-2 text-card-foreground shadow-sm flex-wrap gap-1 max-h-[136px] overflow-y-scroll md:max-h-full">
             {[
                 "7605bb73-2c1a-4026-9959-44ce1de05206",
                 "75078d34-7e5c-4bcf-8388-8eea632418e2",
@@ -131,6 +131,6 @@ function ProductCategorySelectorLoader() {
             ].map((i) => (
                 <div className="shimmer w-[55px] h-[55px]" key={i} />
             ))}
-        </>
+        </div>
     );
 }

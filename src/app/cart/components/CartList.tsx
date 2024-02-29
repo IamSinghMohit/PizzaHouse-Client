@@ -22,7 +22,6 @@ type Props = {};
 function CartList({}: Props) {
     const ids = useAppSelector((state) => state.cart.ids, shallowEqual);
     const queryClient = useQueryClient();
-    const { mutate } = useDeleteCartItem();
     const cartItems = useAppSelector((state) => state.user.cartItems);
     const userCart = queryClient.getQueryData<TGetCartProductsSchema>(["cart"]);
     const showImage = ids.length < 1 && cartItems < 1;
@@ -50,61 +49,10 @@ function CartList({}: Props) {
                                     </li>
                                 ))}
                                 {userCart?.map((pro) => (
-                                    <li key={pro.id}>
-                                        <div className="flex items-start justify-between flex-wrap gap-2">
-                                            {/* LEFT SIDE */}
-                                            <div className="flex items-start gap-2">
-                                                <CImage
-                                                    src={pro.image}
-                                                    alt="cart item image"
-                                                    width={120}
-                                                    className="rounded-sm"
-                                                    height={120}
-                                                />
-                                                <div>
-                                                    <h3 className="text-sm text-gray-900 text-[21px]">
-                                                        {pro.name}
-                                                    </h3>
-                                                    <span className="text-gray-600">
-                                                        Price: {pro.price}
-                                                    </span>
-                                                    <h5 className="flex items-center text-primary_red">
-                                                        <Dot />
-                                                        {pro.status}
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div className="flex flex-col items-end">
-                                                {pro.status ===
-                                                    OrderStatusEnum.COMPLETED && (
-                                                    <Button
-                                                        size={"icon"}
-                                                        className="rounded-xl"
-                                                        onClick={() =>
-                                                            mutate(pro.id)
-                                                        }
-                                                    >
-                                                        <Trash2 />
-                                                    </Button>
-                                                )}
-                                                <Link href={`/order/${pro.id}`}>
-                                                    <Button
-                                                        variant={"link"}
-                                                        className="pr-0"
-                                                    >
-                                                        <Eye
-                                                            width={18}
-                                                            height={18}
-                                                        />{" "}
-                                                        <span className="ml-1">
-                                                            view
-                                                        </span>
-                                                    </Button>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        <Separator orientation="horizontal" />
-                                    </li>
+                                     <FetchedCartItemRenderer
+                                        product={pro}
+                                        key={pro.id}
+                                    />
                                 ))}
                             </ul>
                         </div>
@@ -124,3 +72,57 @@ function CartList({}: Props) {
 }
 
 export default CartList;
+
+function FetchedCartItemRenderer({
+    product,
+}: {
+    product: TGetCartProductsSchema[0];
+}) {
+    const { mutate } = useDeleteCartItem();
+    return (
+        <li>
+            <div className="flex items-start justify-between flex-wrap gap-2">
+                {/* LEFT SIDE */}
+                <div className="flex items-start gap-2">
+                    <CImage
+                        src={product.image}
+                        alt="cart item image"
+                        width={120}
+                        className="rounded-sm"
+                        height={120}
+                    />
+                    <div>
+                        <h3 className="text-sm text-gray-900 text-[21px]">
+                            {product.name}
+                        </h3>
+                        <span className="text-gray-600">
+                            Price: {product.price}
+                        </span>
+                        <h5 className="flex items-center text-primary_red">
+                            <Dot />
+                            {product.status}
+                        </h5>
+                    </div>
+                </div>
+                <div className="flex flex-col items-end">
+                    {product.status === OrderStatusEnum.COMPLETED && (
+                        <Button
+                            size={"icon"}
+                            className="rounded-xl"
+                            onClick={() => mutate(product.id)}
+                        >
+                            <Trash2 />
+                        </Button>
+                    )}
+                    <Link href={`/order/${product.id}`}>
+                        <Button variant={"link"} className="pr-0">
+                            <Eye width={18} height={18} />{" "}
+                            <span className="ml-1">view</span>
+                        </Button>
+                    </Link>
+                </div>
+            </div>
+            <Separator orientation="horizontal" />
+        </li>
+    );
+}

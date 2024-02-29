@@ -1,16 +1,13 @@
-import { GetProductStatsSchema, TGetProductStatsSchema } from "@/app/product/schema";
+import {
+    GetProductStatsSchema,
+    TGetProductStatsSchema,
+} from "@/app/product/schema";
 import api from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 async function getProductStats(): Promise<TGetProductStatsSchema | undefined> {
-    try {
-        const result = await api("/product/stats").then((res) => res.data);
-        return GetProductStatsSchema.parse(result.data);
-    } catch (error) {
-        toast.error("received bad data from server")
-        return undefined;
-    }
+    const result = await api("/product/stats").then((res) => res.data);
+    return GetProductStatsSchema.parse(result.data);
 }
 export function useProductStats() {
     return useQuery({
@@ -18,4 +15,3 @@ export function useProductStats() {
         queryFn: getProductStats,
     });
 }
-

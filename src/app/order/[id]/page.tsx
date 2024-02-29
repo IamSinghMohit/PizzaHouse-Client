@@ -1,6 +1,6 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ClientOrderRenderer from "./components/ClientOrderRenderer";
-import ServerOrderRenderer from "./components/ServerOrderRenderer";
+import FetchedOrderRenderer from "./components/FetchedOrderRenderer";
 
 type Props = {
     params: {
@@ -10,12 +10,12 @@ type Props = {
 
 export default function page({ params }: Props) {
     const id = params.id || "";
-    const shouldRenderServerData = !id.startsWith("client-");
+    const shouldFetchedTheOrder = !id.startsWith("client-");
 
     return (
         <MaxWidthWrapper className="mt-10">
-            {shouldRenderServerData ? (
-                <ServerOrderRenderer id={id} />
+            {shouldFetchedTheOrder  ? (
+                <FetchedOrderRenderer id={id} />
             ) : (
                 <ClientOrderRenderer id={id} />
             )}

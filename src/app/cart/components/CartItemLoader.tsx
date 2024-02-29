@@ -4,7 +4,7 @@ type Props = {};
 
 function CartItemLoader({}: Props) {
     return (
-        <div className="flex bg-white rounded-md border items-start justify-between flex-wrap gap-2  my-2">
+        <div className="flex bg-white rounded-md border items-start justify-between flex-wrap gap-2  my-2  p-2">
             {/* LEFT SIDE */}
             <div className="flex items-start gap-2">
                 <div className="rounded-sm w-[120px] h-[90px] shimmer" />

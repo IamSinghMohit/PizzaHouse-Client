@@ -6,14 +6,16 @@ import { setProductOrderSections } from "@/store/slices/product";
 import { TProductSections } from "@/store/slices/product/type";
 import { ChevronsDown } from "lucide-react";
 import { useEffect, useMemo } from "react";
-import { TProdutSectionsSchema } from "@/schema/product";
+import { useProductAttributes } from "../../hooks";
 
 interface Props {
-    data: TProdutSectionsSchema;
+    id: string;
 }
 
-export default function ProductSectionsRenderer({ data }: Props) {
+export default function ProductSectionsRenderer({ id }: Props) {
     const dispatch = useAppDispatch();
+    const { data = { sections: [], default_attributes: [] } } =
+        useProductAttributes(id);
 
     const defaultAttributes = useMemo(() => {
         const obj: Record<string, string> = {};

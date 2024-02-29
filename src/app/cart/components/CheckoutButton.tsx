@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/hooks";
-import { SpinnerIcon } from "@/icons";
 import { Stripe, loadStripe } from "@stripe/stripe-js";
 import { Codepen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useCheckout } from "../hooks/useCheckout";
+import ButtonWithLoading from "@/app/components/ButtonWithLoading";
 
 type Props = {};
 
@@ -24,8 +23,11 @@ function CheckoutButton({}: Props) {
         init();
     }, [stripePublishKey]);
 
-    async function handleMakePayment() {
-        if (stripePromise && user) {
+    function handleMakePayment() {
+        if(!user){
+            return toast.error("Login plase")
+        }
+        if (stripePromise) {
             const body = {
                 products: ids.map((id) => ({
                     name: entities[id]?.product_name,
@@ -67,16 +69,13 @@ function CheckoutButton({}: Props) {
     }, [data]);
 
     return (
-        <Button
-            className="text-lg rounded-lg w-full sm:w-auto"
+        <ButtonWithLoading
+            isLoading={isPending}
             onClick={handleMakePayment}
-            disabled={isPending}
+            icon={<Codepen />}
         >
-            <span className="mr-1">
-                {isPending ? <SpinnerIcon /> : <Codepen />}
-            </span>
             Checkout
-        </Button>
+        </ButtonWithLoading>
     );
 }
 

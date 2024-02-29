@@ -29,7 +29,7 @@ function CartItem({ id }: { id: EntityId }) {
     }
 
     return (
-        <div className="flex items-start justify-between flex-wrap gap-2">
+        <div className="flex items-start justify-between flex-wrap gap-2 p-2">
             {/* LEFT SIDE */}
             <div className="flex items-start gap-2">
                 <CImage

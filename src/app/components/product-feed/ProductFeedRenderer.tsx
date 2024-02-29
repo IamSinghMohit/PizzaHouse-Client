@@ -5,16 +5,15 @@ import ProductCarousel from "../ProductCarousel";
 import { ArrowRightFromLine } from "lucide-react";
 import ProductCard from "../product-card/ProductCard";
 import { useMediaQuery } from "react-responsive";
-import { TGetFormatedProductsSchema } from "@/schema/product";
+import { useFormatedProducts } from "@/hooks";
 
-interface Props {
-    products: TGetFormatedProductsSchema;
-}
+interface Props {}
 
-export default function ProductFeedRenderer({ products }: Props) {
+export default function ProductFeedRenderer({}: Props) {
     const showCarousel = useMediaQuery({ query: "(max-width:600px)" });
+    const { data = [] } = useFormatedProducts();
 
-    return products.map((sec) => (
+    return data.map((sec) => (
         <div key={sec.id}>
             <div className="my-2 ml-4">
                 <Link

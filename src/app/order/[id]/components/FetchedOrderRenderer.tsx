@@ -13,7 +13,7 @@ import { useSocket } from "@/app/socket-context";
 
 type Props = { id: string };
 
-function ServerOrderRenderer({ id }: Props) {
+function FetchedOrderRenderer({ id }: Props) {
     const { data, isLoading } = useGetOrder(id);
     const [step, setStep] = useState(OrderStatusEnum.PLACED);
     const socket = useSocket()
@@ -64,4 +64,4 @@ function ServerOrderRenderer({ id }: Props) {
     );
 }
 
-export default ServerOrderRenderer;
+export default  FetchedOrderRenderer;

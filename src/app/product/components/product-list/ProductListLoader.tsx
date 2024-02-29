@@ -1,9 +1,14 @@
 import ProductCardLoader from "@/app/components/product-card/ProductCardLoader";
 import { Card } from "@/components/ui/card";
 
-function ProductListLoader() {
+interface Props {
+}
+
+function ProductListLoader({}: Props) {
     return (
-        <Card className="p-2 bg-gray-50 overflow-y-scroll w-full min-h-[500px] grid grid-cols-1 justify-items-center sm:grid-cols-2 lg:grid-cols-3 gap-2">
+        <Card
+            className="p-2 bg-gray-50 overflow-y-scroll w-full h-[500px] min-h-[500px] md:h-auto product-list-grid"
+        >
             {[
                 "41ebf1d1-6815-472a-860c-a329be131140",
                 "26451fe5-b976-48fb-bb38-17d6db9753ff",

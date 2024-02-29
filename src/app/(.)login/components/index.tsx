@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -13,22 +13,42 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { GoogleIcon } from "@/icons";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { LoginSchema, SigninnSchema, TSigninSchema } from "@/schema/auth";
+import {
+    LoginSchema,
+    SigninnSchema,
+    TLoginSchema,
+    TSigninSchema,
+} from "@/schema/auth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import React from "react";
-import { Facebook} from "lucide-react";
+import { Facebook } from "lucide-react";
+import { useUserLogin } from "../hooks/useUserLogin";
+import { useUserSignin } from "../hooks/useUserSignin";
+import ButtonWithLoading from "@/app/components/ButtonWithLoading";
+import { useAppDispatch } from "@/hooks";
+import { setUser } from "@/store/slices/user";
 
 type Props = {};
 
 export function LoginForm({}: Props) {
-    const [register, setRegister] = useState(false);
-    const form = useForm<TSigninSchema>({
-        resolver: zodResolver(
-            (() => (register ? SigninnSchema : LoginSchema))(),
-        ),
+    const dispatch = useAppDispatch();
+    const [login, setLogin] = useState(true);
+    const {
+        data: loginData,
+        isPending: loginLoading,
+        mutate: loginMutate,
+    } = useUserLogin();
+    const {
+        data: singinData,
+        isPending: signinLoading,
+        mutate: singinMutate,
+    } = useUserSignin();
+
+    const form = useForm<TSigninSchema | TLoginSchema>({
+        resolver: zodResolver((() => (login ? LoginSchema : SigninnSchema))()),
         defaultValues: {
             first_name: "",
             last_name: "",
@@ -38,16 +58,32 @@ export function LoginForm({}: Props) {
     });
 
     function onSubmit(data: any) {
-        console.log(data);
+        if (login) {
+            loginMutate(data);
+        } else {
+            singinMutate(data);
+        }
     }
 
     function handleGoogleClick() {
-        window.open(`${process.env.NEXT_PUBLIC_BACKEND_URL}auth/login/google`, "_self");
+        window.open(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}auth/login/google`,
+            "_self",
+        );
     }
+
+    useEffect(() => {
+        if (singinData) {
+            dispatch(setUser(singinData));
+        }
+        if (loginData) {
+            dispatch(setUser(loginData));
+        }
+    }, [singinData, loginData]);
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                {register && (
+                {!login && (
                     <div className="flex items-center gap-2">
                         <FormField
                             control={form.control}
@@ -108,9 +144,9 @@ export function LoginForm({}: Props) {
                 <div>
                     <span
                         className="ml-auto mt-3 underline text-black hover:text-primary_orange cursor-pointer"
-                        onClick={() => setRegister((prev) => !prev)}
+                        onClick={() => setLogin((prev) => !prev)}
                     >
-                        {register ? "login" : "Sign in"}
+                        {!login ? "login" : "Sign in"}
                     </span>
                     <div className="flex items-center gap-1 justify-center">
                         <Separator className="w-1/2" />
@@ -136,23 +172,30 @@ export function LoginForm({}: Props) {
                             className="text-white text-[25px]"
                             type="button"
                         >
-                            <Facebook/>
+                            <Facebook />
                             <span className="text-[16px] font-light">
                                 Facebook
                             </span>
                         </Button>
                     </div>
                 </div>
-                <Button type="submit">Login</Button>
+
+                <ButtonWithLoading
+                    type="submit"
+                    isLoading={loginLoading || signinLoading}
+                >
+                    {login ? "Login" : "Signin"}
+                </ButtonWithLoading>
             </form>
         </Form>
     );
 }
 
 export function LoginWrapper({ children }: { children: ReactNode }) {
-
     return (
-        <Card className={`flex flex-col max-w-[310px] p-4 mx-auto mt-2 rounded-sm`}>
+        <Card
+            className={`flex flex-col max-w-[310px] p-4 mx-auto mt-2 rounded-sm`}
+        >
             {children}
         </Card>
     );

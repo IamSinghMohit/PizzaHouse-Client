@@ -8,5 +8,16 @@ export function ValidateBackendResponse<T>(
         success: z.boolean(),
         data: schema,
     });
-    return baseResponse.parse(response).data;
+    return baseResponse.parse(response).data!;
+}
+
+export function ValidateBackendErrorResponse(res: any) {
+    const schema = z.object({
+        success: z.literal(false),
+        error: z.object({
+            code: z.number(),
+            message: z.string(),
+        }),
+    });
+    return schema.parse(res).error;
 }

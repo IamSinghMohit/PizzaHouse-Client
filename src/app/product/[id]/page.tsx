@@ -117,7 +117,7 @@ export default async function Page(props: Props) {
                         <CImage
                             src={product.image}
                             width={360}
-                            height={320}
+                            height={270}
                             alt="product image"
                             sizes="(max-width: 768px)100vw, (max-width: 1200px)50vw, 30vw"
                             className="rounded-md overflow-hidden mx-auto"

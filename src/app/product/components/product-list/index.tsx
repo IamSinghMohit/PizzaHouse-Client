@@ -26,21 +26,19 @@ function ProductList({}: Props) {
     return isLoading ? (
         <ProductListLoader />
     ) : (
-        <Card className="p-2 bg-gray-50 overflow-y-scroll w-full min-h-[500px]">
-            <div className="product-search-renderer">
-                {arr.map((pro, index) => (
-                    <div
-                        ref={(el) => {
-                            if (index === arr?.length - 2 && el) {
-                                observer(el);
-                            }
-                        }}
-                        key={pro.id}
-                    >
-                        <ProductCard product={pro} key={pro.id} />
-                    </div>
-                ))}
-            </div>
+        <Card className="p-2 bg-gray-50 overflow-y-scroll w-full h-[500px] min-h-[500px] md:h-auto product-list-grid">
+            {arr.map((pro, index) => (
+                <div
+                    ref={(el) => {
+                        if (index === arr?.length - 2 && el) {
+                            observer(el);
+                        }
+                    }}
+                    key={pro.id}
+                >
+                    <ProductCard product={pro} key={pro.id} />
+                </div>
+            ))}
         </Card>
     );
 }

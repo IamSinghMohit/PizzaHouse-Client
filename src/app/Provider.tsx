@@ -2,7 +2,11 @@
 
 import Navbar from "@/components/Navbar";
 import store from "@/store/store";
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import {
+    QueryClient,
+    QueryClientProvider,
+    useQuery,
+} from "@tanstack/react-query";
 import { Provider as ReduxProvider } from "react-redux";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "@/components/ui/sonner";
@@ -14,7 +18,18 @@ interface Props {
     children: React.ReactNode;
 }
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: 2,
+            staleTime: 30000000,
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: "always",
+            refetchIntervalInBackground: false,
+        },
+    },
+});
 
 export default function Provider({ children }: Props) {
     return (
@@ -33,7 +48,7 @@ export default function Provider({ children }: Props) {
                     <ProgressBar
                         height="2px"
                         color="#FE8D0D"
-                        options={{ showSpinner: true }}
+                        options={{ showSpinner: false }}
                         shallowRouting
                     />
                     <Footer />
