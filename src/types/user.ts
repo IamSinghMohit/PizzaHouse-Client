@@ -7,6 +7,5 @@ export type TUserStateUser = {
 };
 export interface IUserSliceState {
     user: TUserStateUser | null;
-    cartItems:number;
     stripePublishKey : string | null;
 }

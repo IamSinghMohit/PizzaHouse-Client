@@ -1,10 +1,9 @@
-import { TuserSchema } from "@/schema/base/auth";
-
+import { TUserSchema } from "@/schema/auth";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface Props {
-    user: TuserSchema;
+    user: TUserSchema ;
 }
 
 function ProfileButton({ user }: Props) {

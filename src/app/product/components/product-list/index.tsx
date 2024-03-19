@@ -26,7 +26,10 @@ function ProductList({}: Props) {
     return isLoading ? (
         <ProductListLoader />
     ) : (
-        <Card className="p-2 bg-gray-50 overflow-y-scroll w-full h-[500px] min-h-[500px] md:h-auto product-list-grid">
+        <Card className="p-2 bg-gray-50 overflow-y-scroll w-full h-[500px] min-h-[500px] md:h-auto product-list-grid thin-scroll-thumb">
+            {arr.length == 0 && (
+                <p>😔 Nothing found</p>
+            )}
             {arr.map((pro, index) => (
                 <div
                     ref={(el) => {

@@ -88,50 +88,6 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-/* ************************************ Scrollbar******/
-/* Firefox */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: #febd14 #dfe9eb;
-}
-
-/* Chrome, Edge and Safari */
-*::-webkit-scrollbar {
-    height: 6px;
-    width: 6px;
-}
-*::-webkit-scrollbar-track {
-    background-color: #dfe9eb;
-}
-
-*::-webkit-scrollbar-track:hover {
-    background-color: #b8c0c2;
-}
-
-*::-webkit-scrollbar-track:active {
-    background-color: #b8c0c2;
-}
-
-*::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: #fe9c08;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-    background-color: #e27c09;
-}
-
-*::-webkit-scrollbar-thumb:active {
-    background-color: #ff8c0a;
-}
-
-@media (max-width: 800px) {
-    *::-webkit-scrollbar {
-        width: 4px;
-        height: 4px;
-    }
-}
-/* ************************************ Scrollbar******/
 /*************Home clip*******/
 .home-clip {
     clip-path: polygon(30% 100%, 71% 100%, 100% 37%, 100% 100%, 0 100%, 0 40%);
@@ -268,3 +224,42 @@
     }
 }
 /* product search page */
+
+/* ---------- for scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: #fe9c08;
+    border-radius: 2px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #e27c09;
+}
+/* Handle on active */
+::-webkit-scrollbar-thumb:active {
+    background-color: #ff8c0a;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: #dfe9eb;
+}
+
+::-webkit-scrollbar-track:hover {
+    background-color: #b8c0c2;
+}
+
+::-webkit-scrollbar-track:active {
+    background-color: #b8c0c2;
+}
+/* Resizer */
+::-webkit-resizer {
+    background: #111; 
+}
+
+.thin-scroll-thumb::-webkit-scrollbar {
+   width: 4px; 
+}

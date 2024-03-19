@@ -23,7 +23,6 @@ export function ProductSlider({
                 min={0}
                 max={data?.max_price || 500}
                 step={1}
-                onBlur={() => console.log("blur called")}
                 onValueChange={setValue}
                 onValueCommit={onValueCommit}
             />
@@ -83,7 +82,7 @@ export const ProductCategorySelector = ({
                 {isLoading ? (
                     <ProductCategorySelectorLoader />
                 ) : (
-                    <div className="flex rounded-lg border bg-card p-2 text-card-foreground shadow-sm flex-wrap gap-1 max-h-[136px] overflow-y-scroll md:max-h-full">
+                    <div className="flex rounded-lg border bg-card p-2 text-card-foreground shadow-sm flex-wrap gap-1 max-h-[136px] overflow-y-scroll md:max-h-full thin-scroll-thumb">
                         {arr.map((cat, index) => (
                             <div
                                 ref={(ref) => {

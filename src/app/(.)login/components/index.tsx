@@ -30,21 +30,25 @@ import { useUserSignin } from "../hooks/useUserSignin";
 import ButtonWithLoading from "@/app/components/ButtonWithLoading";
 import { useAppDispatch } from "@/hooks";
 import { setUser } from "@/store/slices/user";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 export function LoginForm({}: Props) {
     const dispatch = useAppDispatch();
     const [login, setLogin] = useState(true);
+    const router = useRouter();
     const {
         data: loginData,
         isPending: loginLoading,
         mutate: loginMutate,
+        isSuccess: loginSuccess,
     } = useUserLogin();
     const {
         data: singinData,
         isPending: signinLoading,
         mutate: singinMutate,
+        isSuccess: singinSuccess,
     } = useUserSignin();
 
     const form = useForm<TSigninSchema | TLoginSchema>({
@@ -80,6 +84,13 @@ export function LoginForm({}: Props) {
             dispatch(setUser(loginData));
         }
     }, [singinData, loginData]);
+
+    useEffect(() => {
+        if (singinSuccess || loginSuccess) {
+            router.push("/");
+        }
+    }, [singinSuccess, loginSuccess]);
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

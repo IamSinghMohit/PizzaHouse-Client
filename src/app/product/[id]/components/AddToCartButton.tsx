@@ -3,19 +3,18 @@
 import { Button } from "@/components/ui/button";
 import { BaggageClaim } from "lucide-react";
 import React from "react";
-import { useAppDispatch,useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { addToCart } from "@/store/slices/cart";
 import { v4 as uuidV4 } from "uuid";
 import { usePathname } from "next/navigation";
 import { toast } from "sonner";
+import { setProductTopings } from "@/store/slices/product";
 
 type Props = {
-    className?:string;
+    className?: string;
 };
 
-export default function AddToCartButton({
-    className
-}: Props) {
+export default function AddToCartButton({ className }: Props) {
     const productState = useAppSelector((state) => state.product.product_info);
     const { total_price, topings } = useAppSelector((state) => state.product);
     const urlPath = usePathname().split("/");
@@ -49,12 +48,16 @@ export default function AddToCartButton({
                 product_sections: sections,
             }),
         );
+        dispatch(setProductTopings({ type: "RESET", data: {} }));
 
         toast.success("product  added");
     }
     return (
-        <Button onClick={handleClick} className={`flex items-center gap-1 rounded-xl ${className}`}>
-            <span>Add+</span> <BaggageClaim />
+        <Button
+            onClick={handleClick}
+            className={`flex items-center gap-1 rounded-xl ${className}`}
+        >
+            Add
         </Button>
     );
 }

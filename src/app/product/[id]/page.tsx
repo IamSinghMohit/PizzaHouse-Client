@@ -13,6 +13,7 @@ import TopingList from "./components/toping-list";
 import TopingListLoader from "./components/toping-list/TopingListLoader";
 import ProductSectionsLoader from "./components/product-section/ProductSectionsLoader";
 import ErrorBoundary from "@/lib/error-boundary";
+import { useMinimalProductInfo } from "./hooks/useMinimalProductInfo";
 
 interface Props {
     params: {
@@ -22,6 +23,16 @@ interface Props {
 }
 
 const getProduct = cache(async (id: string) => await useProduct(id));
+
+export const revalidate = 3600;
+export async function generateStaticParams() {
+    const products = await useMinimalProductInfo();
+    return products.map((product) => ({
+        id: encodeURIComponent(
+            `${product.name.trim()}-${product.category}-${product.id}`,
+        ),
+    }));
+}
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
     const arr = props.params.id.split("-");
@@ -130,7 +141,9 @@ export default async function Page(props: Props) {
                                 <p className="text-gray-700 overflow-hidden break-words text-[14px]">
                                     {product.description}
                                 </p>
-                                <ProductPrice product={product} />
+                                <Suspense fallback={<></>}>
+                                    <ProductPrice product={product} />
+                                </Suspense>
                             </div>
                             {product.sections.length > 0 && (
                                 <Suspense fallback={<ProductSectionsLoader />}>
@@ -151,7 +164,9 @@ export default async function Page(props: Props) {
                         </Suspense>
                     </ErrorBoundary>
                 </div>
-                <AddToCartButton className="mt-2 w-[150px] sm:max-w-[190px] mx-auto lg:mr-auto lg:ml-0 text-xl" />
+                <Suspense fallback={<></>}>
+                    <AddToCartButton className="mt-2 w-[150px] sm:max-w-[190px] mx-auto lg:mr-auto lg:ml-0 text-xl" />
+                </Suspense>
             </MaxWidthWrapper>
         </article>
     );

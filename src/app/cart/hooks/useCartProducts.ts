@@ -10,9 +10,12 @@ export async function getCartProducts(): Promise<
         ValidateBackendResponse(res.data, GetCartProductsSchema)
     );
 }
-export function useCartProducts() {
+export function useCartProducts(enabled:boolean) {
     return useQuery({
         queryKey: ["cart"],
         queryFn: getCartProducts,
+        retry:false,
+        enabled:enabled,
+        staleTime:30000000000,
     });
 }

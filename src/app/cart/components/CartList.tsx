@@ -14,23 +14,21 @@ import { useDeleteCartItem } from "../hooks/useDeleteCartItem";
 import CartLoader from "./CartLoader";
 import { Server, Client, HydrationProvider } from "react-hydration-provider";
 import CartSummary from "./CartSummary";
-import { useQueryClient } from "@tanstack/react-query";
 import { TGetCartProductsSchema } from "../schema";
+import { useCartProducts } from "../hooks";
 
 type Props = {};
 
 function CartList({}: Props) {
     const ids = useAppSelector((state) => state.cart.ids, shallowEqual);
-    const queryClient = useQueryClient();
-    const cartItems = useAppSelector((state) => state.user.cartItems);
-    const userCart = queryClient.getQueryData<TGetCartProductsSchema>(["cart"]);
-    const showImage = ids.length < 1 && cartItems < 1;
+    const { data: userCart = [] ,isLoading} = useCartProducts(true);
+    const showImage = ids.length + (userCart.length || 0) < 1;
 
     return (
         <HydrationProvider>
             <div>
                 <Client>
-                    {showImage ? (
+                    {(!isLoading && showImage) ? (
                         <Image
                             src="/empty-cart.png"
                             className="mx-auto mt-10"
@@ -48,8 +46,8 @@ function CartList({}: Props) {
                                         <Separator orientation="horizontal" />
                                     </li>
                                 ))}
-                                {userCart?.map((pro) => (
-                                     <FetchedCartItemRenderer
+                                {userCart.map((pro) => (
+                                    <FetchedCartItemRenderer
                                         product={pro}
                                         key={pro.id}
                                     />
@@ -81,7 +79,7 @@ function FetchedCartItemRenderer({
     const { mutate } = useDeleteCartItem();
     return (
         <li>
-            <div className="flex items-start justify-between flex-wrap gap-2">
+            <div className="flex items-start justify-between flex-wrap gap-2 p-2">
                 {/* LEFT SIDE */}
                 <div className="flex items-start gap-2">
                     <CImage
@@ -98,7 +96,13 @@ function FetchedCartItemRenderer({
                         <span className="text-gray-600">
                             Price: {product.price}
                         </span>
-                        <h5 className="flex items-center text-primary_red">
+                        <h5
+                            className={`flex items-center ${
+                                product.status === OrderStatusEnum.COMPLETED
+                                    ? "text-green-500"
+                                    : "text-primary_red"
+                            }`}
+                        >
                             <Dot />
                             {product.status}
                         </h5>

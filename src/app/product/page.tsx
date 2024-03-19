@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { getProducts } from "./hooks/useInfiniteSearchProduct";
 import {
     HydrationBoundary,
@@ -46,7 +46,9 @@ export default async function page({
             <HydrationBoundary state={dehydrate(queryClient)}>
                 <MaxWidthWrapper className="md:px-1 flex justify-center flex-col gap-1 md:flex-row mt-1 md:h-[calc(100vh-74px)]">
                     <ProductSideBar />
-                    <ProductList />
+                    <Suspense>
+                        <ProductList />
+                    </Suspense>
                 </MaxWidthWrapper>
             </HydrationBoundary>
         </main>

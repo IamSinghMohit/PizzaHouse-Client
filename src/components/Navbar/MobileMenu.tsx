@@ -13,6 +13,7 @@ function MBNavLink({
     text,
     icon,
     href,
+    ...other
 }: {
     text: string;
     icon: React.ReactNode;
@@ -22,6 +23,7 @@ function MBNavLink({
         <Link
             className="active:text-primary_orange flex items-center gap-1 hover:underline text-lg"
             href={href}
+            {...other}
         >
             {text}
             <span className="active:text-white">{icon}</span>

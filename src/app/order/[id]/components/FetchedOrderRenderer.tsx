@@ -10,23 +10,43 @@ import OrderStepper from "./OrderStepper";
 import OrderLoader from "./OrderLoader";
 import { OrderStatusEnum } from "../types";
 import { useSocket } from "@/app/socket-context";
+import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
+import { TGetCartProductsSchema } from "@/app/cart/schema";
 
 type Props = { id: string };
-
+type TSocketPayload = {
+    status:
+        | OrderStatusEnum.PLACED
+        | OrderStatusEnum.COMPLETED
+        | OrderStatusEnum.PREPARING
+        | OrderStatusEnum.OUTFORDELIVERY;
+};
 function FetchedOrderRenderer({ id }: Props) {
-    const { data, isLoading } = useGetOrder(id);
+    const { data, isLoading, isError } = useGetOrder(id);
     const [step, setStep] = useState(OrderStatusEnum.PLACED);
-    const socket = useSocket()
+    const queryClient = useQueryClient();
+    const socket = useSocket();
+    const router = useRouter();
 
     useEffect(() => {
-        console.log(socket)
-        socket.current?.emit('join_room',id)
-        socket.current?.on("status_updated",(data) => setStep(data.status))
+        socket.current?.emit("join_room", id);
+        socket.current?.on("status_updated", (data: TSocketPayload) => {
+            queryClient.setQueryData(["cart"], (old: TGetCartProductsSchema) =>
+                old.filter((item) => {
+                    if (item.id === id) {
+                        item.status = data.status;
+                    }
+                    return item;
+                }),
+            );
+            setStep(data.status);
+        });
         return () => {
-            socket.current?.emit("leave_room",id)
-            socket.current?.off("status_updated")
-        }
-    },[socket.current])
+            socket.current?.emit("leave_room", id);
+            socket.current?.off("status_updated");
+        };
+    }, [socket.current]);
 
     useEffect(() => {
         if (data) {
@@ -34,7 +54,13 @@ function FetchedOrderRenderer({ id }: Props) {
         }
     }, [data]);
 
-    return !isLoading ? (
+    useEffect(() => {
+        if (isError) {
+            router.push("/cart");
+        }
+    });
+
+    return !(isLoading || isError) ? (
         <>
             <div className="flex flex-wrap gap-2 bg-gray-50 p-2 rounded-md border mb-2">
                 <CImage
@@ -64,4 +90,4 @@ function FetchedOrderRenderer({ id }: Props) {
     );
 }
 
-export default  FetchedOrderRenderer;
+export default FetchedOrderRenderer;

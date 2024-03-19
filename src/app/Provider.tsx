@@ -2,27 +2,23 @@
 
 import Navbar from "@/components/Navbar";
 import store from "@/store/store";
-import {
-    QueryClient,
-    QueryClientProvider,
-    useQuery,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as ReduxProvider } from "react-redux";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "../components/Footer";
 import { SocketContextProvider } from "./socket-context";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+import { Suspense } from "react";
 
 interface Props {
     children: React.ReactNode;
 }
 
-const queryClient = new QueryClient({
+export const CachedQueryClient = new QueryClient({
     defaultOptions: {
         queries: {
             retry: 2,
-            staleTime: 30000000,
             refetchOnMount: false,
             refetchOnWindowFocus: false,
             refetchOnReconnect: "always",
@@ -33,7 +29,7 @@ const queryClient = new QueryClient({
 
 export default function Provider({ children }: Props) {
     return (
-        <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={CachedQueryClient}>
             <Toaster
                 position="top-center"
                 richColors={true}
@@ -45,12 +41,14 @@ export default function Provider({ children }: Props) {
                     <Navbar />
                     <div className="eclipse"></div>
                     {children}
-                    <ProgressBar
-                        height="2px"
-                        color="#FE8D0D"
-                        options={{ showSpinner: false }}
-                        shallowRouting
-                    />
+                    <Suspense>
+                        <ProgressBar
+                            height="2px"
+                            color="#FE8D0D"
+                            options={{ showSpinner: false }}
+                            shallowRouting
+                        />
+                    </Suspense>
                     <Footer />
                 </SocketContextProvider>
             </ReduxProvider>

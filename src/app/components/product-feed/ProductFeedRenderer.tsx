@@ -5,22 +5,25 @@ import ProductCarousel from "../ProductCarousel";
 import { ArrowRightFromLine } from "lucide-react";
 import ProductCard from "../product-card/ProductCard";
 import { useMediaQuery } from "react-responsive";
-import { useFormatedProducts } from "@/hooks";
+import { TGetFormatedProductsSchema } from "@/schema/product";
+import { Client } from "react-hydration-provider";
 
-interface Props {}
+interface Props {
+    products: TGetFormatedProductsSchema;
+}
 
-export default function ProductFeedRenderer({}: Props) {
+export default function ProductFeedRenderer({ products }: Props) {
     const showCarousel = useMediaQuery({ query: "(max-width:600px)" });
-    const { data = [] } = useFormatedProducts();
-
-    return data.map((sec) => (
+    console.log(showCarousel )
+    return products.map((sec) => (
         <div key={sec.id}>
             <div className="my-2 ml-4">
+                <div className="flex items-center gap-2">
+                <h4 className="font-bold">{sec.category}</h4>
                 <Link
                     href={`/product?name=&category=${sec.category}&min=0&max=0`}
                     className="flex items-center gap-3"
                 >
-                    <h4 className="font-bold">{sec.category}</h4>
                     <button className="p-2  border-2 border-primary_orange text-primary_orange rounded-full flex items-center gap-1 hover:bg-primary_orange hover:text-white px-3 transition-all duration-200">
                         <span className="font-bold">more</span>
                         <span>
@@ -28,6 +31,7 @@ export default function ProductFeedRenderer({}: Props) {
                         </span>
                     </button>
                 </Link>
+                </div>
             </div>
             {showCarousel ? (
                 <ProductCarousel

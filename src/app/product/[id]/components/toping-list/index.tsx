@@ -12,7 +12,7 @@ async function TopingList({ category, className }: Props) {
     const data = await getTopings(category);
     return (
         <Card
-            className={`bg-gray-50 p-2 flex flex-wrap gap-2 content-start overflow-y-scroll ${className}`}
+            className={`bg-gray-50 p-2 flex flex-wrap gap-2 content-start overflow-y-scroll ${className} thin-scroll-thumb`}
         >
             {data.map((toping) => (
                 <Toping toping={toping} key={toping.id} />

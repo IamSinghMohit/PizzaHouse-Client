@@ -24,7 +24,7 @@ function ClientOrderRenderer({ id }: Props) {
                 />
                 <div>
                     <h6>{entity?.product_name}</h6>
-                    <p className="text-gray-600 max-w-[340px] text-[12px] lg:text-[14px]">
+                    <p className="text-gray-600  max-w-[550px] text-[12px] lg:text-[14px]">
                         {entity?.product_description}
                     </p>
                     <h5 className="text-gray-800">

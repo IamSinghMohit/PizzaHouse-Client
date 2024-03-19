@@ -1,5 +1,5 @@
-import { BaggageClaim } from "lucide-react";
 import CartList from "./components/CartList";
+import Image from "next/image";
 
 export default function page() {
     return (
@@ -9,10 +9,11 @@ export default function page() {
                     <header className="text-center">
                         <h1 className="text-xl font-bold text-gray-900 sm:text-3xl flex items-center justify-center gap-2">
                             Cart{" "}
-                            <BaggageClaim
+                            <Image
+                                src={"/shopping-cart.png"}
+                                alt="cart image"
                                 width={40}
                                 height={40}
-                                className="text-primary_orange"
                             />
                         </h1>
                     </header>

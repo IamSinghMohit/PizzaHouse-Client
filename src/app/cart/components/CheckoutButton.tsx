@@ -24,8 +24,9 @@ function CheckoutButton({}: Props) {
     }, [stripePublishKey]);
 
     function handleMakePayment() {
-        if(!user){
-            return toast.error("Login plase")
+        if (!user) {
+            toast.error("Login plase");
+            return;
         }
         if (stripePromise) {
             const body = {
@@ -44,7 +45,6 @@ function CheckoutButton({}: Props) {
                     ),
                 })),
             };
-
             mutate(body);
         }
     }
@@ -55,7 +55,7 @@ function CheckoutButton({}: Props) {
                 try {
                     const paymentResult =
                         await stripePromise?.redirectToCheckout({
-                            sessionId: data || "",
+                            sessionId: data,
                         });
                     if (paymentResult?.error) {
                         toast.error(paymentResult?.error.message);

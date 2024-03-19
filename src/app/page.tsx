@@ -11,7 +11,7 @@ import ErrorBoundary from "@/lib/error-boundary";
 
 export default function Home() {
     return (
-        <main>
+        <main >
             <HydrationProvider>
                 <MaxWidthWrapper className="md:px-2 lg:px-20">
                     <div className="flex flex-col gap-1 sm:flex-row pt-5 ">

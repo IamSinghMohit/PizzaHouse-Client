@@ -33,7 +33,8 @@ export const cartSlice = createSlice({
         addToCart: CartItemAdapter.addOne,
         updateOneIntoCart: CartItemAdapter.updateOne,
         removeOneFromCart: CartItemAdapter.removeOne,
+        emptyCart: CartItemAdapter.removeAll,
     },
 });
-export const { addToCart, updateOneIntoCart, removeOneFromCart} =
+export const { addToCart, updateOneIntoCart, removeOneFromCart, emptyCart } =
     cartSlice.actions;

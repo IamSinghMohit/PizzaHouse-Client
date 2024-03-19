@@ -5,44 +5,43 @@ import { useEffect, useRef, useState } from "react";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
-import { useAppDispatch } from "@/hooks";
-import {
-    seetUserCartItems,
-    setUser,
-    setUserStripeSecret,
-} from "@/store/slices/user";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { setUser, setUserStripeSecret } from "@/store/slices/user";
 import { useGetUser } from "@/hooks/useGetUser";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { useStripeKey } from "@/hooks/useStripeKey";
 import { Client, HydrationProvider } from "react-hydration-provider";
 import { useCartProducts } from "@/app/cart/hooks";
+import { useQueryState } from "next-usequerystate";
+import { emptyCart } from "@/store/slices/cart";
 
 interface Props {}
 
 export default function Navbar({}: Props) {
-    const dispatch = useAppDispatch();
     const { data } = useGetUser();
-    const { data: stripeData } = useStripeKey(!!data);
+    const user = useAppSelector((state) => state.user.user?.id);
+    useCartProducts(!!user);
+    const { data: stripeData } = useStripeKey(!!user);
+
+    const dispatch = useAppDispatch();
+    const [paymentStatus] = useQueryState("payment");
     const isMobile = useMediaQuery({ query: "(max-width:600px)" });
     const scrollRef = useRef(0);
     const [show, setShow] = useState("translate-y-0");
-    const { data: cartData = [] } = useCartProducts();
 
     useEffect(() => {
+        if (paymentStatus === "success") {
+            dispatch(emptyCart());
+        }
+
         if (data) {
             dispatch(setUser(data));
         }
-        if (cartData.length > 0) {
-            dispatch(seetUserCartItems(cartData.length));
-        }
-    }, [data, cartData]);
-
-    useEffect(() => {
         if (stripeData) {
             dispatch(setUserStripeSecret(stripeData));
         }
-    }, [stripeData]);
+    }, [data, stripeData]);
 
     const controlNavbar = () => {
         if (window.scrollY > 200) {
@@ -63,11 +62,6 @@ export default function Navbar({}: Props) {
 
     useEffect(() => {
         window.addEventListener("scroll", controlNavbar);
-        /* async function init() {
-            const locomotive = (await import("locomotive-scroll")).default;
-            new locomotive();
-        }
-        init(); */
 
         return () => {
             window.removeEventListener("scroll", controlNavbar);

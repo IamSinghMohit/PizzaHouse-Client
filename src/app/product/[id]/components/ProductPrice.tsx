@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppDispatch,useAppSelector } from "@/hooks";
-import { TGetProductSchema } from "@/schema/get";
+import { TProductSchema } from "@/schema/product";
 import {
     setStateDefault,
     setTotalPrice,
@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
 
 type Props = {
-    product: TGetProductSchema["data"];
+    product: TProductSchema;
 };
 
 export default function ProductPrice({ product }: Props) {

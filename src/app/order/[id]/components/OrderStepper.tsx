@@ -1,5 +1,4 @@
 import { OrderStatusEnum } from "@/app/order/[id]/types";
-import { useSocket } from "@/app/socket-context";
 import { Bike, ClipboardList, UtensilsCrossed, CookingPot } from "lucide-react";
 import React, { useMemo } from "react";
 

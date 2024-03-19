@@ -74,7 +74,7 @@ const productSlice = createSlice({
         setProductTopings(
             state,
             action: PayloadAction<{
-                type: "ADD" | "DELETE";
+                type: "ADD" | "DELETE" | "RESET";
                 data: Record<string, TProductTopings>;
             }>,
         ) {
@@ -99,6 +99,9 @@ const productSlice = createSlice({
                     }
                     state.total_price = state.total_price - price;
                     break;
+                }
+                case "RESET": {
+                    state.topings = {};
                 }
                 default: {
                     state.topings = {};

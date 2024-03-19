@@ -1,22 +1,16 @@
-import api from "@/lib/axios";
 import {
     GetFormatedProductsSchema,
     TGetFormatedProductsSchema,
 } from "@/schema/product";
-import { ValidateBackendResponse } from "@/utils";
-import { useQuery } from "@tanstack/react-query";
+import { ValidateBackendResponse, NextFetch } from "@/utils";
 
-export const useFormedProductsQueryKeys = ["products", "formated"];
-
-export async function GetFormatedProducts(): Promise<TGetFormatedProductsSchema> {
-    const result = await api.get("/product/formated?productLimit=6");
-    return ValidateBackendResponse(result.data, GetFormatedProductsSchema);
-}
-
-export default function useFormatedProducts() {
-    return useQuery({
-        queryKey: useFormedProductsQueryKeys,
-        staleTime:60 * 1000,
-        queryFn: GetFormatedProducts,
+export default async function useFormatedProducts(): Promise<TGetFormatedProductsSchema> {
+    const response = await NextFetch("product/formated?productLimit=6", {
+        cache: "no-store",
     });
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    const responseData = await response.json();
+    return ValidateBackendResponse(responseData, GetFormatedProductsSchema);
 }

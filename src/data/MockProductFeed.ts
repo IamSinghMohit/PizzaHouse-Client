@@ -49,4 +49,4 @@ const MockProductFeed = [
         ],
     },
 ];
-export default MockProductFeed
+export default MockProductFeed;

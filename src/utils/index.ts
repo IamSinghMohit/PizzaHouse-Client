@@ -1,4 +1,5 @@
 import { z, ZodSchema } from "zod";
+export { default as NextFetch } from "./nextFetch";
 
 export function ValidateBackendResponse<T>(
     response: any,
