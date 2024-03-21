@@ -6,6 +6,8 @@ import { X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useAppSelector } from "@/hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useQueryClient } from "@tanstack/react-query";
+import { TGetCartProductsSchema } from "@/app/cart/schema";
 
 interface Props {}
 
@@ -35,6 +37,10 @@ export default function MobileMenu({}: Props) {
     const [open, setOpen] = useState(false);
     const { user } = useAppSelector((state) => state.user);
     const { ids } = useAppSelector((state) => state.cart);
+    const queryClient = useQueryClient();
+    const cartItems = queryClient.getQueryData<TGetCartProductsSchema>([
+        "cart",
+    ]);
     return (
         <Dialog.Root open={open} onOpenChange={(e) => setOpen(e)}>
             <Dialog.Trigger asChild>
@@ -76,7 +82,8 @@ export default function MobileMenu({}: Props) {
                                     <div className="relative">
                                         <ShoppingCart width={28} height={28} />
                                         <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 text-white text-[12px] font-light flex items-center justify-center">
-                                            {ids.length}
+                                            {ids.length +
+                                                (cartItems?.length || 0)}
                                         </span>
                                     </div>
                                 ))()}
