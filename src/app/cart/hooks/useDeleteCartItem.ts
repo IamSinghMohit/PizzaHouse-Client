@@ -16,7 +16,7 @@ export function useDeleteCartItem() {
             id: string,
         ): Promise<TDeleteCartItemSchema | undefined> => {
             return await api
-                .delete(`auth/cart/${id}`)
+                .patch(`auth/cart/${id}`)
                 .then((res) =>
                     ValidateBackendResponse(res.data, DeleteCartItemSchema),
                 );
