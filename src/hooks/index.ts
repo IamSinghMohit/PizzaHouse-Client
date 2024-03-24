@@ -7,6 +7,6 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export { default as useDebounce } from "./useDebounce";
-export { GetFormatedProducts, default as useFormatedProducts} from "./useFormatedProducts";
+export { default as useFormatedProducts} from "./useFormatedProducts";
 export { useGetUser } from "./useGetUser";
 export { default as useIntersectionObserver } from "./useIntersectionObserver";

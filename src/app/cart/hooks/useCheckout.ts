@@ -8,7 +8,7 @@ import { ZodError } from "zod";
 import { AxiosError } from "axios";
 
 export function useCheckout() {
-    return useMutation<TCreateCheckoutSchema, AxiosError<TBackendErrorReponse>>(
+    return useMutation<TCreateCheckoutSchema, AxiosError<TBackendErrorReponse>,any>(
         {
             mutationKey: ["cart", "checkout"],
             mutationFn: async (data: any) => {
