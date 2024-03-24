@@ -38,7 +38,9 @@ export default function Provider({ children }: Props) {
             />
             <ReduxProvider store={store}>
                 <SocketContextProvider>
-                    <Navbar />
+                    <Suspense>
+                        <Navbar />
+                    </Suspense>
                     <div className="eclipse"></div>
                     {children}
                     <Suspense>
