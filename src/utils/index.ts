@@ -1,4 +1,5 @@
 import { z, ZodSchema } from "zod";
+import { toast } from "sonner";
 export { default as NextFetch } from "./nextFetch";
 
 export function ValidateBackendResponse<T>(
@@ -21,4 +22,8 @@ export function ValidateBackendErrorResponse(res: any) {
         }),
     });
     return schema.parse(res).error;
+}
+export function ShowProhibitedInfo() {
+    toast.error("Database operations are prohibited");
+    toast.info("Go to faq page for more info");
 }

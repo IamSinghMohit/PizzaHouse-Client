@@ -33,6 +33,7 @@ import { setUser } from "@/store/slices/user";
 import { useRouter } from "next/navigation";
 
 type Props = {};
+import { ShowProhibitedInfo } from "@/utils";
 
 export function LoginForm({}: Props) {
     const dispatch = useAppDispatch();
@@ -62,6 +63,7 @@ export function LoginForm({}: Props) {
     });
 
     function onSubmit(data: any) {
+        return ShowProhibitedInfo
         if (login) {
             loginMutate(data);
         } else {
@@ -70,6 +72,7 @@ export function LoginForm({}: Props) {
     }
 
     function handleGoogleClick() {
+        return ShowProhibitedInfo()
         window.open(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}auth/login/google`,
             "_self",

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useCheckout } from "../hooks/useCheckout";
 import ButtonWithLoading from "@/app/components/ButtonWithLoading";
+import { ShowProhibitedInfo } from "@/utils";
 
 type Props = {};
 
@@ -24,6 +25,7 @@ function CheckoutButton({}: Props) {
     }, [stripePublishKey]);
 
     function handleMakePayment() {
+        return ShowProhibitedInfo()
         if (!user) {
             toast.error("Login plase");
             return;
