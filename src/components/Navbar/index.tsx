@@ -15,6 +15,7 @@ import { Client, HydrationProvider } from "react-hydration-provider";
 import { useCartProducts } from "@/app/cart/hooks";
 import { useQueryState } from "next-usequerystate";
 import { emptyCart } from "@/store/slices/cart";
+import LocomotiveScroll from "locomotive-scroll";
 
 interface Props {}
 
