@@ -26,10 +26,6 @@ export const SmoothScrollProvider = ({ children, options }: Props) => {
 
                     setScroll(
                         new LocomotiveScroll({
-                            el:
-                                document.querySelector(
-                                    "[data-scroll-container]",
-                                ) ?? undefined,
                             ...options,
                         }),
                     );
