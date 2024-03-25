@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
@@ -13,9 +13,8 @@ import Link from "next/link";
 import { useStripeKey } from "@/hooks/useStripeKey";
 import { Client, HydrationProvider } from "react-hydration-provider";
 import { useCartProducts } from "@/app/cart/hooks";
-import { useQueryState } from "next-usequerystate";
 import { emptyCart } from "@/store/slices/cart";
-import LocomotiveScroll from "locomotive-scroll";
+import { useQueryState } from "next-usequerystate";
 
 interface Props {}
 
@@ -26,16 +25,11 @@ export default function Navbar({}: Props) {
     const { data: stripeData } = useStripeKey(!!user);
 
     const dispatch = useAppDispatch();
-    const [paymentStatus] = useQueryState("payment");
     const isMobile = useMediaQuery({ query: "(max-width:600px)" });
     const scrollRef = useRef(0);
     const [show, setShow] = useState("translate-y-0");
 
     useEffect(() => {
-        if (paymentStatus === "success") {
-            dispatch(emptyCart());
-        }
-
         if (data) {
             dispatch(setUser(data));
         }
@@ -87,11 +81,25 @@ export default function Navbar({}: Props) {
                     />
                 </Link>
                 <HydrationProvider>
-                    <Client>
-                        {isMobile ? <MobileMenu /> : <DesktopMenu />}
-                    </Client>
+                    <Suspense>
+                        <Client>
+                            <ResponsiveNav isMobile={isMobile} />
+                        </Client>
+                    </Suspense>
                 </HydrationProvider>
             </MaxWidthWrapper>
         </header>
     );
+}
+
+function ResponsiveNav({ isMobile }: { isMobile: boolean }) {
+    const dispatch = useAppDispatch();
+    const [paymentStatus] = useQueryState("payment");
+    useEffect(() => {
+        if (paymentStatus === "success") {
+            dispatch(emptyCart());
+        }
+    }, [paymentStatus]);
+
+    return isMobile ? <MobileMenu /> : <DesktopMenu />;
 }
