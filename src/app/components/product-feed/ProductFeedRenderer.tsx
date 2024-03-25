@@ -6,7 +6,6 @@ import { ArrowRightFromLine } from "lucide-react";
 import ProductCard from "../product-card/ProductCard";
 import { useMediaQuery } from "react-responsive";
 import { TGetFormatedProductsSchema } from "@/schema/product";
-import { Client } from "react-hydration-provider";
 
 interface Props {
     products: TGetFormatedProductsSchema;
@@ -14,7 +13,6 @@ interface Props {
 
 export default function ProductFeedRenderer({ products }: Props) {
     const showCarousel = useMediaQuery({ query: "(max-width:600px)" });
-    console.log(showCarousel )
     return products.map((sec) => (
         <div key={sec.id}>
             <div className="my-2 ml-4">
