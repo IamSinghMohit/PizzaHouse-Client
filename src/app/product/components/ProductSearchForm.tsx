@@ -120,7 +120,7 @@ export const ProductCategorySelector = ({
 
 function ProductCategorySelectorLoader() {
     return (
-        <div className="flex rounded-lg border bg-card p-2 text-card-foreground shadow-sm flex-wrap gap-1 max-h-[136px] overflow-y-scroll md:max-h-full">
+        <div className="flex rounded-lg border bg-card p-2 text-card-foreground shadow-sm flex-wrap gap-1 max-h-[136px] overflow-y-scroll md:max-h-full thin-scroll-thumb">
             {[
                 "7605bb73-2c1a-4026-9959-44ce1de05206",
                 "75078d34-7e5c-4bcf-8388-8eea632418e2",
