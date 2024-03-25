@@ -78,12 +78,12 @@ export default function Page({}: Props) {
                         </AccordionItem>
                         <AccordionItem value="item-3">
                             <AccordionTrigger>
-                                Api are not working
+                                Api's are not working or they are too slow
                             </AccordionTrigger>
                             <AccordionContent>
                                 It could be due to that `render.com`,my hosting
                                 provider will shutdown my server after some
-                                inactivity and its rebooting could take more
+                                inactivity and its reboot could take more
                                 than 50 seconds.
                             </AccordionContent>
                         </AccordionItem>
