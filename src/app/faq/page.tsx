@@ -38,7 +38,7 @@ export default function Page({}: Props) {
                 </CardHeader>
                 <CardContent>
                     <div className="max-h-[315px] md:w-[560px] mb-10 mx-auto">
-                        <h5 className="text-black font-bold text-xl">
+                        <h5 className="text-black font-bold text-md sm:text-xl">
                             Prefer watching a video😇
                         </h5>
                         <div className="relative pb-[56.25%] max-w-[560px] w-full h-0 max-h-[315px]">
