@@ -6,26 +6,23 @@ import Provider from "./Provider";
 const inter = Inter({
     weight: ["400", "600", "700"],
     variable: "--font-inter",
-    preload:false
+    preload: false,
 });
 const roboto = Roboto({
     weight: ["300", "400", "700"],
     variable: "--font-roboto",
     display: "swap",
-    preload:false
+    preload: false,
 });
 
 export const metadata: Metadata = {
-    metadataBase:new URL(process.env.NEXT_PUBLIC_BASE_URL),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
     title: {
-        default: "Pizzeria tastiest pizza's in your city",
+        default: "Pizzeria, tastiest pizza's in your city",
         template: "%s - Pizzeria",
     },
     description:
         "We provide our delivery services in many states of india.Just place your order and ready to fill up your stomach",
-    openGraph: {
-        title: "Pizzeria tastiest pizza's in your city",
-    },
 };
 
 export default function RootLayout({
