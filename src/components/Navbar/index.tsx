@@ -15,6 +15,7 @@ import { Client, HydrationProvider } from "react-hydration-provider";
 import { useCartProducts } from "@/app/cart/hooks";
 import { useQueryState } from "next-usequerystate";
 import { emptyCart } from "@/store/slices/cart";
+import LocomotiveScroll from "locomotive-scroll";
 
 interface Props {}
 
@@ -62,7 +63,6 @@ export default function Navbar({}: Props) {
 
     useEffect(() => {
         window.addEventListener("scroll", controlNavbar);
-
         return () => {
             window.removeEventListener("scroll", controlNavbar);
         };
@@ -85,6 +85,9 @@ export default function Navbar({}: Props) {
                         sizes="(max-width: 768px)100vw, (max-width: 1200px)50vw, 30vw"
                         fill
                     />
+                </Link>
+                <Link href="/faq" className="hover:underline">
+                    🔥FAQ
                 </Link>
                 <HydrationProvider>
                     <Client>

@@ -25,11 +25,11 @@ function CheckoutButton({}: Props) {
     }, [stripePublishKey]);
 
     function handleMakePayment() {
-        return ShowProhibitedInfo()
         if (!user) {
             toast.error("Login plase");
             return;
         }
+        return ShowProhibitedInfo()
         if (stripePromise) {
             const body = {
                 products: ids.map((id) => ({

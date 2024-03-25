@@ -16,6 +16,7 @@ import { Server, Client, HydrationProvider } from "react-hydration-provider";
 import CartSummary from "./CartSummary";
 import { TGetCartProductsSchema } from "../schema";
 import { useCartProducts } from "../hooks";
+import { ShowProhibitedInfo } from "@/utils";
 
 type Props = {};
 
@@ -76,7 +77,6 @@ function FetchedCartItemRenderer({
 }: {
     product: TGetCartProductsSchema[0];
 }) {
-    const { mutate } = useDeleteCartItem();
     return (
         <li>
             <div className="flex items-start justify-between flex-wrap gap-2 p-2">
@@ -113,7 +113,7 @@ function FetchedCartItemRenderer({
                         <Button
                             size={"icon"}
                             className="rounded-xl"
-                            onClick={() => mutate(product.id)}
+                            onClick={() => ShowProhibitedInfo()}
                         >
                             <Trash2 />
                         </Button>

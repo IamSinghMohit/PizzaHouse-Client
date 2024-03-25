@@ -55,18 +55,18 @@ export function LoginForm({}: Props) {
     const form = useForm<TSigninSchema | TLoginSchema>({
         resolver: zodResolver((() => (login ? LoginSchema : SigninnSchema))()),
         defaultValues: {
-            first_name: "",
-            last_name: "",
-            email: "",
-            password: "",
+            first_name: "mohit",
+            last_name: "nishad",
+            email: "user123@gmail.com",
+            password: "mohit8460",
         },
     });
 
     function onSubmit(data: any) {
-        return ShowProhibitedInfo
         if (login) {
             loginMutate(data);
         } else {
+            return ShowProhibitedInfo()
             singinMutate(data);
         }
     }
