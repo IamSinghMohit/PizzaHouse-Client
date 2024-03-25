@@ -76,6 +76,17 @@ export default function Page({}: Props) {
                                 just built it from what i was able to come up
                             </AccordionContent>
                         </AccordionItem>
+                        <AccordionItem value="item-3">
+                            <AccordionTrigger>
+                                Api are not working
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                It could be due to that `render.com`,my hosting
+                                provider will shutdown my server after some
+                                inactivity and its rebooting could take more
+                                than 50 seconds.
+                            </AccordionContent>
+                        </AccordionItem>
                     </Accordion>
                 </CardContent>
             </Card>
