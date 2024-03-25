@@ -31,10 +31,12 @@ import ButtonWithLoading from "@/app/components/ButtonWithLoading";
 import { useAppDispatch } from "@/hooks";
 import { setUser } from "@/store/slices/user";
 import { useRouter } from "next/navigation";
+import { useMediaQuery } from "react-responsive";
 
 type Props = {};
 
 export function LoginForm({}: Props) {
+    const isMobile = useMediaQuery({ query: "(max-width:600px)" });
     const dispatch = useAppDispatch();
     const [login, setLogin] = useState(true);
     const router = useRouter();
@@ -86,7 +88,7 @@ export function LoginForm({}: Props) {
     }, [singinData, loginData]);
 
     useEffect(() => {
-        if (singinSuccess || loginSuccess) {
+        if ((singinSuccess || loginSuccess) && isMobile) {
             router.push("/");
         }
     }, [singinSuccess, loginSuccess]);
