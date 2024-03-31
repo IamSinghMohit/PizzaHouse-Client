@@ -7,7 +7,7 @@ interface Props {
 function ProductListLoader({}: Props) {
     return (
         <Card
-            className="p-2 bg-gray-50 overflow-y-scroll w-full h-[500px] min-h-[500px] md:h-auto product-list-grid"
+            className="p-2 bg-gray-50 overflow-y-scroll w-full h-[500px] min-h-[500px] md:h-auto product-list-grid thin-scroll-thumb"
         >
             {[
                 "41ebf1d1-6815-472a-860c-a329be131140",

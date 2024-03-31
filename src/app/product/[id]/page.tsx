@@ -24,7 +24,7 @@ interface Props {
 
 const getProduct = cache(async (id: string) => await useProduct(id));
 
-export const revalidate = 3600;
+export const revalidate = 3600000;
 export async function generateStaticParams() {
     const products = await useMinimalProductInfo();
     return products.map((product) => ({
